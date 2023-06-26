@@ -1,7 +1,8 @@
 import '../App.css';
 import React from 'react';
 
-const Login = ({ MeLlevoValores }) => {
+
+const Login = ({ MeLlevoValores, navigation }) => {
 
   const tomarValores = (e) => {
     e.preventDefault();
@@ -17,22 +18,34 @@ const Login = ({ MeLlevoValores }) => {
     MeLlevoValores(usuario); 
   };
 
+  
+
   return(
-    <div className="App">
+    <div className='conteiner'>
+    <div className="one-half column" id='formSize'>
+    <div className="App" id='Form'>
       <form onSubmit= {tomarValores}>
       <div className="mb-3">
-        <label className="form-label" > Usuario </label>
-        <input type="text" className="form-control" name="usuario" />
+      <label><b>Ingrese el usuario</b></label>
+      <input type="text" name="usuario" className="u-full-width" placeholder="Usuario"/>
       </div>
+      <br></br>
       <div  className="mb-3">
-        <label  className="form-label">Contraseña </label>
-        <input type="password" className="form-control" name="password"/>
+      <label><b>Ingrese la contraseña</b></label>
+      <input type="password" name="password" className="u-full-width" placeholder="Contraseña"/>
       </div>
-      <button type="submit" className="btn btn-primary">Entrar</button>
+      <div className="one-half row" id='formSize'></div>
+      <button type="submit" className="btn btn-primary btn-sm" id="Boton1" >Entrar</button>
+      <button onPress={() => navigation.navigate('RegistroFront')} type="Registro" className="btn btn-primary btn-sm" id="Boton2" >Registrarse</button>
     </form>
     </div>
+    </div>
+    </div>
+    
   )
+  
 };
+
 
 
 export default Login;

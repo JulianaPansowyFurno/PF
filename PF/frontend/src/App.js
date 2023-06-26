@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import Login from './components/LoginFront';
-//import LoginBack from '.../backend/src/servicios/LoginBack.js';
+import {NavigationContainer} from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import LoginFront from './components/LoginFront';
 
-//import UsuarioService from '../../backend/src/servicios/UsuarioService';
+const Stack = createNativeStackNavigator();
 
 const App = () => {
   const [data, setData] = React.useState(null);
@@ -20,7 +21,17 @@ const App = () => {
 
 
   return(
-    <Login MeLlevoValores = {sacoDatosDeLogin}/>
+    
+    <NavigationContainer>
+      <Login MeLlevoValores = {sacoDatosDeLogin}/>
+      <Stack.Navigator>
+        <Stack.Screen
+          name="Home"
+          component={LoginFront}
+        />
+        <Stack.Screen name="RegistroFront" component={LoginFront} />
+      </Stack.Navigator>
+    </NavigationContainer>
   )
 };
 export default App;
