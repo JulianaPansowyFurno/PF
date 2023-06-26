@@ -9,8 +9,8 @@ export default class TurnosService {
         console.log(id)
         const pool = await sql.connect(config);
         const response = await pool.request()
-        .input('IdTurno',sql.Int, id)
-        .query(`SELECT * FROM Turno WHERE Turno.IdTurno = @IdTurno`);
+        .input('FKPaciente',sql.Int, id)
+        .query(`SELECT * FROM Turno inner join Paciente on Paciente.IdPaciente = Turno.FkPaciente WHERE Turno.FkPaciente = @FkPaciente`);
     
         console.log(response.recordset)
         return response.recordset;
