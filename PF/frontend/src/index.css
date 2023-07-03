@@ -11,18 +11,32 @@ body {
   padding-bottom: 5rem;
 }
 
-
 #Form{
   color: rgb(187, 187, 187);
   margin-top: 15rem;
   width: 200px;
   height: 400 px;
+  
 
 }
+
+.fondoBlanco{
+  background-color: #fff;
+  background: rgba(255, 255, 255, 0.767);
+  width: 220%;
+}
+
+.fondoBlancoEspacio{
+  color: rgba(255, 255, 255, 0.767);
+}
+
+#bordesRedondos{
+  border: 2px solid rgba(255, 255, 255, 0.767);
+  border-radius: 10px;
+}
+
 .conteiner {
   height: 100%;
-    padding: 0;
-    margin: 0;
     display: flex;
     align-items: left;
     justify-content: left;
@@ -62,7 +76,9 @@ input[type="password"]
 }
 
  #formSize{
-  margin-left: 500px !important;
+  margin-left: 300px !important;
+  
+  
 } 
 
 #Boton2 {
@@ -93,4 +109,21 @@ label {
   text-align: left;
   font-family: 'Arial';
   letter-spacing: 1px;
+}
+
+#img{
+  height: 300px;
+  width: 500px;
+  margin-left: 500px ;
+  margin-bottom: 900px; 
+  display: flex;
+  align-items: right;
+  justify-content: right;
+}
+
+.fondo{
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: 100% 100%;
+  padding-bottom: 100%;
 }

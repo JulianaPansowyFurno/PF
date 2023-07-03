@@ -1,8 +1,9 @@
 import '../App.css';
 import React from 'react';
-
+import background from "./Imagenes/fondoLogin.png";
 
 const Login = ({ MeLlevoValores, navigation }) => {
+  const LogoFoto = ['Logo.png']
 
   const tomarValores = (e) => {
     e.preventDefault();
@@ -18,34 +19,55 @@ const Login = ({ MeLlevoValores, navigation }) => {
     MeLlevoValores(usuario); 
   };
 
-  
-
   return(
-    <div className='conteiner'>
-    <div className="one-half column" id='formSize'>
-    <div className="App" id='Form'>
-      <form onSubmit= {tomarValores}>
-      <div className="mb-3">
-      <label><b>Ingrese el usuario</b></label>
-      <input type="text" name="usuario" className="u-full-width" placeholder="Usuario"/>
+<div className="fondo" style={{ backgroundImage:`url(${background})` }}>
+    <div className='conteiner' >
+      
+      <div id='formSize'>
+        <div className="one-half column">
+          <div id='Form' >
+            
+            <form onSubmit= {tomarValores}>
+            <div className='fondoBlanco'id='bordesRedondos'>
+              <br></br>
+              <br></br>
+              <br></br>
+              <br></br>
+                    <div className="mb-3">
+                      <b>Ingrese el usuario</b>
+                      <div className='fondoBlancoEspacio'>
+                      <br></br>
+                      </div>
+                      <input type="text" name="usuario" className="u-full-width" placeholder="Usuario"/>
+                    </div>
+                    <br></br>
+                    <div  className="mb-3">
+                      <b>Ingrese la contraseña</b>
+                      <div className='fondoBlancoEspacio'>
+                      <br></br>
+                      </div>
+                      <input type="password" name="password" className="u-full-width" placeholder="Contraseña"/>
+                    </div>
+                    <br></br>
+                      <button type="submit" className="btn btn-primary btn-sm" id="Boton1" >Entrar</button>
+                      <button  type="Registro" className="btn btn-primary btn-sm" id="Boton2" >Registrarse</button>
+                      
+                      <div className='fondoBlancoEspacio'>
+                      <br></br>
+                      <br></br>
+                      <br></br>
+                      <br></br>
+                      </div>
+              </div>
+              
+              </form>
+              
+              </div>
+        </div>
       </div>
-      <br></br>
-      <div  className="mb-3">
-      <label><b>Ingrese la contraseña</b></label>
-      <input type="password" name="password" className="u-full-width" placeholder="Contraseña"/>
-      </div>
-      <div className="one-half row" id='formSize'></div>
-      <button type="submit" className="btn btn-primary btn-sm" id="Boton1" >Entrar</button>
-      <button onPress={() => navigation.navigate('RegistroFront')} type="Registro" className="btn btn-primary btn-sm" id="Boton2" >Registrarse</button>
-    </form>
     </div>
     </div>
-    </div>
-    
   )
-  
 };
-
-
 
 export default Login;
