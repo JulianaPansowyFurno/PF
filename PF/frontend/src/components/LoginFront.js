@@ -20,52 +20,36 @@ const Login = ({ MeLlevoValores, navigation }) => {
   };
 
   return(
-<div className="fondo" style={{ backgroundImage:`url(${background})` }}>
-    <div className='conteiner' >
-      
-      <div id='formSize'>
-        <div className="one-half column">
-          <div id='Form' >
-            
-            <form onSubmit= {tomarValores}>
-            <div className='fondoBlanco'id='bordesRedondos'>
-              <br></br>
-              <br></br>
-              <br></br>
-              <br></br>
-                    <div className="mb-3">
-                      <b>Ingrese el usuario</b>
-                      <div className='fondoBlancoEspacio'>
-                      <br></br>
-                      </div>
-                      <input type="text" name="usuario" className="u-full-width" placeholder="Usuario"/>
-                    </div>
-                    <br></br>
-                    <div  className="mb-3">
-                      <b>Ingrese la contraseña</b>
-                      <div className='fondoBlancoEspacio'>
-                      <br></br>
-                      </div>
-                      <input type="password" name="password" className="u-full-width" placeholder="Contraseña"/>
-                    </div>
-                    <br></br>
-                      <button type="submit" className="btn btn-primary btn-sm" id="Boton1" >Entrar</button>
-                      <button  type="Registro" className="btn btn-primary btn-sm" id="Boton2" >Registrarse</button>
-                      
-                      <div className='fondoBlancoEspacio'>
-                      <br></br>
-                      <br></br>
-                      <br></br>
-                      <br></br>
-                      </div>
+    <div className="fondo" style={{ backgroundImage:`url(${background})` }}>
+      <div className='conteiner' >
+        <div id='formSize'>
+          <div className="one-half column">
+            <div id='Form' >
+              <div className='fondoBlanco'id='bordesRedondos'>
+                <form onSubmit= {tomarValores}>
+                  <br></br>
+                  <br></br>
+                  <br></br>
+                  <div id='colorLetrasLogin' className="mb-3">
+                    <h3><b>Ingrese el usuario</b></h3>
+                    <input className="u-full-width" type="text" name="usuario"  placeholder="Usuario"/>
+                  </div>
+                  <br></br>
+                  <div id='colorLetrasLogin' className="mb-3">
+                    <h3><b>Ingrese la contraseña</b></h3>
+                    <input type="password" name="password" className="u-full-width" placeholder="Contraseña"/>
+                  </div>
+                  <br></br>
+                  <br></br>
+                  <button type="submit" className="btn btn-primary btn-sm" id="Boton1" >Entrar</button>
+                  <button  type="Registro" className="btn btn-primary btn-sm" id="Boton2" >Registrarse</button>
+                  <h5><a href='pag para cambiar contrasena'><u>Olvide mi contraseña</u></a>   </h5> 
+                </form>
               </div>
-              
-              </form>
-              
-              </div>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
     </div>
   )
 };

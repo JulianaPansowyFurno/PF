@@ -16,8 +16,10 @@ body {
   margin-top: 15rem;
   width: 200px;
   height: 400 px;
-  
+}
 
+#colorLetrasLogin{
+  color: rgb(0, 0, 0);
 }
 
 .fondoBlanco{
@@ -65,10 +67,10 @@ input[type="password"]
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
-  border-radius: 25px;
+  border-radius: 10px;
   margin-top: 10px ;
   margin-left: 1px;
-
+  width: 80%;
 }
 
 #Boton1:hover {
@@ -81,6 +83,10 @@ input[type="password"]
   
 } 
 
+.izq{
+  align-content: left;
+}
+
 #Boton2 {
   background-color: #4341b3; 
   border: none;
@@ -91,10 +97,10 @@ input[type="password"]
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
-  border-radius: 25px;
+  border-radius: 10px;
   margin-top: 10px ;
   margin-left: 1px;
-
+  width: 80%;
 }
 
 #Boton2:hover {
