@@ -1,6 +1,7 @@
 import '../App.css';
 import React from 'react';
 import background from "./Imagenes/fondoLogin.png";
+import logoPNG from "./Imagenes/logoPNG.png";
 
 const Login = ({ MeLlevoValores, navigation }) => {
   const LogoFoto = ['Logo.png']
@@ -29,7 +30,7 @@ const Login = ({ MeLlevoValores, navigation }) => {
                 <form onSubmit= {tomarValores}>
                   <br></br>
                   <br></br>
-                  <br></br>
+                  <img src = {logoPNG} width='72%' ></img>
                   <div id='colorLetrasLogin' className="mb-3">
                     <h3><b>Ingrese el usuario</b></h3>
                     <input className="u-full-width" type="text" name="usuario"  placeholder="Usuario"/>

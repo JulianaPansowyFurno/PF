@@ -8,9 +8,12 @@ const App = () => {
   const sacoDatosDeLogin = (props) => {
     console.log(props);
   };
+  const sacoDatosDeRegistro = (props) => {
+    console.log(props);
+  };
 
   React.useEffect(() => {
-    fetch("/LoginBack")
+    fetch("/RegistroBack")
       .then((res) => res.json())
       .then((data) => setData(data.message));
     }, 
@@ -20,8 +23,8 @@ const App = () => {
   return(
     <div className="App">
         <div className="row">  
-         <LoginFront MeLlevoValores = {sacoDatosDeLogin}/>
-        {/* <RegistroFront/>  */}
+          {/* <LoginFront MeLlevoValores = {sacoDatosDeLogin}/> */}
+          <RegistroFront MeLlevoValores = {sacoDatosDeRegistro}/>
         </div>
     </div>
   )
