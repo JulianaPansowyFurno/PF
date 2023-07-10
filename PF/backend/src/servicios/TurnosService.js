@@ -24,11 +24,11 @@ export default class TurnosService {
                 .input('FechaYHora',sql.NChar, turno.FechaYHora)
                 .input('FkPaciente',sql.Int, turno.FkPaciente)
                 .input('FkMedico',sql.Int, turno.FkMedico)
-                .input('Estado',sql.Bit, turno.Estado)
+                .input('Cancelado',sql.Bit, turno.Cancelado)
                 .input('Asistio',sql.Bit, turno.Asistio)
                 .input('FkEstudio',sql.Int, turno.FkEstudio)
                 .input('FkServicio',sql.Int, turno.FkServicio)
-                .query(`INSERT INTO Turno (FkSede, FechaYHora, FkPaciente, FkMedico, Estado, Asistio, FkEstudio, FkServicio) VALUES (@FkSede, @FechaYHora, @FkPaciente, @FkMedico, @Estado, @Asistio, @FkEstudio, @FkServicio)`);
+                .query(`INSERT INTO Turno (FkSede, FechaYHora, FkPaciente, FkMedico, Cancelado, Asistio, FkEstudio, FkServicio) VALUES (@FkSede, @FechaYHora, @FkPaciente, @FkMedico, @Cancelado, @Asistio, @FkEstudio, @FkServicio)`);
             console.log(response)
             /*{
                 "FkSede": 2,
@@ -49,7 +49,7 @@ export default class TurnosService {
         const response = await pool.request()
         .input('IdTurno',sql.Int, id)
         .input('Estado',sql.Bit, turno.Estado)
-        .query(`UPDATE Turno SET Turno.Estado = @Estado WHERE Turno.IdTurno = @IdTurno`);
+        .query(`UPDATE Turno SET Turno.Cancelado = @Cancelado WHERE Turno.IdTurno = @IdTurno`);
         console.log(response)
 
         return response.recordset;

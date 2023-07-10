@@ -2,23 +2,25 @@ import '../App.css';
 import React from 'react';
 import background from "./Imagenes/fondoLogin.png";
 import logoPNG from "./Imagenes/logoPNG.png";
+import Registro from "./RegistroFront.js"
+//import { useNavigate } from 'react-router-dom';
 
-const Login = ({ MeLlevoValores, navigation }) => {
-  const LogoFoto = ['Logo.png']
+
+
+const Login = ({navigation}) => {
 
   const tomarValores = (e) => {
     e.preventDefault();
     const formulario = new FormData(e.target)
     console.log(formulario.get('usuario'))
     console.log(formulario.get('password'))
-  
     const usuario={
       user: formulario.get('usuario'),
       pass: formulario.get('password')
     }
     console.log(usuario);
-    MeLlevoValores(usuario); 
   };
+
 
   return(
     <div className="fondo" style={{ backgroundImage:`url(${background})` }}>
@@ -43,7 +45,7 @@ const Login = ({ MeLlevoValores, navigation }) => {
                   <br></br>
                   <br></br>
                   <button type="submit" className="btn btn-primary btn-sm" id="Boton1" >Entrar</button>
-                  <button  type="Registro" className="btn btn-primary btn-sm" id="Boton2" >Registrarse</button>
+                  <button  type="Registro" className="btn btn-primary btn-sm" id="Boton2" onPress={() => navigation.navigate(<Registro/>)}> Registrarse</button>
                   <h5><a href='pag para cambiar contrasena'><u>Olvide mi contraseña</u></a>   </h5> 
                 </form>
               </div>
@@ -54,5 +56,6 @@ const Login = ({ MeLlevoValores, navigation }) => {
     </div>
   )
 };
+
 
 export default Login;
