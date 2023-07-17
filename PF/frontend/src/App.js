@@ -1,23 +1,28 @@
 import React, { useState, useEffect } from 'react';
 import LoginFront from "./components/LoginFront.js";
 import RegistroFront from "./components/RegistroFront.js";
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 import ReactDOM from "react-dom";
+import { createRoot } from 'react-dom/client';
 
-const App = () => {
+export default function App() {
 
   return(
+    <BrowserRouter>
     <div>
-      <Router>
+      
+      
       <Routes>
-        <Route exact path="/" element={<LoginFront/>}>
-          <Route path="/Registro" element={<RegistroFront/>} />
+        <Route path="/" element={<LoginFront />}>
+          {/* <Route path="registro" element={<RegistroFront />} /> */}
         </Route>
       </Routes>
-      </Router>
-    </div>
+      
+      </div>
+      </BrowserRouter>
 
   );
 }
 
-ReactDOM.render(<App />, document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(<App />);

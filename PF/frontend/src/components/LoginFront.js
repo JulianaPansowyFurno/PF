@@ -5,6 +5,7 @@ import logoPNG from "./Imagenes/logoPNG.png";
 import Registro from "./RegistroFront.js"
 //import { useNavigate } from 'react-router-dom';
 import {  Link } from "react-router-dom";
+import ReactDOM from "react-dom/client";
 
 
 
@@ -47,7 +48,8 @@ const Login = ({navigation}) => {
                   <br></br>
                   <button type="submit" className="btn btn-primary btn-sm" id="Boton1" >Entrar</button>
                   {/* <button  type="Registro" className="btn btn-primary btn-sm" id="Boton2"> Registrarse</button> */}
-                  <Link to='registro'> Registrarse</Link>
+                  <Link to='/registro'> Registrarse</Link>
+                  <h5>adsad</h5> 
                   <h5><a href='pag para cambiar contrasena'><u>Olvide mi contraseña</u></a>   </h5> 
                 </form>
               </div>
