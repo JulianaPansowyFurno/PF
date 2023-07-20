@@ -2,10 +2,7 @@ import '../App.css';
 import React from 'react';
 import background from "./Imagenes/fondoLogin.png";
 import logoPNG from "./Imagenes/logoPNG.png";
-import Registro from "./RegistroFront.js"
-//import { useNavigate } from 'react-router-dom';
 import {  Link } from "react-router-dom";
-import ReactDOM from "react-dom/client";
 
 
 
@@ -46,10 +43,14 @@ const Login = ({navigation}) => {
                   </div>
                   <br></br>
                   <br></br>
-                  <button type="submit" className="btn btn-primary btn-sm" id="Boton1" >Entrar</button>
+                  {/* <button type="submit" className="btn btn-primary btn-sm" id="Boton1" >Entrar</button> */}
                   {/* <button  type="Registro" className="btn btn-primary btn-sm" id="Boton2"> Registrarse</button> */}
+                  <div id="Boton1">
+                  <Link to='/agenda'> Entrar</Link>
+                  </div>
+                  <div id="Boton2">
                   <Link to='/registro'> Registrarse</Link>
-                  <h5>adsad</h5> 
+                  </div>
                   <h5><a href='pag para cambiar contrasena'><u>Olvide mi contraseña</u></a>   </h5> 
                 </form>
               </div>

@@ -71,6 +71,7 @@ input[type="password"]
   margin-top: 10px ;
   margin-left: 1px;
   width: 80%;
+  font-family: sans-serif;
 }
 
 #Boton1:hover {
@@ -101,6 +102,8 @@ input[type="password"]
   margin-top: 10px ;
   margin-left: 1px;
   width: 80%;
+  font-family: sans-serif;
+  color: rgb(149, 149, 149);
 }
 
 #Boton2:hover {
