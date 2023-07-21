@@ -1,6 +1,6 @@
 import '../App.css';
 import React from 'react';
-import '../registro.css';
+import '../botonLindo.css';
 import background from "./Imagenes/fondoLogin.png";
 import logoPNG from "./Imagenes/logoPNG.png";
 import axios from 'axios';
@@ -26,8 +26,7 @@ const Registro = ({ MeLlevoValores, navigation }) => {
       birth: formulario.get('FechaNacimiento')
     }
     console.log(usuario);
-    MeLlevoValores(usuario); 
-    //MeLlevoValores(usuario);
+    MeLlevoValores(usuario);
     axios.post('http://localhost:5000/usuario', usuario)
     .then(function (response) {
       console.log(response);

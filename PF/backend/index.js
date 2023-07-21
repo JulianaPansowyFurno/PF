@@ -9,7 +9,7 @@ import 'dotenv/config'
 const app = express();
 const port = 5000;
 
-//http://localhost:5000/turno
+//http://localhost:3000/turno?id=2
 app.use(express.json());
 app.use(cors());
 
