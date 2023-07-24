@@ -7,7 +7,7 @@ import '../botonLindo.css';
 
 
 
-const Login = ({navigation}) => {
+const Login = ({}) => {
 
   const tomarValores = (e) => {
     e.preventDefault();

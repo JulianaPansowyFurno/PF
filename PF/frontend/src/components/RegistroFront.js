@@ -7,8 +7,7 @@ import axios from 'axios';
 import {  Link } from "react-router-dom";
 
 
-const Registro = ({ MeLlevoValores, navigation }) => {
-  const LogoFoto = ['Logo.png']
+const Registro = ({ MeLlevoValores }) => {
 
   const tomarValores = (e) => {
     e.preventDefault();
@@ -35,18 +34,18 @@ const Registro = ({ MeLlevoValores, navigation }) => {
 
   return(
     <div className="fondo" style={{ backgroundImage:`url(${background})` }}>
-            <div id='Form' >
+        <div className='conteiner' >
+        <div id='formSize'>
+            <div id='Form2' >
               <div className='fondoBlanco'id='bordesRedondos'>
-                <form  onSubmit= {tomarValores}>
+                <form>
                     <br></br>
                     <br></br>
-                    <img src = {logoPNG} width='72%' ></img>
                     <center>
+                    <img src = {logoPNG} width='50%' ></img>
+                    
                     <div className="omrs-input-group">
                       <label className="omrs-input-filled">
-                        {/* <input className="u-full-width" type="text" name="nombre"   required></input>
-                        <span className="omrs-input-label">Nombre</span> */}
-                        {/* <span class="omrs-input-helper">Helper Text</span> */}
                         <input className="u-full-width" type="text" name="NombreApellido" required></input>
                         <span className="omrs-input-label">Nombre/s y Apellido/s</span>
                       </label>
@@ -110,12 +109,12 @@ const Registro = ({ MeLlevoValores, navigation }) => {
                         
                         
                           <div id="Boton1">
-                          <Link to='/agenda'> Entrar</Link>
+                          <Link type="submit" to='/agenda' state={tomarValores}> Entrar</Link>
                           {/* <button  type="Registro" className="btn btn-primary btn-sm" id="Boton2" >Registrarse</button> */}
                           </div>
 
                           <div id="Boton2">
-                          <Link to='/'> Volver </Link>
+                          <Link type="registro" to='/'> Volver </Link>
                           {/* <button type="submit" className="btn btn-primary btn-sm" id="Boton1" >Entrar</button> */}
                           </div>
 
@@ -124,6 +123,8 @@ const Registro = ({ MeLlevoValores, navigation }) => {
                 </form>
               </div>
             </div>
+            </div>
+          </div>
           </div>
   )
 };

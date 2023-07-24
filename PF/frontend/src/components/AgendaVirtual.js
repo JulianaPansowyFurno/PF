@@ -1,22 +1,28 @@
 import '../App.css';
 import React from 'react';
-import background from "./Imagenes/fondoLogin.png";
-import axios from 'axios';
+const Login = ({}) => {
 
-
-
-const Login = ({navigation}) => {
-
-    axios.post('http://localhost:5000/turno')
-    .then(function (response) {
-      console.log(response);
-    }) 
+    // axios.post('http://localhost:5000/turno')
+    // .then(function (response) {
+    //   console.log(response);
+    // }) 
 
 
   return(
-    <div className="fondo" style={{ backgroundImage:`url(${background})` }}>
-      <h3>Agenda Vistual</h3>
+    <div> 
+      
+      <div className='Listado-Turnos' >
+          <div id='Turno'>
+          <h3>Turno</h3>
+          <p>Turnoo</p>
+          </div>
+          <div id='Turno'>
+          <h3>Turno</h3>
+          <h3>Turnoo</h3>
+          </div>
+      </div>
     </div>
+
   )
 };
 
