@@ -54,10 +54,13 @@ body {
 }
 
 input[type="text"],
-input[type="password"]
+input[type="password"],
+input[type="int"],
+input[type="email"],
+input[type="date"]
 {
-  height: 30px;
-  width: 350px;
+  height: 20%;
+  width: 50%;
   padding: 6px 10px;
   background-color: #fff;
   border: 1px solid #D1D1D1;
@@ -149,17 +152,17 @@ label {
 .letrasBotonIngreso{
   color:#282828;
   font-family: "Roboto";
-  /* NO FUNCIONA FONT */
 }
 
 .Listado-Turnos{
   display: flex;
-  flex-direction: column;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  word-spacing: 1em;
 }
 
 #Turno{
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  height: 3rem;
 }

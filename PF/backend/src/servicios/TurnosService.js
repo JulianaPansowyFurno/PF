@@ -10,7 +10,7 @@ export default class TurnosService {
         const pool = await sql.connect(config);
         const response = await pool.request()
         .input('FKPaciente',sql.Int, id)
-        .query(`SELECT * FROM Turno inner join Paciente on Paciente.IdPaciente = Turno.FkPaciente WHERE Turno.FkPaciente = @FkPaciente`);
+        .query(`SELECT Turno.FkSede, Turno.Fecha, Turno.FkPaciente, Turno.FkMedico, Turno.Cancelado, Turno.Asistio, Turno.FkEstudio, Turno.FkServicio, Turno.Hora FROM Turno inner join Paciente on Paciente.IdPaciente = Turno.FkPaciente WHERE Turno.FkPaciente = @FkPaciente`);
     
         console.log(response.recordset)
         return response.recordset;
@@ -21,14 +21,15 @@ export default class TurnosService {
             const pool = await sql.connect(config);
             const response = await pool.request()
                 .input('FkSede',sql.Int, turno.FkSede)
-                .input('FechaYHora',sql.NChar, turno.FechaYHora)
+                .input('Fecha',sql.NChar, turno.Fecha)
+                .input('Hora',sql.NChar, turno.Hora)
                 .input('FkPaciente',sql.Int, turno.FkPaciente)
                 .input('FkMedico',sql.Int, turno.FkMedico)
                 .input('Cancelado',sql.Bit, turno.Cancelado)
                 .input('Asistio',sql.Bit, turno.Asistio)
                 .input('FkEstudio',sql.Int, turno.FkEstudio)
                 .input('FkServicio',sql.Int, turno.FkServicio)
-                .query(`INSERT INTO Turno (FkSede, FechaYHora, FkPaciente, FkMedico, Cancelado, Asistio, FkEstudio, FkServicio) VALUES (@FkSede, @FechaYHora, @FkPaciente, @FkMedico, @Cancelado, @Asistio, @FkEstudio, @FkServicio)`);
+                .query(`INSERT INTO Turno (FkSede, Fecha, Hora, FkPaciente, FkMedico, Cancelado, Asistio, FkEstudio, FkServicio) VALUES (@FkSede, @Fecha, @Hora, @FkPaciente, @FkMedico, @Cancelado, @Asistio, @FkEstudio, @FkServicio)`);
             console.log(response)
             /*{
                 "FkSede": 2,

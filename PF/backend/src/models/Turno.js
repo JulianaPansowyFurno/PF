@@ -1,10 +1,11 @@
 export class Turno {
     IdTurno;
     FkSede;
-    FechaYHora;
+    Fecha;
+    Hora;
     FkPaciente;
     FkMedico;
-    Estado;
+    Cancelado;
     Asistio;
     FkEstudioServicio;
 }

@@ -15,8 +15,6 @@ const Registro = ({ MeLlevoValores }) => {
     const usuario={
       user: formulario.get('usuario'),
       pass: formulario.get('password'),
-      user: formulario.get('Usuarios'),
-      pass: formulario.get('Contraseña'),
       nameandsur: formulario.get('NombreApellido'),
       DNI: formulario.get('DNI'),
       medicalcover: formulario.get('CoberturaMedica'),
@@ -30,7 +28,10 @@ const Registro = ({ MeLlevoValores }) => {
     .then(function (response) {
       console.log(response);
     }) 
+    
   };
+
+ 
 
   return(
     <div className="fondo" style={{ backgroundImage:`url(${background})` }}>
@@ -104,28 +105,23 @@ const Registro = ({ MeLlevoValores }) => {
                     </label>
 			              </div>
                     </div>
-
                     <br></br>
-                        
-                        
-                          <div id="Boton1">
-                          <Link type="submit" to='/agenda' state={tomarValores}> Entrar</Link>
-                          {/* <button  type="Registro" className="btn btn-primary btn-sm" id="Boton2" >Registrarse</button> */}
-                          </div>
-
-                          <div id="Boton2">
-                          <Link type="registro" to='/'> Volver </Link>
-                          {/* <button type="submit" className="btn btn-primary btn-sm" id="Boton1" >Entrar</button> */}
-                          </div>
-
-                        <h5><a href='pag para cambiar contrasena'><u>Olvide mi contraseña</u></a>   </h5> 
-                    </center>
-                </form>
-              </div>
-            </div>
+                      <div id="Boton1">
+                      <Link type="submit" to='/agenda' state={tomarValores}> Entrar</Link>
+                      {/* <button  type="Registro" className="btn btn-primary btn-sm" id="Boton2" >Registrarse</button> */}
+                      </div>
+                      <div id="Boton2">
+                      <Link type="registro" to='/'> Volver </Link>
+                      {/* <button type="submit" className="btn btn-primary btn-sm" id="Boton1" >Entrar</button> */}
+                      </div>
+                      <h5><a href='pag para cambiar contrasena'><u>Olvide mi contraseña</u></a>   </h5> 
+                  </center>
+              </form>
             </div>
           </div>
-          </div>
+        </div>
+      </div>
+    </div>
   )
 };
 export default Registro;

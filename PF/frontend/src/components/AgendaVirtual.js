@@ -1,30 +1,48 @@
 import '../App.css';
-import React from 'react';
-const Login = ({}) => {
+import axios from 'axios';
+import React, { useEffect, useState } from "react";
 
-    // axios.post('http://localhost:5000/turno')
-    // .then(function (response) {
-    //   console.log(response);
-    // }) 
+import background from "./Imagenes/fondoLogin.png";
+
+const AgendaVirtual = () => {
+  const [posts, setPosts] = useState([]);
+
+  useEffect(() => {
+  axios.get('http://localhost:5000/turno/2') // Poner id paciente en el link
+  .then((result) => {
+    console.log(result.data);
+    setPosts(result.data);
+  })
+    .catch((error) => console.log(error));
+    }, []);
 
 
-  return(
-    <div> 
-      
-      <div className='Listado-Turnos' >
-          <div id='Turno'>
-          <h3>Turno</h3>
-          <p>Turnoo</p>
+  return (
+    <div className="fondo" style={{ backgroundImage:`url(${background})` }}>
+      {posts.map((data) => {
+        return (
+          <div class="container text-center">
+          <div class="row">
+            <div class="col">
+            <h2> Fecha</h2>
+            <p>{data.Fecha}</p>
+            </div>
+            <div class="col">
+            <p>{data.FkPaciente}</p>
+            <p>{data.Cancelado}</p>
+            <p>{data.FkEstudio}</p>
+            <p>{data.FkServicio}</p>
+            </div>
+            <div class="col">
+              Column
+            </div>
           </div>
-          <div id='Turno'>
-          <h3>Turno</h3>
-          <h3>Turnoo</h3>
-          </div>
-      </div>
+        </div>
+
+
+        );
+      })}
     </div>
-
-  )
-};
-
-
-export default Login;
+  );
+}
+export default AgendaVirtual;
