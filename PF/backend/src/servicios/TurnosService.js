@@ -46,11 +46,19 @@ export default class TurnosService {
     cancelarTurno = async (id, turno) => {
         console.log('This is a function on the service');
         const pool = await sql.connect(config);
-        console.log(turno.Estado)
-        const response = await pool.request()
-        .input('IdTurno',sql.Int, id)
-        .input('Estado',sql.Bit, turno.Estado)
-        .query(`UPDATE Turno SET Turno.Cancelado = @Cancelado WHERE Turno.IdTurno = @IdTurno`);
+        console.log(turno.Cancelado)
+        const response = "";
+        if(turno)
+        {
+            response = await pool.request()
+            .input('IdTurno',sql.Int, id)
+            .input('Cancelado',sql.Bit, turno.Cancelado)
+            .query(`UPDATE Turno SET Turno.Cancelado = @Cancelado WHERE Turno.IdTurno = @IdTurno`);
+        }
+        else{
+            response = "No existe el turno";
+        }
+        
         console.log(response)
 
         return response.recordset;

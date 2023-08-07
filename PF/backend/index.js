@@ -1,6 +1,6 @@
 import express from "express";
 import TurnosRouter from "./src/controller/TurnosController.js";
-import UsuarioRouter from "./src/controller/UsuarioController.js";
+import LogInRouter from "./src/controller/UsuarioController.js";
 import PacienteRouter from "./src/controller/PacienteController.js";
 import cors from 'cors';
 import sql from 'mssql'
@@ -14,7 +14,7 @@ app.use(express.json());
 app.use(cors());
 
 app.use("/turno", TurnosRouter);
-app.use("/usuario", UsuarioRouter);
+app.use("/usuario", LogInRouter);
 app.use("/paciente", PacienteRouter);
 
 app.listen(port, () => {

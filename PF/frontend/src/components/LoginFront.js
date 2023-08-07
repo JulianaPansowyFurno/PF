@@ -1,24 +1,36 @@
 import '../App.css';
-import React from 'react';
 import background from "./Imagenes/fondoLogin.png";
 import logoPNG from "./Imagenes/logoPNG.png";
 import {  Link } from "react-router-dom";
 import '../botonLindo.css';
+import axios from 'axios';
+import React, { useEffect, useState } from "react";
 
-
-
-const Login = ({}) => {
+const Login = () => {
+  const [post, setPost] = React.useState('');
+  const [error, setError] = useState("");
 
   const tomarValores = (e) => {
     e.preventDefault();
     const formulario = new FormData(e.target)
-    console.log(formulario.get('usuario'))
-    console.log(formulario.get('password'))
     const usuario={
       user: formulario.get('usuario'),
       pass: formulario.get('password')
     }
-    console.log(usuario);
+    axios.get('http://localhost:5000/usuario')
+    .then(function (response) {
+      setPost(response.data);
+    }) 
+    console.log(usuario.user );
+    if(usuario.user !== post.usuarios && usuario.pass !== post.Contraseña)
+    {
+      alert('This is an alert message!');
+      return false
+    }
+    else
+    {
+      return true
+    }
   };
 
 
@@ -51,11 +63,18 @@ const Login = ({}) => {
                       </label>
 			              </div>
                   <br></br>
-                  {/* <button type="submit" className="btn btn-primary btn-sm" id="Boton1" >Entrar</button> */}
+                  <button type="submit" className="btn btn-primary btn-sm" id="Boton1" >Entrar</button> 
+
                   {/* <button  type="Registro" className="btn btn-primary btn-sm" id="Boton2"> Registrarse</button> */}
+                 
                   <div id="Boton1">
-                  <b><Link to='/agenda' className='letrasBotonIngreso'> Entrar</Link></b>
+                  <b><Link to='/agenda' className='letrasBotonIngreso' > Entrar</Link></b>
                   </div>
+                  {tomarValores && (
+                    <Alert severity="error" onClick={() => setError(null)}>
+                      {props.error || error}
+                    </Alert>
+                  )}
                   <div id="Boton2">
                   <b><Link to='/registro' className='letrasBotonIngreso'> Registrarse</Link></b>
                   </div>

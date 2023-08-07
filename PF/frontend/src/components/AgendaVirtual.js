@@ -20,27 +20,27 @@ const AgendaVirtual = () => {
   return (
     <div className="fondo" style={{ backgroundImage:`url(${background})` }}>
       {posts.map((data) => {
-        return (
-          <div class="container text-center">
-          <div class="row">
-            <div class="col">
-            <h2> Fecha</h2>
-            <p>{data.Fecha}</p>
-            </div>
-            <div class="col">
-            <p>{data.FkPaciente}</p>
-            <p>{data.Cancelado}</p>
-            <p>{data.FkEstudio}</p>
-            <p>{data.FkServicio}</p>
-            </div>
-            <div class="col">
-              Column
-            </div>
-          </div>
-        </div>
+        
+        //   <div class="container text-center">
+        //   <div class="row">
+        //     <div class="col">
+        //     <h2> Fecha</h2>
+        //     <p>{data.Fecha}</p>
+        //     </div>
+        //     <div class="col">
+        //     <p>{data.FkPaciente}</p>
+        //     <p>{data.Cancelado}</p>
+        //     <p>{data.FkEstudio}</p>
+        //     <p>{data.FkServicio}</p>
+        //     </div>
+        //     <div class="col">
+        //       Column
+        //     </div>
+        //   </div>
+        // </div>
+            
 
-
-        );
+      
       })}
     </div>
   );
