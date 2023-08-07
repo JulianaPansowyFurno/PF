@@ -63,18 +63,17 @@ const Login = () => {
                       </label>
 			              </div>
                   <br></br>
-                  <button type="submit" className="btn btn-primary btn-sm" id="Boton1" >Entrar</button> 
-
+                  {/* <button type="submit" className="btn btn-primary btn-sm" id="Boton1" >Entrar</button>  */}
                   {/* <button  type="Registro" className="btn btn-primary btn-sm" id="Boton2"> Registrarse</button> */}
-                 
+
                   <div id="Boton1">
                   <b><Link to='/agenda' className='letrasBotonIngreso' > Entrar</Link></b>
                   </div>
-                  {tomarValores && (
+                  {/* {tomarValores && (
                     <Alert severity="error" onClick={() => setError(null)}>
                       {props.error || error}
                     </Alert>
-                  )}
+                  )} */}
                   <div id="Boton2">
                   <b><Link to='/registro' className='letrasBotonIngreso'> Registrarse</Link></b>
                   </div>
