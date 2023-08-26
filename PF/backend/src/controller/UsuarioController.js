@@ -29,9 +29,7 @@ router.post('', async (req, res) => {
   } else {
     return res.status(200).json("El usuario ya existe");
   }
-
-  /*
-  
+  /* 
   {
     "nameandsur": "JulianPan",
     "DNI": "47350201",
@@ -41,12 +39,17 @@ router.post('', async (req, res) => {
     "birth": "2006-04-10",
     "user": "Uriel Strauss",
     "pass": "Uri1234"
-}
-  
+  }
   */
+  });
 
-
-    
+  router.delete('/:id', async (req, res) => {
+    console.log(`Request URL Param: ${req.params.id}`);
+    console.log(`This is a delete operation`);
+  
+    const usuario = await usuarioServices.DeleteUsuario(req.params.id);
+  
+    return res.status(200).json(usuario);
   });
 
 export default router;

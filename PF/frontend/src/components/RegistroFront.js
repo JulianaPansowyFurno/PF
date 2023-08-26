@@ -13,8 +13,8 @@ const Registro = ({ MeLlevoValores }) => {
     e.preventDefault();
     const formulario = new FormData(e.target)  
     const usuario={
-      user: formulario.get('usuario'),
-      pass: formulario.get('password'),
+      user: formulario.get('Usuarios'),
+      pass: formulario.get('Contrasena'),
       nameandsur: formulario.get('NombreApellido'),
       DNI: formulario.get('DNI'),
       medicalcover: formulario.get('CoberturaMedica'),
@@ -27,7 +27,8 @@ const Registro = ({ MeLlevoValores }) => {
     axios.post('http://localhost:5000/usuario', usuario)
     .then(function (response) {
       console.log(response);
-    }) 
+    })
+
     
   };
 
@@ -100,7 +101,7 @@ const Registro = ({ MeLlevoValores }) => {
 
                     <div className="omrs-input-group">
                     <label className="omrs-input-filled">
-                      <input className="u-full-width" type="password" name="Contraseña" required></input>
+                      <input className="u-full-width" type="password" name="Contrasena" required></input>
                       <span className="omrs-input-label">Contraseña</span>
                     </label>
 			              </div>

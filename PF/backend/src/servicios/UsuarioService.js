@@ -4,12 +4,12 @@ import 'dotenv/config'
 
 export default class UsuarioService {
 
-    getUsuario = async (usuario, Contraseña) => {
+    getUsuario = async (user, pass) => {
         console.log('This is a function on the service getUsuarios');   
         const pool = await sql.connect(config);
         const response = await pool.request()
-        .input('Usuarios',sql.NChar, usuario)
-        .input('Contraseña',sql.NChar, Contraseña)
+        .input('Usuarios',sql.NChar, user)
+        .input('Contraseña',sql.NChar, pass)
         .query(`SELECT COUNT(*) as cantidad FROM Usuario WHERE Usuarios = @Usuarios AND Contraseña = @Contraseña`);
         console.log(response.recordset[0].cantidad);
         if(response.recordset[0].cantidad == 1)
@@ -43,10 +43,20 @@ export default class UsuarioService {
                 .input('FKRol',sql.Int, 2)
                 .query(`INSERT INTO Usuario (Usuarios, Contraseña, FKRol) VALUES (@Usuarios, @Contraseña, @FKRol); SELECT SCOPE_IDENTITY() AS id;`);
             return response.recordset[0];
-        } else {
+        } else { 
             // El usuario ya existe
             return 0;
         }
        
+    }
+    DeleteUsuario = async (IdUsuario) => {
+        console.log('This is a function on the service');
+        const pool = await sql.connect(config);
+        const response = await pool.request()
+        .input('IdUsuario',sql.Int, IdUsuario)
+        .query(`DELETE FROM Usuario WHERE IdUsuario = @IdUsuario`);
+
+        console.log(response)
+        return response.recordset;
     }
 }
