@@ -1,47 +1,89 @@
 import '../App.css';
-import axios from 'axios';
+import axios, { all } from 'axios';
 import React, { useEffect, useState } from "react";
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+
+
 
 import background from "./Imagenes/fondoLogin.png";
 
 const AgendaVirtual = () => {
-  const [posts, setPosts] = useState([]);
+  const [turno, setTurno] = useState([]);
 
   useEffect(() => {
-  axios.get('http://localhost:5000/turno/2') // Poner id paciente en el link
-  .then((result) => {
-    console.log(result.data);
-    setPosts(result.data);
+  axios.get('http://localhost:5000/turno/13') // Poner id paciente en el link
+  .then((response) => {
+    setTurno(response.data);
+    console.log(response.data)
   })
     .catch((error) => console.log(error));
     }, []);
 
-
   return (
+    
     <div className="fondo" style={{ backgroundImage:`url(${background})` }}>
-      {posts.map((data) => {
-        
-        //   <div class="container text-center">
-        //   <div class="row">
-        //     <div class="col">
-        //     <h2> Fecha</h2>
-        //     <p>{data.Fecha}</p>
-        //     </div>
-        //     <div class="col">
-        //     <p>{data.FkPaciente}</p>
-        //     <p>{data.Cancelado}</p>
-        //     <p>{data.FkEstudio}</p>
-        //     <p>{data.FkServicio}</p>
-        //     </div>
-        //     <div class="col">
-        //       Column
-        //     </div>
-        //   </div>
-        // </div>
-            
+      {turno.map((tur) => {
+        return (
+          <div>
 
-      
-      })}
+            <Container>
+              <Row>
+                1 of 1
+              </Row>
+              <Row>
+                2
+              </Row>
+              <Row>
+                3
+              </Row>
+              {/* <Col>
+              <Row>
+                1 of 1
+              </Row>
+              <Row>
+                2
+              </Row>
+              <Row>
+                3
+              </Row>
+              </Col> */}
+
+            </Container>
+            <Container>
+              <Row>
+                1 of 1
+              </Row>
+              <Row>
+                2
+              </Row>
+              <Row>
+                3
+              </Row>
+              {/* <Col>
+              <Row>
+                1 of 1
+              </Row>
+              <Row>
+                2
+              </Row>
+              <Row>
+                3
+              </Row>
+              </Col> */}
+
+            </Container>
+            {/* <div className="container text-center">
+              <div className="row">
+              <b><div className="col" id='tituloAgenda'>Fecha   Sede  Paciente     Medico     Estado   Asistencia    Estudio</div></b>
+                <div className="col" id='infoAgenda'>{tur.Fecha}   {tur.FkSede}   {tur.FkPaciente} {tur.FkMedico} {tur.Cancelado ? "Cancelado" : "No cancelado"} {tur.Asistio ? "Asistió" : "No asistió"} {tur.FkEstudio}</div>
+              </div>
+            </div>  */}
+            </div>
+        );
+        
+      })};
     </div>
   );
 }

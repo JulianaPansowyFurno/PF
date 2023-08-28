@@ -12,7 +12,7 @@ export default function App() {
     <div>
       <Routes>
         <Route exact path="/" element={<LoginFront />}/>
-         <Route path="/registro" element={<RegistroFront />} /*onEnter={requireAuth}*/ /> 
+         <Route path="/registro" element={<RegistroFront />} /> 
         <Route path="/agenda" element={<AgendaVirtual />}/>
       </Routes>
 

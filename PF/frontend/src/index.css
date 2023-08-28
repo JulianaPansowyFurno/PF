@@ -154,15 +154,16 @@ label {
   font-family: "Roboto";
 }
 
-/* .Listado-Turnos{
-  display: flex;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  word-spacing: 1em;
+#tituloAgenda{
+  word-spacing: 150px;
+  font-size: 20px;
+}
+#infoAgenda{
+  word-spacing: 170px;
 }
 
-#Turno{
-  display: flex;
-} */
+.container {
+  display: grid;
+  grid-template-columns: 10rem 10rem 10rem;
+  grid-gap: 1rem;
+}

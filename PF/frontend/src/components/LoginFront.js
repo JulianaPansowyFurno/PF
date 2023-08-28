@@ -1,16 +1,14 @@
 import '../App.css';
 import background from "./Imagenes/fondoLogin.png";
 import logoPNG from "./Imagenes/logoPNG.png";
-import {  Link } from "react-router-dom";
+import {  Link, useNavigate } from "react-router-dom";
 import '../botonLindo.css';
 import axios from 'axios';
 import React, { useState } from "react";
 
-var pagina='';
-
 const Login = () => {
-  const [post, setPost] = React.useState('');
-  const [user, setUser] = useState()
+  const navigate = useNavigate();
+  // const [user, setUser] = useState()
 
   const tomarValores = (e) => {
     e.preventDefault();
@@ -19,19 +17,18 @@ const Login = () => {
       user: formulario.get('usuario'),
       pass: formulario.get('password')
     }
-    axios.get('http://localhost:5000/usuario', usuar)
+    axios.get('http://localhost:5000/usuario', {params: usuar})
     .then(function (response) {
-      if(response == false){
-        pagina = '/registro';
+      if(response.data == false){
+        navigate("/registro");
       }
       else
       {
-        pagina = '/agenda';
+        navigate("/agenda");
       }
-      setUser(response.data)
-      // store the user in localStorage
-      localStorage.setItem('user', response.data)
-      console.log(response.data)
+      // setUser(response.data)
+      // // store the user in localStorage
+      // localStorage.setItem('user', response.data)
     }) 
     .catch(function (error) {
       console.log(error.config);
@@ -71,7 +68,9 @@ const Login = () => {
 
                   {/* BOTONES PARA LA PROXIMA PAGINA*/}
                   <div id="Boton1">
-                  <b><Link to={pagina} className='letrasBotonIngreso' > Entrar</Link></b>
+                  <b>
+                    <button type="submit" className="btn btn-primary btn-sm letrasBotonIngreso" id="Boton1" >Entrar</button>
+                  </b>
                   </div>
                   {/* {tomarValores && (
                     <Alert severity="error" onClick={() => setError(null)}>

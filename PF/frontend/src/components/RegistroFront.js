@@ -4,14 +4,15 @@ import '../botonLindo.css';
 import background from "./Imagenes/fondoLogin.png";
 import logoPNG from "./Imagenes/logoPNG.png";
 import axios from 'axios';
-import {  Link } from "react-router-dom";
+import {  Link, useNavigate } from "react-router-dom";
 
-
-const Registro = ({ MeLlevoValores }) => {
+const Registro = () => {
+  const navigate = useNavigate();
 
   const tomarValores = (e) => {
     e.preventDefault();
-    const formulario = new FormData(e.target)  
+    const formElement = e.target; // Reference to the form element
+    const formulario = new FormData(formElement); 
     const usuario={
       user: formulario.get('Usuarios'),
       pass: formulario.get('Contrasena'),
@@ -23,16 +24,13 @@ const Registro = ({ MeLlevoValores }) => {
       birth: formulario.get('FechaNacimiento')
     }
     console.log(usuario);
-    MeLlevoValores(usuario);
     axios.post('http://localhost:5000/usuario', usuario)
     .then(function (response) {
       console.log(response);
+      navigate("/agenda");
+
     })
-
-    
-  };
-
- 
+  }; 
 
   return(
     <div className="fondo" style={{ backgroundImage:`url(${background})` }}>
@@ -40,7 +38,7 @@ const Registro = ({ MeLlevoValores }) => {
         <div id='formSize'>
             <div id='Form2' >
               <div className='fondoBlanco'id='bordesRedondos'>
-                <form>
+                <form onSubmit={tomarValores}>
                     <br></br>
                     <br></br>
                     <center>
@@ -108,8 +106,7 @@ const Registro = ({ MeLlevoValores }) => {
                     </div>
                     <br></br>
                       <div id="Boton1">
-                      <Link type="submit" to='/agenda' state={tomarValores}> Entrar</Link>
-                      {/* <button  type="Registro" className="btn btn-primary btn-sm" id="Boton2" >Registrarse</button> */}
+                      <button  type="submit" className="btn btn-primary btn-sm" id="Boton2" >Registrarse</button>
                       </div>
                       <div id="Boton2">
                       <Link type="registro" to='/'> Volver </Link>

@@ -14,15 +14,14 @@ export default class UsuarioService {
         console.log(response.recordset[0].cantidad);
         if(response.recordset[0].cantidad == 1)
         {
-            console.log("Existe el usurio")
+            console.log(
+                "Existe el usurio")
             return true;
         }
         else{
-            return false;
             console.log("No existe")
+            return false;
         }
-        
-        return response.recordset;
     }
 
     CrearUsuario = async (usuario) => {
