@@ -20,20 +20,22 @@ const Login = () => {
     axios.get('http://localhost:5000/usuario', {params: usuar})
     .then(function (response) {
       if(response.data == false){
-        navigate("/registro");
+        alert("Usuario o contraseña incorrecta")
       }
       else
       {
         navigate("/agenda");
       }
-      // setUser(response.data)
-      // // store the user in localStorage
-      // localStorage.setItem('user', response.data)
     }) 
     .catch(function (error) {
       console.log(error.config);
-  });
+  });  
   };
+
+  const onRegistro = (e) => {
+    e.preventDefault();
+    navigate("/registro");
+  }
 
 
   return(
@@ -67,19 +69,19 @@ const Login = () => {
                   {/* <button  type="Registro" className="btn btn-primary btn-sm" id="Boton2"> Registrarse</button> */}
 
                   {/* BOTONES PARA LA PROXIMA PAGINA*/}
-                  <div id="Boton1">
-                  <b>
-                    <button type="submit" className="btn btn-primary btn-sm letrasBotonIngreso" id="Boton1" >Entrar</button>
-                  </b>
-                  </div>
-                  {/* {tomarValores && (
-                    <Alert severity="error" onClick={() => setError(null)}>
-                      {props.error || error}
-                    </Alert>
-                  )} */}
                   <div id="Boton2">
-                  <b><Link to='/registro' className='letrasBotonIngreso'> Registrarse</Link></b>
+                  <div className='letrasBotonIngreso'>
+                  <b><button type="submit" className="btn btn-primary btn-sm" id="Boton2" >Entrar</button></b>
                   </div>
+                  </div>
+
+                  <div id="Boton2">
+                  <div className='letrasBotonIngreso'>
+                  <b><button type="registro" className="btn btn-primary btn-sm" id="Boton2" onClick={onRegistro}>Registrarse</button></b>
+                  </div>
+                  </div>
+
+
                   <h5><a href='pag para cambiar contrasena'><u>Olvide mi contraseña</u></a>   </h5>
                   </center>
                 </form>

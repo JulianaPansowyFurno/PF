@@ -18,7 +18,7 @@ const AgendaVirtual = () => {
     setTurno(response.data);
     console.log(response.data)
   })
-    .catch((error) => console.log(error));
+    .catch((error) => alert("mallllll grrrr aahhh yeah yeah sos horribla"));
     }, []);
 
   return (

@@ -32,6 +32,11 @@ const Registro = () => {
     })
   }; 
 
+  const onVolver = (e) => {
+    e.preventDefault();
+    navigate("/");
+  }
+
   return(
     <div className="fondo" style={{ backgroundImage:`url(${background})` }}>
         <div className='conteiner' >
@@ -105,14 +110,21 @@ const Registro = () => {
 			              </div>
                     </div>
                     <br></br>
-                      <div id="Boton1">
-                      <button  type="submit" className="btn btn-primary btn-sm" id="Boton2" >Registrarse</button>
-                      </div>
-                      <div id="Boton2">
-                      <Link type="registro" to='/'> Volver </Link>
-                      {/* <button type="submit" className="btn btn-primary btn-sm" id="Boton1" >Entrar</button> */}
-                      </div>
-                      <h5><a href='pag para cambiar contrasena'><u>Olvide mi contraseña</u></a>   </h5> 
+
+                    {/* BOTONES PARA LA PROXIMA PAGINA*/}
+                  <div id="BotonReg">
+                  <div className='letrasBotonIngreso'>
+                  <b><button type="submit" className="btn btn-primary btn-sm" id="BotonReg" >Registrarse</button></b>
+                  </div>
+                  </div>
+
+                  <div id="BotonReg">
+                  <div className='letrasBotonIngreso'>
+                  <b><button type="registro" className="btn btn-primary btn-sm" id="BotonReg" onClick={onVolver}>Volver</button></b>
+                  </div>
+                  </div>
+
+                  <h5><a href='pag para cambiar contrasena'><u>Olvide mi contraseña</u></a>   </h5> 
                   </center>
               </form>
             </div>
