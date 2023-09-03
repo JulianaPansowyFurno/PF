@@ -147,21 +147,24 @@ label {
   padding-bottom: 100%;
 }
 
+.fondo2{
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: 100% 100% ;
+  padding-bottom: 100%;
+  padding-top: 1%;
+}
+
 .letrasBotonIngreso{
   color: rgb(149, 149, 149);
   font-family: "Roboto";
 }
 
-#tituloAgenda{
-  word-spacing: 150px;
-  font-size: 20px;
-}
-#infoAgenda{
-  word-spacing: 170px;
-}
 
-.container {
-  display: grid;
-  grid-template-columns: 10rem 10rem 10rem;
-  grid-gap: 1rem;
+
+.agendaVirtual{
+  width: 100%;
+  color: black;
+  align-items: right;
+  justify-content: flex-end;
 }
