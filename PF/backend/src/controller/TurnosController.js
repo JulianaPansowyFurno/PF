@@ -21,11 +21,10 @@ router.post('', async (req, res) => {
   return res.status(200).json(turno);
 });
 
-router.put('/:id', async (req, res) => {
-  console.log(`Request URL Param: ${req.params.id}`);
+router.put('', async (req, res) => {
+  console.log(`Request URL Param: ${req.body.id}`);
   console.log(`This is a get operation getTurnos`);
-  const turno = await turnosService.cancelarTurno(req.params.id, req.body);
-  console.log(req.body);
+  const turno = await turnosService.cancelarTurno(req.body.id);
   return res.status(200).json(turno);
 });
 

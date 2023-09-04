@@ -10,7 +10,14 @@ export default class TurnosService {
         const pool = await sql.connect(config);
         const response = await pool.request()
         .input('FKPaciente',sql.Int, id)
-        .query(`SELECT Turno.IdTurno,Turno.FkSede, Turno.Fecha, Turno.FkPaciente, Turno.FkMedico, Turno.Cancelado, Turno.Asistio, Turno.FkEstudio, Turno.FkServicio, Turno.Hora FROM Turno inner join Paciente on Paciente.IdPaciente = Turno.FkPaciente WHERE Turno.FkPaciente = @FkPaciente`);
+        .query(`SELECT Turno.IdTurno, Sede.Sede, Turno.Fecha, Paciente.NombreApellido, Medico.NombreApellidoM , Turno.Cancelado, Turno.Asistio, Estudio.Estudio, Servicio.Servicio, Turno.Hora 
+        FROM Turno 
+        inner join Paciente on Paciente.IdPaciente = Turno.FkPaciente 
+        inner join Sede on Sede.IdSede = Turno.FkSede
+        inner join Medico on Medico.IdMedico = Turno.FkMedico
+        inner join Estudio on Estudio.IdEstudio = Turno.FkEstudio
+        inner join Servicio on Servicio.IdServicio = Turno.FkServicio
+        WHERE Turno.FkPaciente = @FkPaciente`);
     
         console.log(response.recordset)
         return response.recordset;
@@ -43,21 +50,19 @@ export default class TurnosService {
             }*/
         return response.recordset;
     }
-    cancelarTurno = async (id, turno) => {
+    cancelarTurno = async (id) => {
         console.log('This is a function on the service');
         const pool = await sql.connect(config);
-        console.log(turno.Cancelado)
-        const response = "";
-        if(turno)
-        {
-            response = await pool.request()
+        const response = await pool.request()
             .input('IdTurno',sql.Int, id)
-            .input('Cancelado',sql.Bit, turno.Cancelado)
-            .query(`UPDATE Turno SET Turno.Cancelado = @Cancelado WHERE Turno.IdTurno = @IdTurno`);
-        }
-        else{
-            response = "No existe el turno";
-        }
+            .query(`UPDATE Turno SET Turno.Cancelado = 1 WHERE Turno.IdTurno = @IdTurno`);
+        //if(turno)
+        //{
+            
+       // }
+        //else{
+           // response = "No existe el turno";
+        //}
         
         console.log(response)
 

@@ -155,6 +155,15 @@ label {
   padding-top: 1%;
 }
 
+.conteiner{
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: 100% 100% ;
+  padding-bottom: 100%;
+  padding-top: 1%;
+  
+}
+
 .letrasBotonIngreso{
   color: rgb(149, 149, 149);
   font-family: "Roboto";
@@ -162,9 +171,3 @@ label {
 
 
 
-.agendaVirtual{
-  width: 100%;
-  color: black;
-  align-items: right;
-  justify-content: flex-end;
-}
