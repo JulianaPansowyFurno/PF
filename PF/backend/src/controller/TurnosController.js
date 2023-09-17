@@ -13,6 +13,13 @@ router.get('/:id', async (req, res) => {
   return res.status(200).json(turno);
 });
 
+router.get('', async (req, res) => {
+  console.log(`This is a get operation getTurnos`);
+  const turno = await turnosService.getEstudio();
+
+  return res.status(200).json(turno);
+});
+
 router.post('', async (req, res) => {
   
   console.log(`This is a get operation getTurnos`);

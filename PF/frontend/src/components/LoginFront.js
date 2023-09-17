@@ -82,7 +82,7 @@ const Login = () => {
                   </div>
 
 
-                  <h5><a href='pag para cambiar contrasena'><u>Olvide mi contraseña</u></a>   </h5>
+                  {/* <h5><a href='pag para cambiar contrasena'><u>Olvide mi contraseña</u></a>   </h5> */}
                   </center>
                 </form>
               </div>

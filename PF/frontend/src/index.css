@@ -35,6 +35,7 @@ body {
   background-color: #fff;
   background: rgba(255, 255, 255, 0.767);
   width: 220%;
+  padding-bottom: 3rem;
 }
 
 .fondoBlancoEspacio{
@@ -124,7 +125,6 @@ h1,
 h2,
 label {
   color: white;
-  padding: 3rem 0;
   text-align: left;
   font-family: 'Arial';
   letter-spacing: 1px;
@@ -167,6 +167,27 @@ label {
 .letrasBotonIngreso{
   color: rgb(149, 149, 149);
   font-family: "Roboto";
+}
+
+.btntur{
+  width: 10%;
+  height: 10%;
+}
+
+.BTNAgenda{
+  background-color: #e3a9d2; /* Color de fondo pastel */
+  border: none;
+  border-radius: 20px; /* Borde redondeado */
+  padding: 10px 20px; /* Espaciado interno */
+  font-family: 'Delicious Handrawn', cursive;
+  font-size: 16px; /* Tamaño de la fuente */
+  color: #fff; /* Color del texto */
+  cursor: pointer;
+}
+
+.BTNAgenda:hover {
+  /* Estilos adicionales al pasar el cursor sobre el botón */
+  background-color: #b14197; /* Color de fondo pastel en hover */
 }
 
 

@@ -1,69 +1,72 @@
 import '../App.css';
+import React from 'react';
+import '../botonLindo.css';
 import background from "./Imagenes/fondoLogin.png";
 import logoPNG from "./Imagenes/logoPNG.png";
-import '../botonLindo.css';
 import axios from 'axios';
+import {  Link, useNavigate } from "react-router-dom";
 import Form from 'react-bootstrap/Form';
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
+
 
 const SacarTurno = () => {
-  const [turno, setTurno] = useState([]);
+  const [TodosEstudios, SetEstudios] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
+    traerEstudios();
+  }, []);
+
+  const traerEstudios = () => {
     axios
-      .get("http://localhost:5000/turno/3") // Poner id paciente en el link
+      .get("http://localhost:5000/turno")
       .then((response) => {
-        setTurno(response.data);
+        SetEstudios(response.data);
         console.log(response.data);
       })
       .catch((error) => alert("mallllll"));
-  }, []);
+  };
 
-  const onRegistro = (e) => {
-    e.preventDefault();
-  }
 
 
   return(
     <div className="fondo" style={{ backgroundImage:`url(${background})` }}>
-      <div className='conteiner' >
+        <div className='conteiner' >
         <div id='formSize'>
-          <div className="one-half column">
-            <div id='Form' >
+            <div id='Form2' >
               <div className='fondoBlanco'id='bordesRedondos'>
-              <form>
-                  <br></br>
-
-                  <img src = {logoPNG} width='80%' ></img>
-                  <br></br>
-                  <br></br>
-                    <div className="omrs-input-group">
-                      <label className="omrs-input-filled">
-                        <input className="u-full-width" type="text" name="usuario" required></input>
-                        <span className="omrs-input-label">Ingrese el usuario</span>
-                      </label>
-			              </div>
-                  <br></br>
-
-                  {/* {turno.map((tur) => {
-                  return (
-                    <Form.Select>
-                      <option>Default select</option>
-                    </Form.Select>
+                <form>
                     <br></br>
-                  );
-                })}; */}
+                    <br></br>
+                    <center>
+                    <img src = {logoPNG} width='50%' ></img>
+                    
+                    <Form.Select>
+                        {TodosEstudios.map((e) => {
+                            return(
+                              <option>
+                          <div key={e.IdEstudio} >
+                            {e.Estudio}
+                            </div>
+                            </option>
+                            );
+                            
+                          })}
 
-                  {/* BOTONES PARA LA PROXIMA PAGINA*/}
-                  <div id="Boton2">
+                    </Form.Select>
+                          
+                    
+                    <br></br>
+
+                    {/* BOTONES PARA LA PROXIMA PAGINA*/}
+                  <div id="BotonReg">
                   <div className='letrasBotonIngreso'>
-                  <b><button type="submit" className="btn btn-primary btn-sm" id="Boton2" >Entrar</button></b>
+                  <b><button type="submit" className="btn btn-primary btn-sm" id="BotonReg" > Sacar </button></b>
                   </div>
                   </div>
-
-  
-                </form>
-              </div>
+ 
+                  </center>
+              </form>
             </div>
           </div>
         </div>
@@ -71,6 +74,4 @@ const SacarTurno = () => {
     </div>
   )
 };
-
-
 export default SacarTurno;

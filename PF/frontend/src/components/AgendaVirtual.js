@@ -4,7 +4,6 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Container from "react-bootstrap/Container";
 import Table from "react-bootstrap/Table";
-import cruzAgenda from "./Imagenes/cruzAgenda.png";
 import relojAgenda from "./Imagenes/relojAgenda.png";
 import background from "./Imagenes/fondoLogin.png";
 
@@ -36,6 +35,10 @@ const AgendaVirtual = () => {
       traerTurnos();
       console.log("jejejuju tiene caca");
     });
+  };
+
+  const onPosponer = (id) => {
+    navigate("/posponer");
   };
 
   return (
@@ -86,12 +89,8 @@ const AgendaVirtual = () => {
                 </tbody>
               </Table>
               <center>
-              <button onClick={() => onCancelar(tur.IdTurno)}>
-                <img src={cruzAgenda} width="7%"/>
-              </button>
-              <button onClick={() => onCancelar(tur.IdTurno)}>
-                <img src={relojAgenda} width="7%" />
-              </button>
+              <button className="BTNAgenda" onClick={() => onCancelar(tur.IdTurno)}> Cancelado</button>
+              <button className="BTNAgenda" onClick={() => onPosponer(tur.IdTurno)}> Posponer </button>
               </center>
               <br></br>
             </>

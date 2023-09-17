@@ -25,7 +25,7 @@ export default class UsuarioService {
     }
 
     CrearUsuario = async (usuario) => {
-        console.log('This is a function on the service Create USuario');
+        console.log('This is a function on the service CrearUsuario');
         const pool = await sql.connect(config);
 
         // Vamos a validar que ese usuario no exista
@@ -49,7 +49,7 @@ export default class UsuarioService {
        
     }
     DeleteUsuario = async (IdUsuario) => {
-        console.log('This is a function on the service');
+        console.log('This is a function on the service DeleteUsuario');
         const pool = await sql.connect(config);
         const response = await pool.request()
         .input('IdUsuario',sql.Int, IdUsuario)

@@ -50,6 +50,37 @@ export default class TurnosService {
             }*/
         return response.recordset;
     }
+
+    PosponerTurno = async (id, fecha) => {
+        console.log('This is a function on the service');
+            const pool = await sql.connect(config);
+            const response = await pool.request()
+                .input('Fecha',sql.NChar, turno.Fecha)
+                .query(`INSERT INTO Turno (Fecha) VALUES (@Fecha) WHERE Turno.IdTurno = @IdTurno`);
+            console.log(response)
+            /*{
+                "FkSede": 2,
+                "FechaYHora": "2022/06/10",
+                "FkPaciente": 3,
+                "FkMedico": 1,
+                "Estado": true,
+                "Asistio": true,
+                "FkEstudio": 3,
+                "FkServicio": 2
+            }*/
+        return response.recordset;
+    }
+
+    getEstudio = async () => {
+        console.log('This is a function on the service getEstudio');
+        const pool = await sql.connect(config);
+        const response = await pool.request()
+        .query(`SELECT Estudio  FROM Estudio`);
+        console.log(response.recordset)
+        return response.recordset;
+    }
+
+
     cancelarTurno = async (id) => {
         console.log('This is a function on the service');
         const pool = await sql.connect(config);
