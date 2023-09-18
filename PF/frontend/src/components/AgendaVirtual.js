@@ -6,10 +6,24 @@ import Container from "react-bootstrap/Container";
 import Table from "react-bootstrap/Table";
 import relojAgenda from "./Imagenes/relojAgenda.png";
 import background from "./Imagenes/fondoLogin.png";
+import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
 
 const AgendaVirtual = () => {
   const [turno, setTurno] = useState([]);
+  const [id, setId] = useState("");
   const navigate = useNavigate();
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => 
+  setShow(false)
+  ;
+
+  const handleShow = (id) => 
+  {setShow(true);
+ onPosponer(id);}
+  ;
+
 
   const traerTurnos = () => {
     axios
@@ -31,14 +45,25 @@ const AgendaVirtual = () => {
   };
 
   const onCancelar = (id) => {
-    axios.put("http://localhost:5000/turno", { id }).then(function (response) {
+    axios.put("http://localhost:5000/turno", { id })
+    .then(function (response) {
       traerTurnos();
-      console.log("jejejuju tiene caca");
     });
   };
 
-  const onPosponer = (id) => {
-    navigate("/posponer");
+  const onPosponer = (e) => {
+    e.preventDefault();
+    const formElement = e.target; // Reference to the form element
+    const formulario = new FormData(formElement); 
+    const fecha={
+      IdTurno: id,
+      Fecha: formulario.get('Fecha')
+    }
+    axios.put("http://localhost:5000/turno", fecha)
+    .then(function (response) {
+      traerTurnos();
+    });
+    // navigate("/posponer/${persona.id}");
   };
 
   return (
@@ -50,6 +75,7 @@ const AgendaVirtual = () => {
         {turno.map((tur) => {
           return (
             <>
+            {setId(tur.IdTurno)}
               <Table className="table table-hover-fluid">
                 <thead>
                   <tr>
@@ -90,7 +116,32 @@ const AgendaVirtual = () => {
               </Table>
               <center>
               <button className="BTNAgenda" onClick={() => onCancelar(tur.IdTurno)}> Cancelado</button>
-              <button className="BTNAgenda" onClick={() => onPosponer(tur.IdTurno)}> Posponer </button>
+              
+              <Button variant="primary"  onClick={() => {handleShow(tur.IdTurno)}}>
+              Posponer
+              </Button>
+                    <Modal show={show} onHide={handleClose}>
+              <Modal.Header closeButton>
+                <Modal.Title>Modal heading</Modal.Title>
+              </Modal.Header>
+              <Modal.Body><br></br>
+                    <div className="omrs-input-group">
+                    <label className="omrs-input-filled">
+                      <input className="u-full-width" type="date" name="Fecha" required></input>
+                      <span className="omrs-input-label">Fecha a la que desea pasar el turno: </span>
+                    </label>
+			              </div>
+              </Modal.Body>
+              <Modal.Footer>
+                <Button variant="secondary" onClick={handleClose}>
+                  Close
+                </Button>
+                <Button variant="primary"  onClick={handleClose}>
+                  Guardar
+                </Button>
+              </Modal.Footer>
+            </Modal>
+              {/* <button className="BTNAgenda" onClick={() => onPosponer(tur.IdTurno)}> Posponer </button> */}
               </center>
               <br></br>
             </>

@@ -2,6 +2,7 @@ import express from "express";
 import TurnosRouter from "./src/controller/TurnosController.js";
 import LogInRouter from "./src/controller/UsuarioController.js";
 import PacienteRouter from "./src/controller/PacienteController.js";
+import EspecialidadRouter from "./src/controller/EspecialidadController.js";
 import cors from 'cors';
 import sql from 'mssql'
 import 'dotenv/config'
@@ -16,6 +17,7 @@ app.use(cors());
 app.use("/turno", TurnosRouter);
 app.use("/usuario", LogInRouter);
 app.use("/paciente", PacienteRouter);
+app.use("/especialidad", EspecialidadRouter);
 
 app.listen(port, () => {
   console.log(`Listening on port ${port}`);

@@ -51,35 +51,30 @@ export default class TurnosService {
         return response.recordset;
     }
 
-    PosponerTurno = async (id, fecha) => {
-        console.log('This is a function on the service');
+    PosponerTurno = async (turno) => {
+        console.log('This is a function on the service test');
             const pool = await sql.connect(config);
             const response = await pool.request()
+                .input('IdTurno',sql.Int, turno.IdTurno)
                 .input('Fecha',sql.NChar, turno.Fecha)
-                .query(`INSERT INTO Turno (Fecha) VALUES (@Fecha) WHERE Turno.IdTurno = @IdTurno`);
+                .query(`UPDATE Turno SET Fecha = @Fecha WHERE IdTurno = @IdTurno`);
             console.log(response)
-            /*{
-                "FkSede": 2,
-                "FechaYHora": "2022/06/10",
-                "FkPaciente": 3,
-                "FkMedico": 1,
-                "Estado": true,
-                "Asistio": true,
-                "FkEstudio": 3,
-                "FkServicio": 2
-            }*/
+            
         return response.recordset;
     }
 
-    getEstudio = async () => {
-        console.log('This is a function on the service getEstudio');
+    getEstudio = async (id) => {
+        console.log('This is a function on the service getEstudio', id);
         const pool = await sql.connect(config);
         const response = await pool.request()
-        .query(`SELECT Estudio  FROM Estudio`);
+        .input('IdEspecialidad',sql.Int, id)
+        .query(`SELECT Estudio.*
+            FROM Estudio 
+            inner join Especialidad on Especialidad.IdEspecialidad = Estudio.FkEspecialidad
+            Where Estudio.FKEspecialidad = @IdEspecialidad`);
         console.log(response.recordset)
         return response.recordset;
     }
-
 
     cancelarTurno = async (id) => {
         console.log('This is a function on the service');
@@ -87,14 +82,6 @@ export default class TurnosService {
         const response = await pool.request()
             .input('IdTurno',sql.Int, id)
             .query(`UPDATE Turno SET Turno.Cancelado = 1 WHERE Turno.IdTurno = @IdTurno`);
-        //if(turno)
-        //{
-            
-       // }
-        //else{
-           // response = "No existe el turno";
-        //}
-        
         console.log(response)
 
         return response.recordset;

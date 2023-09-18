@@ -14,6 +14,7 @@ const Registro = () => {
     const formElement = e.target; // Reference to the form element
     const formulario = new FormData(formElement); 
     const fecha={
+      
       Fecha: formulario.get('Fecha')
     }
     axios.post('http://localhost:5000/usuario', fecha)
@@ -53,7 +54,7 @@ const Registro = () => {
                     {/* BOTONES PARA LA PROXIMA PAGINA*/}
                   <div id="BotonReg">
                   <div className='letrasBotonIngreso'>
-                  <b><button type="submit" className="btn btn-primary btn-sm" id="BotonReg" >Registrarse</button></b>
+                  <b><button type="submit" className="btn btn-primary btn-sm" id="BotonReg" > Posponer</button></b>
                   </div>
                   </div>
 

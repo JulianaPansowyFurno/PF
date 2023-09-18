@@ -10,23 +10,33 @@ import { useState, useEffect } from "react";
 
 
 const SacarTurno = () => {
-  const [TodosEstudios, SetEstudios] = useState([]);
+  const [estudios, setEstudios] = useState([]);
+  const [especialidades, setEspecialidades] = useState([]);
+  const [IdEspecialidad, SetIdEspecialidad] = useState(2);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    traerEstudios();
-  }, []);
-
-  const traerEstudios = () => {
+  const getEstudios = (id) => {
     axios
-      .get("http://localhost:5000/turno")
+      .get("http://localhost:5000/turno/especialidad/" + id)
       .then((response) => {
-        SetEstudios(response.data);
-        console.log(response.data);
+        setEstudios(response.data);
+        console.log(response);
       })
       .catch((error) => alert("mallllll"));
   };
 
+  const traerEspecialidades = () => {
+    axios
+      .get("http://localhost:5000/especialidad")
+      .then((response) => {
+        setEspecialidades(response.data);
+      })
+      .catch((error) => alert("aca hay algo raro"));
+  };
+  
+  useEffect(() => {
+    traerEspecialidades()
+  }, []);
 
 
   return(
@@ -41,18 +51,28 @@ const SacarTurno = () => {
                     <center>
                     <img src = {logoPNG} width='50%' ></img>
                     
+                    <Form.Select onChange={(e) => getEstudios(e.target.value)}>
+                      <option>Seleccionar Especialidad...</option>
+                        {especialidades.map((e) => {
+                            return(
+                              <option value={e.IdEspecialidad}>
+                                {e.Especialidad}
+                              </option>
+                            );
+                          })}
+                    </Form.Select>
+
+                      
                     <Form.Select>
-                        {TodosEstudios.map((e) => {
+                      <option>Seleccione el estudio...</option>
+                        {estudios.map((e) => {
                             return(
                               <option>
-                          <div key={e.IdEstudio} >
-                            {e.Estudio}
-                            </div>
-                            </option>
+                                {e.Estudio}
+                              </option>
                             );
-                            
+                          
                           })}
-
                     </Form.Select>
                           
                     
