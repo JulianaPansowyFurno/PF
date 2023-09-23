@@ -22,8 +22,9 @@ h4.title {
 /** END: Non Openmrs CSS **/
 div.omrs-input-group {
   margin-bottom: 1.5rem;
+  margin-right: 7rem;
   position: relative;
-  width: 20.4375rem;
+  width: 15rem; 
 }
 
 /* Input*/
@@ -31,10 +32,11 @@ div.omrs-input-group {
 .omrs-input-filled > input {
 	border: none;
 	border-bottom: 0.125rem solid var(--omrs-color-ink-medium-contrast);
-	width: 100%;
+	width: 150%;
+	margin-right: 10%;
 	height: 2.5rem;
 	font-size: 0.9rem;
-	padding-left:7rem;
+	/* padding-left:7rem; */
 	line-height: 147.6%;
 	padding-top: 0.825rem;
 	padding-bottom: 0.2rem;

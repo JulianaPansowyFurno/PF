@@ -15,14 +15,9 @@ const AgendaVirtual = () => {
   const navigate = useNavigate();
   const [show, setShow] = useState(false);
 
-  const handleClose = () => 
-  setShow(false)
-  ;
+  const handleClose = () =>   setShow(false);
 
-  const handleShow = (id) => 
-  {setShow(true);
- onPosponer(id);}
-  ;
+  const handleShow = () => setShow(true);
 
 
   const traerTurnos = () => {
@@ -74,8 +69,10 @@ const AgendaVirtual = () => {
       <Container>
         {turno.map((tur) => {
           return (
+            <div key={tur.id}>
             <>
             {setId(tur.IdTurno)}
+
               <Table className="table table-hover-fluid">
                 <thead>
                   <tr>
@@ -115,14 +112,14 @@ const AgendaVirtual = () => {
                 </tbody>
               </Table>
               <center>
-              <button className="BTNAgenda" onClick={() => onCancelar(tur.IdTurno)}> Cancelado</button>
+             
               
-              <Button variant="primary"  onClick={() => {handleShow(tur.IdTurno)}}>
+              {/* <Button variant="primary"  onClick={() => {handleShow(tur.IdTurno)}}>
               Posponer
               </Button>
                     <Modal show={show} onHide={handleClose}>
               <Modal.Header closeButton>
-                <Modal.Title>Modal heading</Modal.Title>
+                <Modal.Title>Posponer Turno</Modal.Title>
               </Modal.Header>
               <Modal.Body><br></br>
                     <div className="omrs-input-group">
@@ -140,12 +137,16 @@ const AgendaVirtual = () => {
                   Guardar
                 </Button>
               </Modal.Footer>
-            </Modal>
+            </Modal> */}
+
+             <button className="BTNAgenda" onClick={() => onCancelar(tur.IdTurno)}> Cancelado</button>
               {/* <button className="BTNAgenda" onClick={() => onPosponer(tur.IdTurno)}> Posponer </button> */}
               </center>
               <br></br>
             </>
+            </div>
           );
+          
         })}
 
         <div id="Boton2">

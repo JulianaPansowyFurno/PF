@@ -60,7 +60,7 @@ input[type="int"],
 input[type="email"],
 input[type="date"]
 {
-  width: 50%;
+  width: 100%;
   padding: 6px 10px;
   background-color: #fff;
   border: 1px solid #D1D1D1;
