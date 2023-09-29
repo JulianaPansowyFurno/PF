@@ -4,10 +4,9 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Container from "react-bootstrap/Container";
 import Table from "react-bootstrap/Table";
-import relojAgenda from "./Imagenes/relojAgenda.png";
-import background from "./Imagenes/fondoLogin.png";
-import Button from 'react-bootstrap/Button';
-import Modal from 'react-bootstrap/Modal';
+ import background from "./Imagenes/fondoLogin.png";
+ import Button from 'react-bootstrap/Button';
+ import Modal from 'react-bootstrap/Modal';
 
 const AgendaVirtual = () => {
   const [turno, setTurno] = useState([]);
@@ -25,7 +24,6 @@ const AgendaVirtual = () => {
       .get("http://localhost:5000/turno/13") // Poner id paciente en el link
       .then((response) => {
         setTurno(response.data);
-        console.log(response.data);
       })
       .catch((error) => alert("mallllll"));
   };
@@ -39,14 +37,14 @@ const AgendaVirtual = () => {
     navigate("/sacarTurno");
   };
 
-  const onCancelar = (id) => {
-    axios.put("http://localhost:5000/turno", { id })
-    .then(function (response) {
-      traerTurnos();
-    });
-  };
+   const onCancelar = (id) => {
+     axios.put("http://localhost:5000/turno", { id })
+     .then(function (response) {
+       traerTurnos();
+     });
+   };
 
-  const onPosponer = (e) => {
+   const onPosponer = (e) => {
     e.preventDefault();
     const formElement = e.target; // Reference to the form element
     const formulario = new FormData(formElement); 
@@ -67,11 +65,10 @@ const AgendaVirtual = () => {
       style={{ backgroundImage: `url(${background})` }}
     >
       <Container>
-        {turno.map((tur) => {
+         {turno.map((tur) => {
           return (
-            <div key={tur.id}>
-            <>
-            {setId(tur.IdTurno)}
+            <div key={tur.IdTurno}>
+             
 
               <Table className="table table-hover-fluid">
                 <thead>
@@ -92,10 +89,7 @@ const AgendaVirtual = () => {
                     <td>{tur.NombreApellido}</td>
                     <td>{tur.Sede}</td>
                     <td>
-                      {("0" + new Date(tur.Fecha).getDate()).substr(-2) +
-                        "-" +
-                        ("0" + new Date(tur.Fecha).getMonth()).substr(-2) +
-                        "-" +
+                      {("0" + new Date(tur.Fecha).getDate()).substr(-2) + "-" + ("0" + new Date(tur.Fecha).getMonth()).substr(-2) + "-" +
                         new Date(tur.Fecha).getFullYear()}
                     </td>
                     <td>{tur.NombreApellidoM}</td>
@@ -104,19 +98,37 @@ const AgendaVirtual = () => {
                     <td>{tur.Estudio}</td>
                     <td>{tur.Servicio}</td>
                     <td>
-                      {("0" + new Date(tur.Hora).getHours()).substr(-2) +
-                        ":" +
-                        ("0" + new Date(tur.Hora).getMinutes()).substr(-2)}
+                      {("0" + new Date(tur.Hora).getHours()).substr(-2) + ":" + ("0" + new Date(tur.Hora).getMinutes()).substr(-2)}
                     </td>
                   </tr>
                 </tbody>
-              </Table>
-              <center>
-             
               
-              {/* <Button variant="primary"  onClick={() => {handleShow(tur.IdTurno)}}>
-              Posponer
-              </Button>
+              <center>
+          
+      <Button className="BTNAgenda" variant="primary" onClick={handleShow}>
+        Cancelar
+      </Button>
+
+      <Button className="BTNAgenda" variant="primary"  onClick={() => {handleShow(tur.IdTurno)}}>
+        Posponer
+      </Button>
+
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Cancelar turno </Modal.Title>
+        </Modal.Header>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+          <Button variant="primary" onClick={handleClose} > 
+           <div on={() => onCancelar(tur.IdTurno)}>
+            Save Changes
+            </div>
+          </Button>
+        </Modal.Footer>
+      </Modal>
+
                     <Modal show={show} onHide={handleClose}>
               <Modal.Header closeButton>
                 <Modal.Title>Posponer Turno</Modal.Title>
@@ -137,17 +149,15 @@ const AgendaVirtual = () => {
                   Guardar
                 </Button>
               </Modal.Footer>
-            </Modal> */}
-
-             <button className="BTNAgenda" onClick={() => onCancelar(tur.IdTurno)}> Cancelado</button>
-              {/* <button className="BTNAgenda" onClick={() => onPosponer(tur.IdTurno)}> Posponer </button> */}
-              </center>
-              <br></br>
-            </>
+            </Modal>
+         {/* <button className="BTNAgenda" onClick={() => onCancelar(tur.IdTurno)}> Cancelado</button>
+          <button className="BTNAgenda" onClick={() => onPosponer(tur.IdTurno)}> Posponer </button> */}
+          </center>
+          <br></br>
+          </Table>
             </div>
           );
-          
-        })}
+        })} 
 
         <div id="Boton2">
           <div className="letrasBotonIngreso">
@@ -169,48 +179,3 @@ const AgendaVirtual = () => {
   );
 };
 export default AgendaVirtual;
-
-/*
-
-
-{
-                /* 
-                
-                
-
-                <Row></Row>
-              </Col>
-
-              <Col>
-                <Row>Asistio</Row>
-                <Row></Row>
-              </Col>
-
-              <Col>
-                <Row>Estudio</Row>
-                <Row></Row>
-              </Col>
-
-              <Col>
-                <Row>Medico</Row>
-                <Row>{tur.NombreApellidoM}</Row>
-              </Col>
-
-              <Col>
-                <Row>Sede</Row>
-                <Row>{tur.Sede}</Row>
-              </Col>
-
-              <Col>
-                <Row>Fecha</Row>
-                <Row>{tur.Fecha}</Row>
-              </Col>
-                
-                
-                
-                <div className="container text-center">
-              <div className="row">
-              <b><div className="col" id='tituloAgenda'>Fecha   Sede  Paciente     Medico     Estado   Asistencia    Estudio</div></b>
-                <div className="col" id='infoAgenda'>{tur.Fecha}   {tur.FkSede}   {tur.FkPaciente} {tur.FkMedico} {tur.Cancelado ? "Cancelado" : "No cancelado"} {tur.Asistio ? "Asistió" : "No asistió"} {tur.FkEstudio}</div>
-              </div>
-            </div>  */
