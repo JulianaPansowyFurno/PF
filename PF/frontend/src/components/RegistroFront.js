@@ -1,10 +1,10 @@
 import '../App.css';
 import React from 'react';
-import '../botonLindo.css';
 import background from "./Imagenes/fondoLogin.png";
 import logoPNG from "./Imagenes/logoPNG.png";
 import axios from 'axios';
 import {  Link, useNavigate } from "react-router-dom";
+import "../botonLindo.css";
 
 const Registro = () => {
   const navigate = useNavigate();
@@ -38,6 +38,8 @@ const Registro = () => {
   }
 
   return(
+    <div className='bodyEstatico'>
+
     <div className="fondo" style={{ backgroundImage:`url(${background})` }}>
         <div className='conteiner' >
         <div id='formSize'>
@@ -47,22 +49,19 @@ const Registro = () => {
                     <br></br>
                     <br></br>
                     <center>
-                    <img src = {logoPNG} width='50%' ></img>
+                    <img src = {logoPNG} width='70%' ></img>
                     
                     <div className="omrs-input-group">
                       <label className="omrs-input-filled">
                         <input className="u-full-width" type="text" name="NombreApellido" required></input>
-                        <span className="omrs-input-label">Nombre/s y Apellido/s</span>
+                          <span className="omrs-input-label">Nombre/s y Apellido/s</span>
                       </label>
 			              </div>
                   
-                    <br></br>
-                    <div id='colorLetrasLogin' className="mb-3">
                     <div className="omrs-input-group">
                     <label className="omrs-input-filled">
                       <input className="u-full-width" type="int" name="DNI" required></input>
                       <span className="omrs-input-label">DNI</span>
-                      {/* <span class="omrs-input-helper">Helper Text</span> */}
                     </label>
 			              </div>
 
@@ -89,9 +88,9 @@ const Registro = () => {
 
                     <br></br>
                     <div className="omrs-input-group">
-                    <label className="omrs-input-filled">
+                    <label className="omrs-input-filled" id='marginFecha'>
                       <input className="u-full-width" type="date" name="FechaNacimiento" required></input>
-                      <span className="omrs-input-label">Fecha Nacimiento</span>
+                      <span className="omrs-input-label" id='textoFecha'>Fecha Nacimiento</span>
                     </label>
 			              </div>
 
@@ -108,29 +107,23 @@ const Registro = () => {
                       <span className="omrs-input-label">Contraseña</span>
                     </label>
 			              </div>
-                    </div>
                     <br></br>
 
-                    {/* BOTONES PARA LA PROXIMA PAGINA*/}
-                  <div id="BotonReg">
-                  <div className='letrasBotonIngreso'>
-                  <b><button type="submit" className="btn btn-primary btn-sm" id="BotonReg" >Registrarse</button></b>
+                    {/* BOTONES PARA LA PROXIMA PAGINA*/}=
+                  <button type="submit" className="boton" >Registrarse</button>=
+=
+                  <button type="registro" className="boton" onClick={onVolver}>Volver</button>=    
+                  <div>
+                    <h7><a href='pag para cambiar contrasena'><u>Olvide mi contraseña</u></a>   </h7> 
                   </div>
-                  </div>
-
-                  <div id="BotonReg">
-                  <div className='letrasBotonIngreso'>
-                  <b><button type="registro" className="btn btn-primary btn-sm" id="BotonReg" onClick={onVolver}>Volver</button></b>
-                  </div>
-                  </div>
-
-                  <h5><a href='pag para cambiar contrasena'><u>Olvide mi contraseña</u></a>   </h5> 
+                  
                   </center>
               </form>
             </div>
           </div>
         </div>
       </div>
+    </div>
     </div>
   )
 };

@@ -49,9 +49,10 @@ body {
 
 .conteiner {
   height: 100%;
-    display: flex;
-    align-items: left;
-    justify-content: left;
+  display: flex;
+  align-items: left;
+  justify-content: left;
+  width: 1200px;
 }
 
 input[type="text"],

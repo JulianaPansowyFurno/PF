@@ -39,6 +39,7 @@ const Login = () => {
 
 
   return(
+      <div className='bodyEstatico'>
     <div className="fondo" style={{ backgroundImage:`url(${background})` }}>
       <div className='conteiner' >
         <div id='formSize'>
@@ -69,17 +70,25 @@ const Login = () => {
                   {/* <button  type="Registro" className="btn btn-primary btn-sm" id="Boton2"> Registrarse</button> */}
 
                   {/* BOTONES PARA LA PROXIMA PAGINA*/}
-                  <div id="Boton2">
-                  <div className='letrasBotonIngreso'>
-                  <b><button type="submit" className="btn btn-primary btn-sm" id="Boton2" >Entrar</button></b>
-                  </div>
-                  </div>
+                  {/* <div id="Boton2"> */}
+                  {/* <div className='letrasBotonIngreso'> */}
+                  
+                  {/* </div> */}
+                  {/* </div> */}
 
-                  <div id="Boton2">
-                  <div className='letrasBotonIngreso'>
-                  <b><button type="registro" className="btn btn-primary btn-sm" id="Boton2" onClick={onRegistro}>Registrarse</button></b>
+                  {/* <div id="Boton2"> */}
+                  {/* <div className='letrasBotonIngreso'> */}
+                  <button type="submit" className="boton">
+                    Entrar
+                  </button>
+                  <div className='espacioEntreBotones'>
                   </div>
-                  </div>
+                  <button type="registro" className="boton" onClick={onRegistro}>
+                    Registrarse
+                  </button>
+                  
+                  {/* </div> */}
+                  {/* </div> */}
 
 
                   {/* <h5><a href='pag para cambiar contrasena'><u>Olvide mi contraseña</u></a>   </h5> */}
@@ -90,6 +99,7 @@ const Login = () => {
           </div>
         </div>
       </div>
+    </div>
     </div>
   )
 };
