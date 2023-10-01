@@ -52,7 +52,7 @@ body {
   display: flex;
   align-items: left;
   justify-content: left;
-  width: 1200px;
+  width: 100%;
 }
 
 input[type="text"],
@@ -190,6 +190,10 @@ label {
   /* Estilos adicionales al pasar el cursor sobre el botón */
   background-color: #b14197; /* Color de fondo pastel en hover */
 }
+.thead{
+  align-items: center;
+}
+
 
 
 

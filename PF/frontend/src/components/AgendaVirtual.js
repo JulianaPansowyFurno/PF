@@ -7,16 +7,23 @@ import Table from "react-bootstrap/Table";
  import background from "./Imagenes/fondoLogin.png";
  import Button from 'react-bootstrap/Button';
  import Modal from 'react-bootstrap/Modal';
+import Form from 'react-bootstrap/Form';
 
 const AgendaVirtual = () => {
   const [turno, setTurno] = useState([]);
   const [id, setId] = useState("");
   const navigate = useNavigate();
-  const [show, setShow] = useState(false);
+  const [showCancelModal, setShowCancelModal] = useState(false);
+  const [showPosponerModal, setShowPosponerModal] = useState(false);
 
-  const handleClose = () =>   setShow(false);
+  const handleCloseCancelModal = () => setShowCancelModal(false);
+  const handleClosePosponerModal = () => setShowPosponerModal(false);
 
-  const handleShow = () => setShow(true);
+  const handleShowCancelModal = () => setShowCancelModal(true);
+  const handleShowPosponerModal = (id) => {
+    setId(id);
+    setShowPosponerModal(true);
+  };
 
 
   const traerTurnos = () => {
@@ -59,18 +66,18 @@ const AgendaVirtual = () => {
     // navigate("/posponer/${persona.id}");
   };
 
+  const onclickCancelar = (id) => {
+    onCancelar(id); 
+    handleCloseCancelModal();
+  };
+
   return (
-    <div
-      className="conteiner"
-      style={{ backgroundImage: `url(${background})` }}
-    >
+    <div className="conteiner" style={{ backgroundImage: `url(${background})` }} >
       <Container>
          {turno.map((tur) => {
           return (
             <div key={tur.IdTurno}>
-             
-
-              <Table className="table table-hover-fluid">
+             <Table className="table table-hover-fluid">
                 <thead>
                   <tr>
                     <th>Paciente</th>
@@ -82,6 +89,8 @@ const AgendaVirtual = () => {
                     <th>Estudio</th>
                     <th>Servicio</th>
                     <th>Hora</th>
+                    <th></th>
+                    <th></th>
                   </tr>
                 </thead>
                 <tbody>
@@ -100,82 +109,81 @@ const AgendaVirtual = () => {
                     <td>
                       {("0" + new Date(tur.Hora).getHours()).substr(-2) + ":" + ("0" + new Date(tur.Hora).getMinutes()).substr(-2)}
                     </td>
+                    <td>
+                    <Button className="BTNAgenda" variant="primary" onClick={handleShowCancelModal}>
+                      Cancelar
+                    </Button>
+                    </td>
+                    <td>
+                    <Button className="BTNAgenda" variant="primary"  onClick={() => {handleShowPosponerModal(tur.IdTurno)}}>
+                      Posponer
+                    </Button>
+                    </td>
                   </tr>
                 </tbody>
               
-              <center>
-          
-      <Button className="BTNAgenda" variant="primary" onClick={handleShow}>
-        Cancelar
-      </Button>
 
-      <Button className="BTNAgenda" variant="primary"  onClick={() => {handleShow(tur.IdTurno)}}>
-        Posponer
-      </Button>
+    
 
-      <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>Cancelar turno </Modal.Title>
-        </Modal.Header>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
-          <Button variant="primary" onClick={handleClose} > 
-           <div on={() => onCancelar(tur.IdTurno)}>
-            Save Changes
-            </div>
-          </Button>
-        </Modal.Footer>
-      </Modal>
+              <Modal show={showCancelModal} onHide={handleCloseCancelModal}>
+                  <Modal.Header closeButton>
+                    <Modal.Title>Cancelar turno </Modal.Title>
+                  </Modal.Header>
+                  <Modal.Footer>
+                    <Button variant="secondary" onClick={handleCloseCancelModal}>
+                      Close
+                    </Button>
+                    <Button variant="primary" onClick={() => onclickCancelar(tur.IdTurno)}>
+                    Save Changes
+                  </Button>
+                  </Modal.Footer>
+              </Modal>
 
-                    <Modal show={show} onHide={handleClose}>
+              <Modal show={showPosponerModal} onHide={handleClosePosponerModal}>
               <Modal.Header closeButton>
                 <Modal.Title>Posponer Turno</Modal.Title>
               </Modal.Header>
               <Modal.Body><br></br>
-                    <div className="omrs-input-group">
-                    <label className="omrs-input-filled">
-                      <input className="u-full-width" type="date" name="Fecha" required></input>
-                      <span className="omrs-input-label">Fecha a la que desea pasar el turno: </span>
-                    </label>
-			              </div>
+              <Form onSubmit= {onPosponer}> 
+              <Form.Text className="text-muted">
+                        Elige la fecha  a la que la quieres cambiar:
+                      </Form.Text>
+                    <Form.Group className="mb-3" controlId="formBasicEmail">
+                      <Form.Label>Change de date</Form.Label>
+                      <Form.Control type="date" placeholder="Enter date" />
+                    </Form.Group>
+                    {/* <Button variant="primary" type="submit">
+                      Submit
+                    </Button> */}
+                  </Form>
               </Modal.Body>
               <Modal.Footer>
-                <Button variant="secondary" onClick={handleClose}>
+                <Button variant="secondary" onClick={handleClosePosponerModal}>
                   Close
                 </Button>
-                <Button variant="primary"  onClick={handleClose}>
+                <Button variant="primary" type="submit" onClick={handleClosePosponerModal}>
                   Guardar
                 </Button>
               </Modal.Footer>
             </Modal>
-         {/* <button className="BTNAgenda" onClick={() => onCancelar(tur.IdTurno)}> Cancelado</button>
-          <button className="BTNAgenda" onClick={() => onPosponer(tur.IdTurno)}> Posponer </button> */}
-          </center>
-          <br></br>
-          </Table>
-            </div>
+            {/* <button className="BTNAgenda" onClick={() => onCancelar(tur.IdTurno)}> Cancelado</button>
+              <button className="BTNAgenda" onClick={() => onPosponer(tur.IdTurno)}> Posponer </button> */}
+             
+              <br></br>
+              </Table>
+                </div>
           );
         })} 
 
-        <div id="Boton2">
-          <div className="letrasBotonIngreso">
             <b>
-              <button
-                type="form"
-                className="btn btn-primary btn-sm"
-                id="Boton2"
-                onClick={onForm}
-              >
-                {" "}
-                Sacar Turno
-              </button>
+              <Button
+                type="form"   className="botonAG"  onClick={onForm}>
+                    Sacar Turno
+              </Button>
             </b>
-          </div>
-        </div>
       </Container>
     </div>
   );
+      
 };
 export default AgendaVirtual;

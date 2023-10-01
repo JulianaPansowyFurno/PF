@@ -12,7 +12,6 @@ import { useState, useEffect } from "react";
 const SacarTurno = () => {
   const [estudios, setEstudios] = useState([]);
   const [especialidades, setEspecialidades] = useState([]);
-  const [IdEspecialidad, SetIdEspecialidad] = useState(2);
   const navigate = useNavigate();
 
   const getEstudios = (id) => {

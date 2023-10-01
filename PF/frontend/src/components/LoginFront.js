@@ -78,12 +78,12 @@ const Login = () => {
 
                   {/* <div id="Boton2"> */}
                   {/* <div className='letrasBotonIngreso'> */}
-                  <button type="submit" className="boton">
+                  <button type="submit" className="botonLog">
                     Entrar
                   </button>
                   <div className='espacioEntreBotones'>
                   </div>
-                  <button type="registro" className="boton" onClick={onRegistro}>
+                  <button type="registro" className="botonreg" onClick={onRegistro}>
                     Registrarse
                   </button>
                   
