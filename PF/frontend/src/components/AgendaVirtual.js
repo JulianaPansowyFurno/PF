@@ -8,7 +8,7 @@ import Table from "react-bootstrap/Table";
  import Button from 'react-bootstrap/Button';
  import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
-
+// usestate
 const AgendaVirtual = () => {
   const [turno, setTurno] = useState([]);
   const [id, setId] = useState("");
@@ -20,15 +20,11 @@ const AgendaVirtual = () => {
   const handleClosePosponerModal = () => setShowPosponerModal(false);
 
   const handleShowCancelModal = () => setShowCancelModal(true);
-  const handleShowPosponerModal = (id) => {
-    setId(id);
-    setShowPosponerModal(true);
-  };
+  const handleShowPosponerModal = () => setShowPosponerModal(true);
 
 
   const traerTurnos = () => {
-    axios
-      .get("http://localhost:5000/turno/13") // Poner id paciente en el link
+    axios.get("http://localhost:5000/turno/13") // Poner id paciente en el link
       .then((response) => {
         setTurno(response.data);
       })
@@ -45,16 +41,14 @@ const AgendaVirtual = () => {
   };
 
    const onCancelar = (id) => {
-     axios.put("http://localhost:5000/turno", { id })
-     .then(function (response) {
-       traerTurnos();
-     });
+    
    };
 
    const onPosponer = (e) => {
     e.preventDefault();
     const formElement = e.target; // Reference to the form element
     const formulario = new FormData(formElement); 
+    console.log(id)
     const fecha={
       IdTurno: id,
       Fecha: formulario.get('Fecha')
@@ -66,18 +60,20 @@ const AgendaVirtual = () => {
     // navigate("/posponer/${persona.id}");
   };
 
-  const onclickCancelar = (id) => {
-    onCancelar(id); 
+  const onclickCancelar = (IdTurno) => {
+    console.log(IdTurno + "emtrp2")
+     axios.put("http://localhost:5000/turno", {params: IdTurno})
+      .then(function (response) {
+        traerTurnos();
+     });
+ 
     handleCloseCancelModal();
   };
 
   return (
     <div className="conteiner" style={{ backgroundImage: `url(${background})` }} >
       <Container>
-         {turno.map((tur) => {
-          return (
-            <div key={tur.IdTurno}>
-             <Table className="table table-hover-fluid">
+        <Table striped="columns">
                 <thead>
                   <tr>
                     <th>Paciente</th>
@@ -94,8 +90,11 @@ const AgendaVirtual = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>{tur.NombreApellido}</td>
+                
+                {turno.map((tur) => {
+                return (
+                <tr>
+                    <td key={tur.IdTurno}>{tur.NombreApellido}</td>
                     <td>{tur.Sede}</td>
                     <td>
                       {("0" + new Date(tur.Fecha).getDate()).substr(-2) + "-" + ("0" + new Date(tur.Fecha).getMonth()).substr(-2) + "-" +
@@ -115,16 +114,15 @@ const AgendaVirtual = () => {
                     </Button>
                     </td>
                     <td>
-                    <Button className="BTNAgenda" variant="primary"  onClick={() => {handleShowPosponerModal(tur.IdTurno)}}>
+                    <Button className="BTNAgenda" variant="primary"  onClick={handleShowPosponerModal}>
                       Posponer
                     </Button>
                     </td>
-                  </tr>
-                </tbody>
+                  
               
 
     
-
+              
               <Modal show={showCancelModal} onHide={handleCloseCancelModal}>
                   <Modal.Header closeButton>
                     <Modal.Title>Cancelar turno </Modal.Title>
@@ -150,38 +148,58 @@ const AgendaVirtual = () => {
                       </Form.Text>
                     <Form.Group className="mb-3" controlId="formBasicEmail">
                       <Form.Label>Change de date</Form.Label>
-                      <Form.Control type="date" placeholder="Enter date" />
+                      <Form.Control type="date" name="Fecha" placeholder="Enter date" />
                     </Form.Group>
-                    {/* <Button variant="primary" type="submit">
-                      Submit
-                    </Button> */}
-                  </Form>
-              </Modal.Body>
+                  
+              
               <Modal.Footer>
                 <Button variant="secondary" onClick={handleClosePosponerModal}>
                   Close
                 </Button>
                 <Button variant="primary" type="submit" onClick={handleClosePosponerModal}>
+                  
                   Guardar
                 </Button>
+                
               </Modal.Footer>
+              </Form>
+              </Modal.Body>
             </Modal>
             {/* <button className="BTNAgenda" onClick={() => onCancelar(tur.IdTurno)}> Cancelado</button>
               <button className="BTNAgenda" onClick={() => onPosponer(tur.IdTurno)}> Posponer </button> */}
-             
-              <br></br>
-              </Table>
-                </div>
+              </tr>
+              
+              
+          );
+        })}
+        
+         {/* {turno.map((tur) => {
+          return (
+                    <td key={tur.IdTurno}>{tur.NombreApellido}</td>
+                
           );
         })} 
+        {turno.map((tur) => {
+          return (
+            
+            <div key={tur.IdTurno}>
+                    <td>{tur.Sede}</td>
+                    
+                </div>
+                
+          );
+        })}  */}
+        
+                </tbody>
 
-            <b>
-              <Button
+              
+            </Table>
+            <Button
                 type="form"   className="botonAG"  onClick={onForm}>
                     Sacar Turno
               </Button>
-            </b>
       </Container>
+      
     </div>
   );
       

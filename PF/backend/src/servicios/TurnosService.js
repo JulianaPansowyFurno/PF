@@ -51,6 +51,7 @@ export default class TurnosService {
         return response.recordset;
     }
 
+    //FUNCIONA
     PosponerTurno = async (turno) => {
         console.log('This is a function on the service test');
             const pool = await sql.connect(config);
@@ -77,7 +78,7 @@ export default class TurnosService {
     }
 
     cancelarTurno = async (id) => {
-        console.log('This is a function on the service');
+        console.log('This is a function on the service cancelar turn');
         const pool = await sql.connect(config);
         const response = await pool.request()
             .input('IdTurno',sql.Int, id)

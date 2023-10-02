@@ -119,7 +119,7 @@ input[type="date"]
 }
 
 #Boton2:hover {
-  background-color: rgb(81, 148, 187);
+  background-color: rgb(81, 92, 187);
 }
 
 h1,
@@ -176,7 +176,8 @@ label {
 }
 
 .BTNAgenda{
-  background-color: #e3a9d2; /* Color de fondo pastel */
+  align-items: center;
+  background-color: #4341b3; /* Color de fondo pastel */
   border: none;
   border-radius: 20px; /* Borde redondeado */
   padding: 10px 20px; /* Espaciado interno */
@@ -188,7 +189,7 @@ label {
 
 .BTNAgenda:hover {
   /* Estilos adicionales al pasar el cursor sobre el botón */
-  background-color: #b14197; /* Color de fondo pastel en hover */
+  background-color: rgb(81, 92, 187);
 }
 .thead{
   align-items: center;
