@@ -8,11 +8,17 @@ const pacientesServices = new PacienteService();
 
 // El login devuelve true si existe un usuario con ese user y pass, o false si no existe
 router.get('', async (req, res) => {
-  console.log(`This is a get operation getUsuario`);
+  console.log(`This is a get operation getUsuariooooo`);
   let user = req.query.user
   let pass = req.query.pass
   const loginSuccess = await usuarioServices.getUsuario(user, pass);
 
+  return res.status(200).json(loginSuccess);
+});
+
+router.get('', async (req, res) => {
+  console.log(`This is a get operation ID`);
+  const loginSuccess = await usuarioServices.getUsuarioID(req.body);
   return res.status(200).json(loginSuccess);
 });
 

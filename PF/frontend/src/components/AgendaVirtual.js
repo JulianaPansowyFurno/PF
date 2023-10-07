@@ -8,10 +8,13 @@ import Table from "react-bootstrap/Table";
  import Button from 'react-bootstrap/Button';
  import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
+import { MyContext } from "../MyContext";
+import {useContext} from 'react';
 // usestate
 const AgendaVirtual = () => {
   const [turno, setTurno] = useState([]);
-  const [id, setId] = useState("");
+  const {id, setId}=useContext(MyContext);
+
   const navigate = useNavigate();
   const [showCancelModal, setShowCancelModal] = useState(false);
   const [showPosponerModal, setShowPosponerModal] = useState(false);
@@ -24,7 +27,7 @@ const AgendaVirtual = () => {
 
 
   const traerTurnos = () => {
-    axios.get("http://localhost:5000/turno/13") // Poner id paciente en el link
+    axios.get(`http://localhost:5000/turno/${id}`) // Poner id paciente en el link
       .then((response) => {
         setTurno(response.data);
       })

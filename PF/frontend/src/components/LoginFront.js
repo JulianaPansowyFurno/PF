@@ -5,10 +5,14 @@ import {  Link, useNavigate } from "react-router-dom";
 import '../botonLindo.css';
 import axios from 'axios';
 import React, { useState } from "react";
+import swal from 'sweetalert';
+import AgendaVirtual from './AgendaVirtual';
+import { MyContext } from "../MyContext";
+import {useContext} from 'react';
 
 const Login = () => {
   const navigate = useNavigate();
-  // const [user, setUser] = useState()
+  const {id, setId}=useContext(MyContext);
 
   const tomarValores = (e) => {
     e.preventDefault();
@@ -19,11 +23,16 @@ const Login = () => {
     }
     axios.get('http://localhost:5000/usuario', {params: usuar})
     .then(function (response) {
+      
       if(response.data == false){
-        alert("Usuario o contraseña incorrecta")
+        swal("Oops!", "Usuario o contraseña incorrecta", "error");
+        //alert("Usuario o contraseña incorrecta")
       }
       else
       {
+        const idPaciente = response.data[0].IdPaciente;
+        setId(idPaciente)
+        console.log(idPaciente)
         navigate("/agenda");
       }
     }) 

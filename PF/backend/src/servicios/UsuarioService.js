@@ -14,15 +14,31 @@ export default class UsuarioService {
         console.log(response.recordset[0].cantidad);
         if(response.recordset[0].cantidad == 1)
         {
+            const response2 = await pool.request()
+            .input('Usuarios',sql.NChar, user)
+            .input('Contraseña',sql.NChar, pass)
+            .query(`SELECT Paciente.IdPaciente FROM Paciente
+            inner join Usuario on Usuario.IdUsuario = Paciente.FkUsuarioPaciente
+            WHERE Usuario.Usuarios = @Usuarios AND Usuario.Contraseña = @Contraseña`);
             console.log(
                 "Existe el usurio")
-            return true;
+            return response2.recordset;
         }
         else{
             console.log("No existe")
             return false;
         }
     }
+
+    // getUsuarioID = async (usuario) => {
+    //     console.log('This is a function on the service iD usuario');   
+    //     const pool = await sql.connect(config);
+    //     const response = await pool.request()
+    //     .input('Usuarios',sql.NChar, usuario.usuario)
+    //     .input('Contraseña',sql.NChar, usuario.contra)
+    //     .query(`SELECT Usuario.IdUsuario FROM Usuario WHERE Usuarios = @Usuarios AND Contraseña = @Contraseña`);
+    //     return response.recordset;
+    // }
 
     CrearUsuario = async (usuario) => {
         console.log('This is a function on the service CrearUsuario');
