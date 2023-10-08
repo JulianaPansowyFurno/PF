@@ -45,6 +45,8 @@ body {
 #bordesRedondos{
   border: 2px solid rgba(255, 255, 255, 0.767);
   border-radius: 10px;
+  width: 700px
+
 }
 
 .conteiner {

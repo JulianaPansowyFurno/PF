@@ -48,10 +48,10 @@ const SacarTurno = () => {
                     <br></br>
                     <br></br>
                     <center>
-                    <img src = {logoPNG} width='50%' ></img>
-                    
+                    <img src = {logoPNG} width='80%' ></img>
+                    <div className='form'>
                     <Form.Select onChange={(e) => getEstudios(e.target.value)}>
-                      <option>Seleccionar Especialidad...</option>
+                      <option>Seleccionar especialidad...</option>
                         {especialidades.map((e) => {
                             return(
                               <option value={e.IdEspecialidad}>
@@ -73,16 +73,16 @@ const SacarTurno = () => {
                           
                           })}
                     </Form.Select>
-                          
+                    </div>
                     
                     <br></br>
 
                     {/* BOTONES PARA LA PROXIMA PAGINA*/}
-                  <div id="BotonReg">
-                  <div className='letrasBotonIngreso'>
-                  <b><button type="submit" className="btn btn-primary btn-sm" id="BotonReg" > Sacar </button></b>
-                  </div>
-                  </div>
+                  {/* <div id="BotonReg"> */}
+                  {/* <div className='letrasBotonIngreso'> */}
+                  <button type="submit" className="botonLog" > Sacar </button>
+                  {/* </div> */}
+                  {/* </div> */}
  
                   </center>
               </form>

@@ -3,6 +3,12 @@
 	font-family: "Roboto";
 }
 
+/* SACR TURNO */
+
+.form{
+	width: 500px;
+}
+
 /* BOTON LOGIN Y REGISTRAR */
 .botonLog{
 display: inline-block;
@@ -69,7 +75,26 @@ transition: background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
 		color: rgba(182, 182, 182, 0.9);
 	}
 	
-
+	.botonVolver{
+		display: inline-block;
+outline: 0;
+cursor: pointer;
+border: none;
+padding: 0 78px;
+height: 70px;
+line-height: 70px;
+border-radius: 7px;
+background-color: rgb(0 64 141);
+color: white;
+font-weight: 400;
+font-size: 20px;
+box-shadow: 0 4px 14px 0 rgb(0 118 255 / 39%);
+transition: background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+		
+		}
+		:hover{
+			color: rgba(182, 182, 182, 0.9);
+		}
   /* otras cosas */
 
 .espacioEntreBotones{
@@ -77,6 +102,7 @@ transition: background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
 }
 .bodyEstatico {
 	overflow: hidden;
+	overflow-y: hidden;
   }
   #marginFecha{
 	width: 190px;

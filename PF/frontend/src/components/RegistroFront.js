@@ -49,7 +49,7 @@ const Registro = () => {
                     <br></br>
                     <br></br>
                     <center>
-                    <img src = {logoPNG} width='70%' ></img>
+                    <img src = {logoPNG} width='80%' ></img>
                     
                     <div className="omrs-input-group">
                       <label className="omrs-input-filled">
@@ -108,11 +108,11 @@ const Registro = () => {
                     </label>
 			              </div>
                     <br></br>
-
-                    {/* BOTONES PARA LA PROXIMA PAGINA*/}=
-                  <button type="submit" className="boton" >Registrarse</button>=
-=
-                  <button type="registro" className="boton" onClick={onVolver}>Volver</button>=    
+                    <button type="submit" className="botonreg"> Registrarse </button>
+                  <div className='espacioEntreBotones'>
+                  </div>
+                  <button type="registro" className="botonVolver" onClick={onVolver}> Volver </button>
+                    {/* BOTONES PARA LA PROXIMA PAGINA*/}
                   <div>
                     <h7><a href='pag para cambiar contrasena'><u>Olvide mi contraseña</u></a>   </h7> 
                   </div>
