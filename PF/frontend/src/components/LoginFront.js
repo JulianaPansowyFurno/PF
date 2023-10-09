@@ -23,8 +23,7 @@ const Login = () => {
     }
     axios.get('http://localhost:5000/usuario', {params: usuar})
     .then(function (response) {
-      
-      if(response.data == false){
+      if(response.data === false){
         swal("Oops!", "Usuario o contraseña incorrecta", "error");
         //alert("Usuario o contraseña incorrecta")
       }

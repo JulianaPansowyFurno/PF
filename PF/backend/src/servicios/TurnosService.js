@@ -23,6 +23,8 @@ export default class TurnosService {
         return response.recordset;
     }
 
+    
+
     sacarTurno = async (turno) => {
         console.log('This is a function on the service');
             const pool = await sql.connect(config);

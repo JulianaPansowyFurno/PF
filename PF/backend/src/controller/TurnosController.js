@@ -27,7 +27,7 @@ router.put('', async (req, res) => {
   return res.status(200).json(turno);
   });
 
-router.post('', async (req, res) => {
+router.post('/sacarturno', async (req, res) => {
   
   console.log(`This is a get operation getTurnos`);
   const turno = await turnosService.sacarTurno(req.body);
@@ -40,6 +40,13 @@ router.put('/:id', async (req, res) => {
   console.log(`This is a get operation Cancelarrr`);
   const turno = await turnosService.cancelarTurno(req.params.id);
   return res.status(200).json(turno);
+});
+
+router.get('', async (req, res) => {
+  console.log(`This is a get operation getEspecialidades`);
+  const sedes = await turnosService.GetSede();
+
+  return res.status(200).json(sedes);
 });
 
 export default router;
