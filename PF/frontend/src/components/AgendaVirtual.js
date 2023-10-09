@@ -153,7 +153,7 @@ const AgendaVirtual = () => {
           <Modal.Title>Cancelar turno </Modal.Title>
         </Modal.Header>
         <Modal.Body><br></br>
-          ¿Esta seguro que quieres cancelar su turno?
+          ¿pola me llamo pobi?
           </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleCloseCancelModal}>

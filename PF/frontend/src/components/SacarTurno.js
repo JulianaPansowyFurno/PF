@@ -91,7 +91,7 @@ const SacarTurno = () => {
                     </Form.Select>
 
                       
-                    <Form.Select onClick={(e) => setEstud(e.target.value)}>
+                    <Form.Select onChange={(e) => setEstud(e.target.value)}>
                       <option>Seleccione el estudio...</option>
                         {estudios.map((e) => {
                             return(
@@ -104,7 +104,7 @@ const SacarTurno = () => {
                     </Form.Select>
                     
 
-                    <Form.Select onClick={(e) => setSe(e.target.value)}>
+                    <Form.Select onChange={(e) => setSe(e.target.value)}>
                     <option>Seleccione la sede...</option>
                       {sede.map((e) => {
                             return(
