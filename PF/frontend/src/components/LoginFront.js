@@ -21,14 +21,22 @@ const Login = () => {
       user: formulario.get('usuario'),
       pass: formulario.get('password')
     }
+    
     axios.get('http://localhost:5000/usuario', {params: usuar})
     .then(function (response) {
+      console.log(response.data)
+      if(response.data.usuario === "Adiministrador")
+    {
+      navigate("/administradoresAgenda")
+    }
       if(response.data === false){
         swal("Oops!", "Usuario o contraseña incorrecta", "error");
         //alert("Usuario o contraseña incorrecta")
       }
       else
       {
+
+        
         const idPaciente = response.data[0].IdPaciente;
         setId(idPaciente)
         console.log(idPaciente)
@@ -38,6 +46,7 @@ const Login = () => {
     .catch(function (error) {
       console.log(error.config);
   });  
+  
   };
 
   const onRegistro = (e) => {

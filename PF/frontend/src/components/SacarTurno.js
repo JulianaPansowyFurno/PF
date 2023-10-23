@@ -7,18 +7,25 @@ import axios from 'axios';
 import {  Link, useNavigate } from "react-router-dom";
 import Form from 'react-bootstrap/Form';
 import { useState, useEffect } from "react";
-
-
+import { MyContext } from "../MyContext";
+import { useContext } from 'react';
+import swal from 'sweetalert';
 
 const SacarTurno = () => {
   const [estudios, setEstudios] = useState([]);
   const [especialidades, setEspecialidades] = useState([]);
   const [sede, setSede] = useState([]);
-  const [estud, setEstud] = useState();
-  const [se, setSe] = useState();
+  const [estud, setEstud] = useState(0);
+  const [idSede, setIdSede] = useState(0);
+  const [idEst, setidEst] = useState(0);
+  const [idEsp, setidEsp] = useState(0);
   const navigate = useNavigate();
+  const { id, setId } = useContext(MyContext);
+
+
 
   const getEstudios = (id) => {
+    setidEsp(id)
     axios
       .get("http://localhost:5000/turno/especialidad/" + id)
       .then((response) => {
@@ -48,26 +55,35 @@ const SacarTurno = () => {
 
   const Valores = (e) => {
     e.preventDefault();
-    const formElement = e.target; // Reference to the form element
-    const formulario = new FormData(formElement);
-    console.log(formulario.get('Estudio'))
+    const formElement = e.target; 
+    //const formulario = new FormData(formElement);
     const turno = {
-      Estudio: formulario.get('Estudio'),
-      Hora: formulario.get('Hora'),
-      Fecha: formulario.get('Fecha')
+      FkEstudio: estud,
+      FkSede: idSede,
+      Cancelado: false,
+      Asistio: false,
+      FkPaciente: id,
+      FkMedico: 2,
+      FkServicio: 1,
+      Hora: formElement.Hora.value,
+      Fecha: formElement.Fecha.value
     }
-    axios.put("http://localhost:5000/turno/sacarturno", turno)
+    axios.post("http://localhost:5000/turno/sacarturno", turno)
       .then(function (response) {
-        console.log(response)
+        swal("Bien!", "Se ha creado tu turno", "success");
       });
   };
   
+  const onVolver = (e) => {
+    e.preventDefault();
+    navigate("/agenda");
+  }
+
   useEffect(() => {
     traerEspecialidades()
     traerSede()
+    
   }, []);
-
-
   return(
     <div className="fondo" style={{ backgroundImage:`url(${background})` }}>
         <div className='conteiner' >
@@ -86,6 +102,7 @@ const SacarTurno = () => {
                               <option value={e.IdEspecialidad}>
                                 {e.Especialidad}
                               </option>
+                              
                             );
                           })}
                     </Form.Select>
@@ -95,7 +112,7 @@ const SacarTurno = () => {
                       <option>Seleccione el estudio...</option>
                         {estudios.map((e) => {
                             return(
-                              <option>
+                              <option value={e.IdEstudio}>
                                 {e.Estudio}
                               </option>
                             );
@@ -104,11 +121,11 @@ const SacarTurno = () => {
                     </Form.Select>
                     
 
-                    <Form.Select onChange={(e) => setSe(e.target.value)}>
+                    <Form.Select onChange={(e) => setIdSede(e.target.value)}>
                     <option>Seleccione la sede...</option>
                       {sede.map((e) => {
                             return(
-                              <option>
+                              <option value={e.IdSede}>
                                 {e.Sede}
                               </option>
                             );
@@ -117,27 +134,25 @@ const SacarTurno = () => {
                     </Form.Select>
 
                     
-                    <Form>
                     <Form.Text className="text-muted">
                       Elige la fecha en la que quieres sacar el turno:
                     </Form.Text>
                     <Form.Group className="mb-3" controlId="formBasicEmail">
-                      <Form.Control type="date" name="Fecha" placeholder="Enter date" />
+                      <Form.Control type="date" controlId="Fecha" name="Fecha" placeholder="Enter date" />
                     </Form.Group>
-                    </Form>
 
-                    <Form>
                       Elige la hora en la que quieres sacar el turno:
                     <Form.Group className="mb-3" controlId="formBasicEmail">
-                      <Form.Control id="appt-time" type="time" name="appt-time"/>
+                      <Form.Control controlId="Hora" type="time" name="Hora"/>
                     </Form.Group>
-                    </Form>
 
                     </div>
                     <br></br>                    
                   <button type="submit" className="botonLog" > Sacar </button> 
                   </center>
                   </form>
+
+                  <button className="botonLog"  onClick={onVolver}> Volver a mi agenda </button> 
             </div>
           </div>
         </div>

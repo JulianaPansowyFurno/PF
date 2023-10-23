@@ -17,7 +17,7 @@ export default class UsuarioService {
             const response2 = await pool.request()
             .input('Usuarios',sql.NChar, user)
             .input('Contraseña',sql.NChar, pass)
-            .query(`SELECT Paciente.IdPaciente FROM Paciente
+            .query(`SELECT Paciente.IdPaciente, Usuario.Usuarios FROM Paciente
             inner join Usuario on Usuario.IdUsuario = Paciente.FkUsuarioPaciente
             WHERE Usuario.Usuarios = @Usuarios AND Usuario.Contraseña = @Contraseña`);
             console.log(

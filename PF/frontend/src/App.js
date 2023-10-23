@@ -7,7 +7,7 @@ import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import ReactDOM from 'react-dom'
 import {useState} from 'react';
 import { MyContext } from './MyContext.js';
-
+import AdmAgenda from "./components/AdmAgenda"
 
 export default function App() {
   const [id, setId] = useState(0);
@@ -19,6 +19,7 @@ export default function App() {
          <Route path="/registro" element={<RegistroFront />} /> 
         <Route path="/agenda" element={<AgendaVirtual />}/>
         <Route path="/sacarTurno" element={<SacarTurno />}/>
+        <Route path="/administradoresAgenda" element={<AdmAgenda />}/>
       </Routes>
       </Router>
       </MyContext.Provider>
