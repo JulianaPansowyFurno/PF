@@ -89,6 +89,5 @@ export default class TurnosService {
 
         return response.recordset;
     }
-
     
 }

@@ -1,13 +1,13 @@
-import '../App.css';
-import background from "./Imagenes/fondoLogin.png";
-import logoPNG from "./Imagenes/logoPNG.png";
+import '../../App.css';
+import background from "../Imagenes/fondoLogin.png";
+import logoPNG from "../Imagenes/logoPNG.png";
 import {  Link, useNavigate } from "react-router-dom";
-import '../botonLindo.css';
+import "../../botonLindo.css";
 import axios from 'axios';
 import React, { useState } from "react";
 import swal from 'sweetalert';
 import AgendaVirtual from './AgendaVirtual';
-import { MyContext } from "../MyContext";
+import { MyContext } from "../../MyContext";
 import {useContext} from 'react';
 
 const Login = () => {
@@ -25,23 +25,21 @@ const Login = () => {
     axios.get('http://localhost:5000/usuario', {params: usuar})
     .then(function (response) {
       console.log(response.data)
-      if(response.data.usuario === "Adiministrador")
-    {
-      navigate("/administradoresAgenda")
-    }
-      if(response.data === false){
-        swal("Oops!", "Usuario o contraseña incorrecta", "error");
-        //alert("Usuario o contraseña incorrecta")
-      }
-      else
+      if(response.data === false)
       {
-
-        
+        swal("Oops!", "Usuario o contraseña incorrecta", "error");
+      }
+      else if(response.data[0].FkRol === 1)
+      {
+        navigate("/administradoresAgenda")
+      }
+      else if(response.data[0].FkRol === 2)
+      {
         const idPaciente = response.data[0].IdPaciente;
         setId(idPaciente)
         console.log(idPaciente)
         navigate("/agenda");
-      }
+      }     
     }) 
     .catch(function (error) {
       console.log(error.config);

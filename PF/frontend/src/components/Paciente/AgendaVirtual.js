@@ -1,14 +1,14 @@
-import "../App.css";
+import "../../App.css";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Container from "react-bootstrap/Container";
 import Table from "react-bootstrap/Table";
-import background from "./Imagenes/fondoLogin.png";
+import background from "../Imagenes/fondoLogin.png";
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
-import { MyContext } from "../MyContext";
+import { MyContext } from "../../MyContext";
 import { useContext } from 'react';
 
 const AgendaVirtual = () => {

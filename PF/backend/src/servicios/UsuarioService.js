@@ -15,19 +15,42 @@ export default class UsuarioService {
         if(response.recordset[0].cantidad == 1)
         {
             const response2 = await pool.request()
-            .input('Usuarios',sql.NChar, user)
-            .input('Contraseña',sql.NChar, pass)
-            .query(`SELECT Paciente.IdPaciente, Usuario.Usuarios FROM Paciente
-            inner join Usuario on Usuario.IdUsuario = Paciente.FkUsuarioPaciente
+            .input('Usuarios', sql.NChar, user)
+            .input('Contraseña', sql.NChar, pass)
+           .query(`SELECT Usuario.FkRol FROM Usuario
+            inner join Rol on Rol.IdRol = Usuario.FkRol
             WHERE Usuario.Usuarios = @Usuarios AND Usuario.Contraseña = @Contraseña`);
-            console.log(
-                "Existe el usurio")
-            return response2.recordset;
+
+            const userRole = response2.recordset[0].FkRol;
+            if(userRole === 2)
+            {
+                const responseeeee = await pool.request()
+                .input('Usuarios',sql.NChar, user)
+                .input('Contraseña',sql.NChar, pass)
+                .query(`SELECT Paciente.IdPaciente, Usuario.FkRol FROM Paciente
+                inner join Usuario on Usuario.IdUsuario = Paciente.FkUsuarioPaciente
+                inner join Rol on Rol.IdRol = Usuario.FkRol
+                WHERE Usuario.Usuarios = @Usuarios AND Usuario.Contraseña = @Contraseña`);
+                return responseeeee.recordset;
+            } 
+            else if (userRole === 1)
+            {
+                const responseRol = await pool.request()
+            .input('Usuarios', sql.NChar, user)
+            .input('Contraseña', sql.NChar, pass)
+           .query(`SELECT Usuario.FkRol FROM Usuario
+            inner join Rol on Rol.IdRol = Usuario.FkRol
+            WHERE Usuario.Usuarios = @Usuarios AND Usuario.Contraseña = @Contraseña`);
+            return responseRol.recordset;
+            }
+           
         }
         else{
             console.log("No existe")
             return false;
         }
+
+        
     }
 
     // getUsuarioID = async (usuario) => {

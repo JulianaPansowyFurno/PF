@@ -1,10 +1,10 @@
-import '../App.css';
+import '../../App.css';
 import React from 'react';
-import background from "./Imagenes/fondoLogin.png";
-import logoPNG from "./Imagenes/logoPNG.png";
+import background from "../Imagenes/fondoLogin.png";
+import logoPNG from "../Imagenes/logoPNG.png";
 import axios from 'axios';
 import {  Link, useNavigate } from "react-router-dom";
-import "../botonLindo.css";
+import "../../botonLindo.css";
 
 const Registro = () => {
   const navigate = useNavigate();

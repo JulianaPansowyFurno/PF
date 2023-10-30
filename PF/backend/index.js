@@ -5,6 +5,7 @@ import PacienteRouter from "./src/controller/PacienteController.js";
 import EspecialidadRouter from "./src/controller/EspecialidadController.js";
 import CancelarRouter from "./src/controller/CancelarController.js";
 import SedeRouter from "./src/controller/SedeController.js";
+import MedicoRouter from "./src/controller/MedicosController.js"
 import cors from 'cors';
 import sql from 'mssql'
 import 'dotenv/config'
@@ -22,6 +23,8 @@ app.use("/paciente", PacienteRouter);
 app.use("/especialidad", EspecialidadRouter);
 app.use("/cancelar", CancelarRouter);
 app.use("/sede", SedeRouter);
+app.use("/medico", MedicoRouter);
+
 
 
 app.listen(port, () => {
