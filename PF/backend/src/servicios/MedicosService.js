@@ -23,7 +23,7 @@ export default class MedicosService {
         return response.recordset;
     }
 
-    CrearMedico  = async (medico, DiasLaboralesID) => {
+    CrearMedico  = async (medico) => {
         console.log('This is a function on the service crearMedico');
         const pool = await sql.connect(config);
 
@@ -41,7 +41,7 @@ export default class MedicosService {
                 .input('FkEspecialidad',sql.Int, medico.esp)
                 .input('Mail',sql.NChar, medico.mail)
                 .input('Telefono',sql.Int, medico.telefono)
-                .input('FkDiasLaborales',sql.Int, medico.DiasLaboralesID)
+                .input('FkDiasLaborales',sql.Int, medico.DiasLaborales)
                 .query(`INSERT INTO Medico (NombreApellidoM, FkEspecialidad, Mail, Telefono, FkDiasLaborales) VALUES (@NombreApellidoM, @FkEspecialidad, @Mail, @Telefono, @FkDiasLaborales)`);
             return response.recordset;
         
@@ -67,7 +67,8 @@ export default class MedicosService {
             VALUES (@lunes, @martes, @miercoles, @jueves, @viernes, @sabado); SELECT SCOPE_IDENTITY() AS id;`);
         
         return response.recordset;
-
     }
+
+
     
 }

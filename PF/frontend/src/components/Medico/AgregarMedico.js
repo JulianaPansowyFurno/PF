@@ -16,6 +16,7 @@ const AgregarMedico = () => {
   const [espElegida, setEspElegida] = useState();
   const [selectedDays, setSelectedDays] = useState({ domingo: false, lunes: false,martes: false,miercoles: false,jueves: false,viernes: false,sabado: false });
   const navigate = useNavigate();
+  const [idDiasLaborales, setidDiasLaborales] = useState();
 
 
   const handleDayChange = (day) => {
@@ -34,6 +35,18 @@ const AgregarMedico = () => {
       })
       .catch((error) => alert("aca hay algo raro"));
   }
+  const insertardiasLaboralesss = () => {
+    axios.post('http://localhost:5000/medico/insertardias', selectedDays)
+    .then(function (response) {
+      setidDiasLaborales(response.data[0].id)
+    })
+    .catch((error) => alert("mal el insert"));
+  }
+
+  useEffect(() => {
+    insertardiasLaboralesss()   
+     
+  }, []);
 
   const Valores = (e) => {
     e.preventDefault();
@@ -44,13 +57,14 @@ const AgregarMedico = () => {
       mail: formulario.get('Mail'),
       telefono: formulario.get('Telefono'),
       nombre: formulario.get('NombreApellidoM'),
-      diaslaborales: selectedDays
+      diaslaborales: idDiasLaborales
     }
+    console.log(idDiasLaborales)
     axios.post('http://localhost:5000/medico', medico)
     .then(function (response) {
       console.log(response);
-      navigate("/agenda");
-
+      navigate("/administradoresAgenda");
+      swal("Bien!", "Se elimino el plato del menu correctamente", "success");
     })
   }; 
   
@@ -60,7 +74,8 @@ const AgregarMedico = () => {
   }
 
   useEffect(() => {
-    traerEspecialidades()    
+    traerEspecialidades()   
+
   }, []);
 
  

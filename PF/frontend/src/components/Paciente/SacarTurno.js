@@ -90,10 +90,11 @@ const SacarTurno = () => {
         <div id='formSize'>
             <div id='Form2' >
               <div className='fondoBlanco'id='bordesRedondos'>
+              <center>
               <form onSubmit={Valores}>
                     <br></br>
                     <br></br>
-                    <center>
+                    
                     <div className='form'>
                     <Form.Select onChange={(e) => getEstudios(e.target.value)}>
                       <option>Seleccionar especialidad...</option>
@@ -106,7 +107,7 @@ const SacarTurno = () => {
                             );
                           })}
                     </Form.Select>
-
+                    <br></br>
                       
                     <Form.Select onChange={(e) => setEstud(e.target.value)}>
                       <option>Seleccione el estudio...</option>
@@ -120,7 +121,7 @@ const SacarTurno = () => {
                           })}
                     </Form.Select>
                     
-
+                    <br></br>
                     <Form.Select onChange={(e) => setIdSede(e.target.value)}>
                     <option>Seleccione la sede...</option>
                       {sede.map((e) => {
@@ -133,7 +134,7 @@ const SacarTurno = () => {
                           })}
                     </Form.Select>
 
-                    
+                    <br></br>
                     <Form.Text className="text-muted">
                       Elige la fecha en la que quieres sacar el turno:
                     </Form.Text>
@@ -141,6 +142,8 @@ const SacarTurno = () => {
                       <Form.Control type="date" controlId="Fecha" name="Fecha" placeholder="Enter date" />
                     </Form.Group>
 
+
+                    <br></br>
                       Elige la hora en la que quieres sacar el turno:
                     <Form.Group className="mb-3" controlId="formBasicEmail">
                       <Form.Control controlId="Hora" type="time" name="Hora"/>
@@ -149,10 +152,11 @@ const SacarTurno = () => {
                     </div>
                     <br></br>                    
                   <button type="submit" className="botonLog" > Sacar </button> 
-                  </center>
+                  
                   </form>
-
-                  <button className="botonLog"  onClick={onVolver}> Volver a mi agenda </button> 
+                  <br></br>
+                  <button className="botonLog"  onClick={onVolver}> Volver </button> 
+                  </center>
             </div>
           </div>
         </div>

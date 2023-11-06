@@ -19,7 +19,7 @@ body {
 
 #Form{
   color: rgb(187, 187, 187);
-  margin-top: 15rem;
+  margin-top: 8rem;
   width: 200px;
   height: 400 px;
 }
@@ -49,7 +49,7 @@ body {
 #bordesRedondos{
   border: 2px solid rgba(255, 255, 255, 0.767);
   border-radius: 10px;
-  width: 700px
+  width: 550px
 
 }
 

@@ -24,15 +24,16 @@ router.get('/dias', async (req, res) => {
 router.post('', async (req, res) => {
     console.log(`This is a get operation create`);
   
-    const DiasLaborales = await medController.InsertDiasLaborales(req.body);
-    
-    if(DiasLaborales.id>0)
-    {
     console.log(`This is a get operation vrearrrrr mediCOOOOOOOOOOOOOOOOOOOOS`);
-    const sedes = await medController.CrearMedico(req.body, DiasLaborales.id);
+    const sedes = await medController.CrearMedico(req.body);
     return res.status(200).json(sedes);
-    }
-  
+    
+});
+
+router.post('/insertardias', async (req, res) => {
+  console.log(`This is a get operation create`);
+  const DiasLaborales = await medController.InsertDiasLaborales(req.body);
+  return res.status(200).json(DiasLaborales);
 });
 
 
