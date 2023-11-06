@@ -8,6 +8,24 @@
 .form{
 	width: 500px;
 }
+#izq{
+	align-items: left;
+	text-align: left;
+}
+.marginLeft{
+	margin-left: 20px;
+}
+.marginLogo{
+	margin-top: -20px;
+	margin-left: 28px;
+}
+#marginLeftt{
+	margin-left: 20px;
+}
+.letraUnPocoMasGrande{
+	font-weight: 100;
+	font-size: 17px;
+}
 
 /* BOTON LOGIN Y REGISTRAR */
 .botonLog{

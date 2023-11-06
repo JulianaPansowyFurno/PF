@@ -10,6 +10,11 @@ import { useState, useEffect } from "react";
 import { MyContext } from "../../MyContext";
 import { useContext } from 'react';
 import swal from 'sweetalert';
+import 'mdb-react-ui-kit/dist/css/mdb.min.css';
+import "@fortawesome/fontawesome-free/css/all.min.css";
+import { MDBDropdown, MDBDropdownMenu, MDBDropdownToggle, MDBDropdownItem, MDBBtn } from 'mdb-react-ui-kit';
+
+
 
 const SacarTurno = () => {
   const [estudios, setEstudios] = useState([]);
@@ -87,16 +92,37 @@ const SacarTurno = () => {
   return(
     <div className="fondo" style={{ backgroundImage:`url(${background})` }}>
         <div className='conteiner' >
-        <div id='formSize'>
+        <div id='formSize' >
             <div id='Form2' >
               <div className='fondoBlanco'id='bordesRedondos'>
-              <center>
               <form onSubmit={Valores}>
                     <br></br>
                     <br></br>
-                    
+
                     <div className='form'>
-                    <Form.Select onChange={(e) => getEstudios(e.target.value)}>
+                    <center>
+                    <img className='marginLogo' src = {logoPNG} width='100%' ></img>
+                    </center>
+
+    
+    {/* <MDBDropdown size='lg' dropright group>
+        <MDBBtn size='lg' className='marginLeft' onChange={(e) => getEstudios(e.target.value)}> Seleccionar especialidad...</MDBBtn>
+        <MDBDropdownToggle />
+        <MDBDropdownMenu size='lg'>
+        {especialidades.map((e) => {
+                            return(
+                              <MDBDropdownItem value={e.IdEspecialidad}>{e.Especialidad}</MDBDropdownItem>
+                              
+                            );
+                          })}
+          <MDBDropdownItem link>Action</MDBDropdownItem>
+          <MDBDropdownItem link>Another action</MDBDropdownItem>
+          <MDBDropdownItem link>Something else here</MDBDropdownItem>
+          <MDBDropdownItem divider />
+          <MDBDropdownItem link>Separated link</MDBDropdownItem>
+        </MDBDropdownMenu>
+      </MDBDropdown> */}
+                    <Form.Select className='marginLeft' onChange={(e) => getEstudios(e.target.value)}>
                       <option>Seleccionar especialidad...</option>
                         {especialidades.map((e) => {
                             return(
@@ -109,7 +135,7 @@ const SacarTurno = () => {
                     </Form.Select>
                     <br></br>
                       
-                    <Form.Select onChange={(e) => setEstud(e.target.value)}>
+                    <Form.Select className='marginLeft' onChange={(e) => setEstud(e.target.value)}>
                       <option>Seleccione el estudio...</option>
                         {estudios.map((e) => {
                             return(
@@ -122,7 +148,7 @@ const SacarTurno = () => {
                     </Form.Select>
                     
                     <br></br>
-                    <Form.Select onChange={(e) => setIdSede(e.target.value)}>
+                    <Form.Select className='marginLeft' onChange={(e) => setIdSede(e.target.value)}>
                     <option>Seleccione la sede...</option>
                       {sede.map((e) => {
                             return(
@@ -133,30 +159,42 @@ const SacarTurno = () => {
                           
                           })}
                     </Form.Select>
-
                     <br></br>
-                    <Form.Text className="text-muted">
-                      Elige la fecha en la que quieres sacar el turno:
+                    <Form.Text className='letraUnPocoMasGrande' id='marginLeftt'>
+                      Elige la fecha en la que quieres sacar el turnoo:
                     </Form.Text>
-                    <Form.Group className="mb-3" controlId="formBasicEmail">
+                    <center>
+
+                    <Form.Group className="mb-3" controlId="formBasicEmail" id='marginLeftt'>
                       <Form.Control type="date" controlId="Fecha" name="Fecha" placeholder="Enter date" />
                     </Form.Group>
 
-
+                    </center>
                     <br></br>
-                      Elige la hora en la que quieres sacar el turno:
-                    <Form.Group className="mb-3" controlId="formBasicEmail">
+                    <Form.Text className='letraUnPocoMasGrande' id='marginLeftt'>
+                    Elige la hora en la que quieres sacar el turno:
+                    </Form.Text>
+                    <center>
+
+                    <Form.Group className="mb-3" controlId="formBasicEmail" id='marginLeftt'>
                       <Form.Control controlId="Hora" type="time" name="Hora"/>
                     </Form.Group>
+                    </center>
 
                     </div>
-                    <br></br>                    
+                    <br></br>     
+                    <center>
+               
                   <button type="submit" className="botonLog" > Sacar </button> 
-                  
+                  </center>
+
                   </form>
+                  <center>
+
                   <br></br>
                   <button className="botonLog"  onClick={onVolver}> Volver </button> 
                   </center>
+
             </div>
           </div>
         </div>

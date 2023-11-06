@@ -6,6 +6,7 @@ import EspecialidadRouter from "./src/controller/EspecialidadController.js";
 import CancelarRouter from "./src/controller/CancelarController.js";
 import SedeRouter from "./src/controller/SedeController.js";
 import MedicoRouter from "./src/controller/MedicosController.js"
+import FiltroRouter from "./src/controller/FiltroController.js"
 import cors from 'cors';
 import sql from 'mssql'
 import 'dotenv/config'
@@ -24,6 +25,7 @@ app.use("/especialidad", EspecialidadRouter);
 app.use("/cancelar", CancelarRouter);
 app.use("/sede", SedeRouter);
 app.use("/medico", MedicoRouter);
+app.use("/filtro", FiltroRouter);
 
 
 

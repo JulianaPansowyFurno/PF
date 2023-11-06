@@ -14,7 +14,6 @@ import { useContext } from 'react';
 const AgendaVirtual = () => {
   const [turno, setTurno] = useState([]);
   const { id, setId } = useContext(MyContext);
-
   const navigate = useNavigate();
   const [showCancelModal, setShowCancelModal] = useState(false);
   const [showPosponerModal, setShowPosponerModal] = useState(false);

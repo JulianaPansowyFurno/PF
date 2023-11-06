@@ -17,7 +17,22 @@ const AgregarMedico = () => {
   const [selectedDays, setSelectedDays] = useState({ domingo: false, lunes: false,martes: false,miercoles: false,jueves: false,viernes: false,sabado: false });
   const navigate = useNavigate();
   const [idDiasLaborales, setidDiasLaborales] = useState();
+  const [showCancelModal, setShowCancelModal] = useState(false);
+  const [showPosponerModal, setShowPosponerModal] = useState(false);
+  const [turnoId, setTurnoId] = useState();
 
+
+  const handleCloseCancelModal = () => setShowCancelModal(false);
+  const handleClosePosponerModal = () => setShowPosponerModal(false);
+
+  const handleShowCancelModal = (idTurno) => {
+    setTurnoId(idTurno);
+    setShowCancelModal(true);
+  }
+  const handleShowPosponerModal = (idTurno) => {
+    setTurnoId(idTurno);
+    setShowPosponerModal(true);
+  }  
 
   const handleDayChange = (day) => {
     setSelectedDays((prevSelectedDays) => ({
@@ -36,16 +51,17 @@ const AgregarMedico = () => {
       .catch((error) => alert("aca hay algo raro"));
   }
   const insertardiasLaboralesss = () => {
+    console.log(selectedDays)
     axios.post('http://localhost:5000/medico/insertardias', selectedDays)
     .then(function (response) {
       setidDiasLaborales(response.data[0].id)
+      
     })
     .catch((error) => alert("mal el insert"));
   }
 
   useEffect(() => {
     insertardiasLaboralesss()   
-     
   }, []);
 
   const Valores = (e) => {
@@ -57,14 +73,15 @@ const AgregarMedico = () => {
       mail: formulario.get('Mail'),
       telefono: formulario.get('Telefono'),
       nombre: formulario.get('NombreApellidoM'),
-      diaslaborales: idDiasLaborales
+      DiasLaborales: idDiasLaborales
     }
-    console.log(idDiasLaborales)
     axios.post('http://localhost:5000/medico', medico)
     .then(function (response) {
-      console.log(response);
-      navigate("/administradoresAgenda");
+      console.log(idDiasLaborales);
+      console.log("hola")
+      console.log("medico bien")
       swal("Bien!", "Se elimino el plato del menu correctamente", "success");
+      navigate("/administradoresAgenda");
     })
   }; 
   

@@ -7,13 +7,56 @@ import Table from "react-bootstrap/Table";
 import background from "../Imagenes/fondoLogin.png";
 import { MyContext } from "../../MyContext";
 import { useContext } from 'react';
-import AgregarMedico from "./AgregarMedico";
+import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
+import Form from 'react-bootstrap/Form';
 
 const AgendaVirtual = () => {
   const [turno, setTurno] = useState([]);
   const { id, setId } = useContext(MyContext);
+  const [showCancelModal, setShowCancelModal] = useState(false);
+  const [showPosponerModal, setShowPosponerModal] = useState(false);
+  const [turnoId, setTurnoId] = useState();
   const navigate = useNavigate();
 
+
+  const handleCloseCancelModal = () => setShowCancelModal(false);
+  const handleClosePosponerModal = () => setShowPosponerModal(false);
+
+  const handleShowCancelModal = (idTurno) => {
+    setTurnoId(idTurno);
+    setShowCancelModal(true);
+  }
+  const handleShowPosponerModal = (idTurno) => {
+    setTurnoId(idTurno);
+    setShowPosponerModal(true);
+  }
+
+
+  const onPosponer = (e, IdTurno) => {
+    e.preventDefault();
+    const formElement = e.target; // Reference to the form element
+    const formulario = new FormData(formElement);
+    console.log(IdTurno)
+    const fecha = {
+      IdTurno: IdTurno,
+      Fecha: formulario.get('Fecha')
+    }
+    axios.put("http://localhost:5000/turno", fecha)
+      .then(function (response) {
+        traerTurnos();
+      });
+  };
+
+  const onclickCancelar = (IdTurno) => {
+    console.log(IdTurno + "emtrp2")
+    axios.put(`http://localhost:5000/cancelar/${IdTurno}`)
+      .then(function (response) {
+        traerTurnos();
+      });
+
+    handleCloseCancelModal();
+  };
 
   const traerTurnos = () => {
     axios.get(`http://localhost:5000/medico`) // Poner id paciente en el link
@@ -79,6 +122,16 @@ const AgendaVirtual = () => {
                   <td>
                     {("0" + new Date(tur.Hora).getHours()).substr(-2) + ":" + ("0" + new Date(tur.Hora).getMinutes()).substr(-2)}
                   </td>
+                  <td>
+                    <Button className="BTNAgenda" variant="primary" onClick={() => handleShowCancelModal(tur.IdTurno)}>
+                      Cancelar
+                    </Button>
+                  </td>
+                  <td>
+                    <Button className="BTNAgenda" variant="primary" onClick={() => handleShowPosponerModal(tur.IdTurno)}>
+                      Posponer
+                    </Button>
+                  </td>
                 </tr>
               );
             })}
@@ -87,6 +140,49 @@ const AgendaVirtual = () => {
 
         <button className="botonLog"  onClick={AgregarMedico}> Agregar Medica </button> 
       </Container>
+      <Modal show={showCancelModal} onHide={handleCloseCancelModal}>
+        <Modal.Header closeButton>
+          <Modal.Title>Cancelar turno </Modal.Title>
+        </Modal.Header>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleCloseCancelModal}>
+            Close
+          </Button>
+          <Button variant="primary" onClick={() => onclickCancelar(turnoId)}>
+            Save Changes
+          </Button>
+        </Modal.Footer>
+        
+      </Modal>
+
+      <Modal show={showPosponerModal} onHide={handleClosePosponerModal}>
+        <Modal.Header closeButton>
+          <Modal.Title>Posponer Turno</Modal.Title>
+        </Modal.Header>
+        <Modal.Body><br></br>
+          <Form onSubmit={(e) => onPosponer(e, turnoId)}>
+            <Form.Text className="text-muted">
+              Elige la fecha  a la que la quieres cambiar:
+            </Form.Text>
+            <Form.Group className="mb-3" controlId="formBasicEmail">
+              <Form.Label>Change de date</Form.Label>
+              <Form.Control type="date" name="Fecha" placeholder="Enter date" />
+            </Form.Group>
+
+
+            <Modal.Footer>
+              <Button variant="secondary" onClick={handleClosePosponerModal}>
+                Close
+              </Button>
+              <Button variant="primary" type="submit" onClick={handleClosePosponerModal}>
+
+                Guardar
+              </Button>
+
+            </Modal.Footer>
+          </Form>
+        </Modal.Body>
+      </Modal>
     </div>
   );
 
