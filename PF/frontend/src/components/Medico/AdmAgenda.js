@@ -1,4 +1,6 @@
 import "../../App.css";
+import"../../botonLindo.css";
+import"../../index.css";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -22,6 +24,7 @@ const AgendaVirtual = () => {
   const [pac, setPac] = useState([]);
   const [medicos, setmedicos] = useState([]);
   const [unMedico, setunMedico] = useState([]);
+  const [Fecha, setFecha] = useState("");
 
 
 
@@ -117,13 +120,33 @@ const AgendaVirtual = () => {
       })
       .catch((error) => alert("aca hay algo raro"));
   }
+  const filtroFecha = (e) => {
+    const formElement = e.target; // Reference to the form element
+    const formulario = new FormData(formElement);
+    const fecha = {
+      Fecha: formulario.get('Fecha')
+    }
+    axios.put("http://localhost:5000/filtro", fecha)
+      .then(function (response) {
+        console.log(response)
+        traerTurnos();
+      });
+  }
 
 
 
   return (
     <div className="conteiner" style={{ backgroundImage: `url(${background})` }} >
       <Container>
-      
+      {/*HACER ESTOOOOOOOOOOOOOOOO <label for="exampleDataList" class="form-label">Datalist example</label>
+<input class="form-control" list="datalistOptions" id="exampleDataList" placeholder="Type to search...">
+<datalist id="datalistOptions">
+  <option value="San Francisco">
+  <option value="New York">
+  <option value="Seattle">
+  <option value="Los Angeles">
+  <option value="Chicago">
+</datalist> */}
       <Form.Select className='marginLeft' onChange={(e) => filtroNombre(e.target.value)}>
           <option>Seleccionar nombre del paciente...</option>
             {pacientes.map((e) => {
@@ -136,21 +159,34 @@ const AgendaVirtual = () => {
         })}
         </Form.Select>
 
-
         <Form.Select className='marginLeft' onChange={(e) => filtroMedicos(e.target.value)}>
-          <option>Seleccionar nombre del medico...</option>
+          <option>Seleccionar nombre del medicoooo...</option>
             {medicos.map((e) => {
               return(                
                 <option value={e.IdMedico}>
-                  {e.NombreApellido}
+                  {e.NombreApellidoM}
                 </option>
             );
             
         })}
         </Form.Select>
 
-                  
-        <Table striped="columns">
+        <Form.Text className='letraUnPocoMasGrande' id='marginLeftt'>
+          Elige la fecha en la que quieres sacar el turnoo:
+        </Form.Text>
+        <center>
+        <Form.Group>
+  <Form.Label>Fecha</Form.Label>
+  <Form.Control type="date"
+    controlId="Fecha"
+    name="Fecha"
+    onChange={filtroFecha}
+    placeholder="Enter date"
+  />
+</Form.Group>
+        </center>
+        <br></br>
+        <Table striped bordered hover variant="light">
           <thead>
             <tr>
               <th>Paciente</th>

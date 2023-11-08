@@ -5,7 +5,7 @@ import 'dotenv/config'
 export default class FiltroService {
 
     GetFiltroPaciente = async (idPaciente) => {
-        console.log('This is a function on the service GetFiltroNombre');
+        console.log('This is a function on the service GetFiltroPaciente');
         const pool = await sql.connect(config);
         const response = await pool.request()
           .input('FkPaciente',sql.Int, idPaciente)
@@ -24,7 +24,7 @@ export default class FiltroService {
 
     
     GetFiltroMedicos = async (idMedico) => {
-      console.log('This is a function on the service GetFiltroNombre');
+      console.log('This is a function on the service GetFiltroMedicos');
       const pool = await sql.connect(config);
       const response = await pool.request()
         .input('FkMedico',sql.Int, idMedico)
@@ -39,5 +39,24 @@ export default class FiltroService {
     
       console.log(response.recordset);
       return response.recordset;
+  }
+
+
+  GetFiltroFecha = async (Fecha) => {
+    console.log('This is a function on the service get filtro fecha');
+    const pool = await sql.connect(config);
+    const response = await pool.request()
+      .input('Fecha', sql.NChar, Fecha.Fecha)
+      .query(`SELECT Turno.IdTurno, Sede.Sede, Turno.Fecha, Paciente.NombreApellido, Medico.NombreApellidoM , Turno.Cancelado, Turno.Asistio, Estudio.Estudio, Servicio.Servicio, Turno.Hora 
+      FROM Turno 
+      inner join Paciente on Paciente.IdPaciente = Turno.FkPaciente 
+      inner join Sede on Sede.IdSede = Turno.FkSede
+      inner join Medico on Medico.IdMedico = Turno.FkMedico
+      inner join Estudio on Estudio.IdEstudio = Turno.FkEstudio
+      inner join Servicio on Servicio.IdServicio = Turno.FkServicio
+       WHERE Fecha = @Fecha`);
+  
+    console.log(response.recordset);
+    return response.recordset;
   }
 }
