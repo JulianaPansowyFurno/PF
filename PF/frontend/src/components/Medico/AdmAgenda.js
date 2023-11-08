@@ -18,6 +18,11 @@ const AgendaVirtual = () => {
   const [showPosponerModal, setShowPosponerModal] = useState(false);
   const [turnoId, setTurnoId] = useState();
   const navigate = useNavigate();
+  const [pacientes, setpacientes] = useState([]);
+  const [pac, setPac] = useState([]);
+  const [medicos, setmedicos] = useState([]);
+  const [unMedico, setunMedico] = useState([]);
+
 
 
   const handleCloseCancelModal = () => setShowCancelModal(false);
@@ -37,7 +42,6 @@ const AgendaVirtual = () => {
     e.preventDefault();
     const formElement = e.target; // Reference to the form element
     const formulario = new FormData(formElement);
-    console.log(IdTurno)
     const fecha = {
       IdTurno: IdTurno,
       Fecha: formulario.get('Fecha')
@@ -49,7 +53,6 @@ const AgendaVirtual = () => {
   };
 
   const onclickCancelar = (IdTurno) => {
-    console.log(IdTurno + "emtrp2")
     axios.put(`http://localhost:5000/cancelar/${IdTurno}`)
       .then(function (response) {
         traerTurnos();
@@ -68,16 +71,85 @@ const AgendaVirtual = () => {
 
   useEffect(() => {
     traerTurnos();
+    traerPacientes();
+    traerMedicos();
   }, []);
 
   const AgregarMedico = () => {
     navigate("/agregarMedico")
   };
 
+  const traerPacientes = () => {
+    axios
+      .get("http://localhost:5000/paciente")
+      .then((response) => {
+        setpacientes(response.data);
+      })
+      .catch((error) => alert("aca hay algo raro"));
+  }
+
+  const filtroNombre = (IdPaciente) => {
+    console.log(IdPaciente)
+    axios.get(`http://localhost:5000/filtro/${IdPaciente}`)
+      .then((response) => {
+        console.log(response)
+        setTurno(response.data);
+      })
+      .catch((error) => alert("aca hay algo raro"));
+  }
+
+  const traerMedicos = () => {
+    axios
+      .get("http://localhost:5000/medico/getAll")
+      .then((response) => {
+        console.log(response.data)
+        setmedicos(response.data);
+      })
+      .catch((error) => alert("aca hay algo raro"));
+  }
+
+  const filtroMedicos = (IdMedico) => {
+    console.log(IdMedico)
+    axios.get(`http://localhost:5000/filtro/nombreMed/${IdMedico}`)
+      .then((response) => {
+        console.log(response)
+        setTurno(response.data);
+      })
+      .catch((error) => alert("aca hay algo raro"));
+  }
+
+
 
   return (
     <div className="conteiner" style={{ backgroundImage: `url(${background})` }} >
       <Container>
+      
+      <Form.Select className='marginLeft' onChange={(e) => filtroNombre(e.target.value)}>
+          <option>Seleccionar nombre del paciente...</option>
+            {pacientes.map((e) => {
+              return(                
+                <option value={e.IdPaciente}>
+                  {e.NombreApellido}
+                </option>
+            );
+            
+        })}
+        </Form.Select>
+
+
+        <Form.Select className='marginLeft' onChange={(e) => filtroMedicos(e.target.value)}>
+          <option>Seleccionar nombre del medico...</option>
+            {medicos.map((e) => {
+              return(                
+                <option value={e.IdMedico}>
+                  {e.NombreApellido}
+                </option>
+            );
+            
+        })}
+        </Form.Select>
+
+                  
         <Table striped="columns">
           <thead>
             <tr>

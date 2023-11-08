@@ -17,4 +17,12 @@ export default class PacienteService {
             .query(`INSERT INTO Paciente (NombreApellido, DNI, CoberturaMedica, Mail, Telefono, FechaNacimiento, FkUsuarioPaciente) VALUES (@NombreApellido, @DNI, @CoberturaMedica, @Mail, @Telefono, @FechaNacimiento, @FkUsuarioPaciente)`);
         return response.recordset;
     }
+    GetPAcientes = async () => {
+        console.log('This is a function on the service getESpecialidades');
+        const pool = await sql.connect(config);
+        const response = await pool.request()
+        .query(`SELECT * FROM Paciente`);
+        console.log(response.recordset)
+        return response.recordset;
+    }
 }

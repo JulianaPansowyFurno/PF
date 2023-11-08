@@ -4,7 +4,15 @@ import 'dotenv/config'
 
 export default class MedicosService {
 
-   
+    GetAllMedicos  = async () => {
+        console.log('This is a function on the service getTurnos medivossss');
+        const pool = await sql.connect(config);
+        const response = await pool.request()
+        .query(`SELECT * FROM Medico`);
+        console.log(response.recordset)
+        return response.recordset;
+    }
+
     GetTurnosMedico  = async () => {
         console.log('This is a function on the service getTurnos medivossss');
         const pool = await sql.connect(config);
