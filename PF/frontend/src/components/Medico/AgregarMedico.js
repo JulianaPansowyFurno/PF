@@ -146,57 +146,61 @@ const AgregarMedico = () => {
                   
                     <h2>Select your workdays:</h2>
                     <label>
-                      Lunes
+                      
                       <input
+                      className="izq"
                         type="checkbox"
                         checked={selectedDays.lunes}
                         onChange={() => handleDayChange('lunes')}
                       />
+                      Lunes
                     </label>
                     <br></br>
                     <label>
-                      Martes
+                      
                       <input
                         type="checkbox"
                         checked={selectedDays.martes}
                         onChange={() => handleDayChange('martes')}
                       />
+                      Martes
                     </label>
                     <br></br>
                     <label>
-                      Miercoles
+                      
                       <input
                         type="checkbox"
                         checked={selectedDays.miercoles}
                         onChange={() => handleDayChange('miercoles')}
                       />
+                      Miercoles
                     </label>
                     <br></br>
                     <label>
-                      Jueves
                       <input
                         type="checkbox"
                         checked={selectedDays.jueves}
                         onChange={() => handleDayChange('jueves')}
                       />
+                      Jueves
                     </label>
                     <br></br>
                     <label>
-                      Viernes
                       <input
                         type="checkbox"
                         checked={selectedDays.viernes}
                         onChange={() => handleDayChange('viernes')}
                       />
+                      Viernes
                     </label>
                     <br></br>
                     <label>
-                      Sabado
                       <input
                         type="checkbox"
                         checked={selectedDays.sabado}
                         onChange={() => handleDayChange('sabado')}
                       />
+                      Sabado
                     </label>
                     
                     </div>
@@ -204,8 +208,10 @@ const AgregarMedico = () => {
                   <button type="submit" className="botonLog" > Sacar </button> 
                   </center>
                   </form>
-
-                  <button className="botonLog"  onClick={onVolver}> Volver a mi agenda </button> 
+                  <br></br>
+                  <center>
+                  <button className="botonLog"  onClick={onVolver}> Volver a mi agenda </button>
+                  </center>
             </div>
           </div>
         </div>

@@ -46,7 +46,7 @@ export default class FiltroService {
     console.log('This is a function on the service get filtro fecha');
     const pool = await sql.connect(config);
     const response = await pool.request()
-      .input('Fecha', sql.NChar, Fecha.Fecha)
+      .input('Fecha', sql.NChar, Fecha)
       .query(`SELECT Turno.IdTurno, Sede.Sede, Turno.Fecha, Paciente.NombreApellido, Medico.NombreApellidoM , Turno.Cancelado, Turno.Asistio, Estudio.Estudio, Servicio.Servicio, Turno.Hora 
       FROM Turno 
       inner join Paciente on Paciente.IdPaciente = Turno.FkPaciente 

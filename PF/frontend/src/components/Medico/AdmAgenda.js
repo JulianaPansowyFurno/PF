@@ -12,6 +12,7 @@ import { useContext } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
+import isMatch from 'date-fns/isMatch'
 
 const AgendaVirtual = () => {
   const [turno, setTurno] = useState([]);
@@ -73,10 +74,17 @@ const AgendaVirtual = () => {
   };
 
   useEffect(() => {
+    //VALIDAR QUE LA FECHA SEA DIFERETE A NULL Y RECIEN AHI LLAMAR LA FUNCION
+    filtroFecha();
     traerTurnos();
     traerPacientes();
     traerMedicos();
   }, []);
+
+  useEffect(() => {
+    filtroFecha();
+    traerTurnos();
+  }, [Fecha]);
 
   const AgregarMedico = () => {
     navigate("/agregarMedico")
@@ -95,7 +103,6 @@ const AgendaVirtual = () => {
     console.log(IdPaciente)
     axios.get(`http://localhost:5000/filtro/${IdPaciente}`)
       .then((response) => {
-        console.log(response)
         setTurno(response.data);
       })
       .catch((error) => alert("aca hay algo raro"));
@@ -105,7 +112,6 @@ const AgendaVirtual = () => {
     axios
       .get("http://localhost:5000/medico/getAll")
       .then((response) => {
-        console.log(response.data)
         setmedicos(response.data);
       })
       .catch((error) => alert("aca hay algo raro"));
@@ -120,36 +126,27 @@ const AgendaVirtual = () => {
       })
       .catch((error) => alert("aca hay algo raro"));
   }
-  const filtroFecha = (e) => {
-    const formElement = e.target; // Reference to the form element
-    const formulario = new FormData(formElement);
-    const fecha = {
-      Fecha: formulario.get('Fecha')
-    }
-    axios.put("http://localhost:5000/filtro", fecha)
-      .then(function (response) {
-        console.log(response)
-        traerTurnos();
-      });
-  }
 
+  
+  const filtroFecha = () => {
+    console.log(Fecha)
+    axios.get(`http://localhost:5000/filtro?Fecha=${Fecha}`)
+    .then((response) => {
+      console.log(response.data)
+      setTurno(response.data);
+    })
+    .catch((error) => alert("aca hay algo raro"));
+  }
 
 
   return (
     <div className="conteiner" style={{ backgroundImage: `url(${background})` }} >
       <Container>
-      {/*HACER ESTOOOOOOOOOOOOOOOO <label for="exampleDataList" class="form-label">Datalist example</label>
-<input class="form-control" list="datalistOptions" id="exampleDataList" placeholder="Type to search...">
-<datalist id="datalistOptions">
-  <option value="San Francisco">
-  <option value="New York">
-  <option value="Seattle">
-  <option value="Los Angeles">
-  <option value="Chicago">
-</datalist> */}
       <Form.Select className='marginLeft' onChange={(e) => filtroNombre(e.target.value)}>
           <option>Seleccionar nombre del paciente...</option>
+          
             {pacientes.map((e) => {
+              
               return(                
                 <option value={e.IdPaciente}>
                   {e.NombreApellido}
@@ -172,18 +169,20 @@ const AgendaVirtual = () => {
         </Form.Select>
 
         <Form.Text className='letraUnPocoMasGrande' id='marginLeftt'>
-          Elige la fecha en la que quieres sacar el turnoo:
+         Elige la fecha en la que quieres sacar el turnoo:
         </Form.Text>
         <center>
-        <Form.Group>
-  <Form.Label>Fecha</Form.Label>
-  <Form.Control type="date"
-    controlId="Fecha"
-    name="Fecha"
-    onChange={filtroFecha}
-    placeholder="Enter date"
-  />
-</Form.Group>
+         <Form.Group>
+        <Form.Label>Fecha</Form.Label>
+        <Form.Control
+          type="date"
+          controlId="date"
+          name="date"
+          onChange={(e) => setFecha(e.target.value)}
+          placeholder="Enter date"  
+        />
+      </Form.Group>
+
         </center>
         <br></br>
         <Table striped bordered hover variant="light">
@@ -283,7 +282,6 @@ const AgendaVirtual = () => {
                 Close
               </Button>
               <Button variant="primary" type="submit" onClick={handleClosePosponerModal}>
-
                 Guardar
               </Button>
 

@@ -17,9 +17,11 @@ router.get('/nombreMed/:FkMedico', async (req, res) => {
 });
 
 
-router.get('/', async (req, res) => {
+router.get('', async (req, res) => {
   console.log(`This is a get operation GetFiltroFechac`);
-  const especialidades = await filtroserv.GetFiltroFecha(req.body);
+  const Fecha = req.query.Fecha;
+  console.log(Fecha)
+  const especialidades = await filtroserv.GetFiltroFecha(Fecha);
   return res.status(200).json(especialidades);
 });
 
