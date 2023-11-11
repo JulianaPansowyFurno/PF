@@ -14,6 +14,7 @@ import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 import isMatch from 'date-fns/isMatch'
 
+
 const AgendaVirtual = () => {
   const [turno, setTurno] = useState([]);
   const { id, setId } = useContext(MyContext);
@@ -51,27 +52,32 @@ const AgendaVirtual = () => {
       IdTurno: IdTurno,
       Fecha: formulario.get('Fecha')
     }
-    axios.put("http://localhost:5000/turno", fecha)
-      .then(function (response) {
-        traerTurnos();
-      });
+    // axios.put("http://localhost:5000/turno", fecha)
+    //   .then(function (response) {
+    //     traerTurnos();
+    //   });
+    //DESCOMENTAR
   };
 
   const onclickCancelar = (IdTurno) => {
-    axios.put(`http://localhost:5000/cancelar/${IdTurno}`)
-      .then(function (response) {
-        traerTurnos();
-      });
+    // axios.put(`http://localhost:5000/cancelar/${IdTurno}`)
+    //   .then(function (response) {
+    //     traerTurnos();
+    //   });
+        //DESCOMENTAR
+
 
     handleCloseCancelModal();
   };
 
   const traerTurnos = () => {
-    axios.get(`http://localhost:5000/medico`)
-      .then((response) => {
-        setTurno(response.data);
-      })
-      .catch((error) => alert("mallllll"));
+    // axios.get(`http://localhost:5000/medico`)
+    //   .then((response) => {
+    //     setTurno(response.data);
+    //   })
+    //   .catch((error) => alert("mallllll"));
+        //DESCOMENTAR
+
   };
 
   useEffect(() => {
@@ -103,75 +109,99 @@ const AgendaVirtual = () => {
   };
 
   const traerPacientes = () => {
-    axios
-      .get("http://localhost:5000/paciente")
-      .then((response) => {
-        setpacientes(response.data);
-      })
-      .catch((error) => alert("aca hay algo raro"));
+    // axios
+    //   .get("http://localhost:5000/paciente")
+    //   .then((response) => {
+    //     setpacientes(response.data);
+    //   })
+    //   .catch((error) => alert("aca hay algo raro"));
+        //DESCOMENTAR
+
   }
 
   const filtroNombre = (IdPaciente) => {
     console.log(IdPaciente)
-    axios.get(`http://localhost:5000/filtro/${IdPaciente}`)
-      .then((response) => {
-        setTurno(response.data);
-      })
-      .catch((error) => alert("aca hay algo raro"));
+    // axios.get(`http://localhost:5000/filtro/${IdPaciente}`)
+    //   .then((response) => {
+    //     setTurno(response.data);
+    //   })
+    //   .catch((error) => alert("aca hay algo raro"));
+        //DESCOMENTAR
+
   }
 
   const traerMedicos = () => {
-    axios
-      .get("http://localhost:5000/medico/getAll")
-      .then((response) => {
-        setmedicos(response.data);
-      })
-      .catch((error) => alert("aca hay algo raro"));
+    // axios
+    //   .get("http://localhost:5000/medico/getAll")
+    //   .then((response) => {
+    //     setmedicos(response.data);
+    //   })
+    //   .catch((error) => alert("aca hay algo raro"));
+        //DESCOMENTAR
+
   }
 
   const filtroMedicos = (IdMedico) => {
     console.log(IdMedico)
-    axios.get(`http://localhost:5000/filtro/nombreMed/${IdMedico}`)
-      .then((response) => {
-        console.log(response)
-        setTurno(response.data);
-      })
-      .catch((error) => alert("aca hay algo raro"));
+    // axios.get(`http://localhost:5000/filtro/nombreMed/${IdMedico}`)
+    //   .then((response) => {
+    //     console.log(response)
+    //     setTurno(response.data);
+    //   })
+    //   .catch((error) => alert("aca hay algo raro"));
+        //DESCOMENTAR
+
   }
 
   
   const filtroFecha = () => {
     console.log(Fecha)
-    axios.get(`http://localhost:5000/filtro?Fecha=${Fecha}`)
-    .then((response) => {
-      console.log(response.data)
-      setTurno(response.data);
-    })
-    .catch((error) => alert("aca hay algo raro"));
+    // axios.get(`http://localhost:5000/filtro?Fecha=${Fecha}`)
+    // .then((response) => {
+    //   console.log(response.data)
+    //   setTurno(response.data);
+    // })
+    // .catch((error) => alert("aca hay algo raro"));
+        //DESCOMENTAR
+
   }
 
   const filtroEspecialidad = (idesp) => {
-    axios.get(`http://localhost:5000/filtro/esp/${idesp}`)
-    .then((response) => {
-      console.log(response.data)
-      setTurno(response.data);
-    })
-    .catch((error) => alert("aca hay algo raro"));
+    // axios.get(`http://localhost:5000/filtro/esp/${idesp}`)
+    // .then((response) => {
+    //   console.log(response.data)
+    //   setTurno(response.data);
+    // })
+    // .catch((error) => alert("aca hay algo raro"));
+        //DESCOMENTAR
+
   }
 
   const traerEspecialidades = () => {
-    axios
-      .get("http://localhost:5000/especialidad")
-      .then((response) => {
-        setEspecialidades(response.data);
-      })
-      .catch((error) => alert("aca hay algo raro"));
+    // axios
+    //   .get("http://localhost:5000/especialidad")
+    //   .then((response) => {
+    //     setEspecialidades(response.data);
+    //   })
+    //   .catch((error) => alert("aca hay algo raro"));
+        //DESCOMENTAR
+
   }
 
 
   return (
     <div className="conteiner" style={{ backgroundImage: `url(${background})` }} >
+    <div className='fondoBlancoAdm'id='bordesRedondosAdm'>
+
+
       <Container>
+      <br></br>
+
+        <center>
+      <Form.Label className="letraFiltroAdm">
+          <b>Filtros</b>
+        </Form.Label>
+        </center>
       <Form.Select className='marginLeft' onChange={(e) => filtroNombre(e.target.value)}>
           <option>Seleccionar nombre del paciente...</option>
           
@@ -187,7 +217,7 @@ const AgendaVirtual = () => {
         </Form.Select>
 
         <Form.Select className='marginLeft' onChange={(e) => filtroMedicos(e.target.value)}>
-          <option>Seleccionar nombre del medicoooo...</option>
+          <option>Seleccionar nombre del medico...</option>
             {medicos.map((e) => {
               return(                
                 <option value={e.IdMedico}>
@@ -209,13 +239,11 @@ const AgendaVirtual = () => {
             
         })}
         </Form.Select>
-
-        <Form.Text className='letraUnPocoMasGrande' id='marginLeftt'>
-         Elige la fecha en la que quieres sacar el turnoo:
-        </Form.Text>
-        <center>
          <Form.Group>
-        <Form.Label>Fecha</Form.Label>
+          <br></br>
+        <Form.Label className="letraFechaAdm">
+          Fecha:
+        </Form.Label>
         <Form.Control
           type="date"
           controlId="date"
@@ -224,9 +252,14 @@ const AgendaVirtual = () => {
           placeholder="Enter date"  
         />
       </Form.Group>
+      <br></br>
+      <br></br>
 
-        </center>
-        <br></br>
+<center>
+<Form.Label className="letraFiltroAdm">
+  <b>Turnos</b>
+</Form.Label>
+</center>
         <Table striped bordered hover variant="light">
           <thead>
             <tr>
@@ -287,7 +320,7 @@ const AgendaVirtual = () => {
           </tbody>
         </Table>
 
-        <button className="botonLog"  onClick={AgregarMedico}> Agregar Medica </button> 
+        <button className="botonSacarTurno"  onClick={AgregarMedico}> Agregar Medico </button> 
       </Container>
       <Modal show={showCancelModal} onHide={handleCloseCancelModal}>
         <Modal.Header closeButton>
@@ -332,6 +365,8 @@ const AgendaVirtual = () => {
         </Modal.Body>
       </Modal>
     </div>
+    </div>
+
   );
 
 };

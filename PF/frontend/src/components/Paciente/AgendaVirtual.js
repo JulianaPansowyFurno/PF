@@ -11,6 +11,7 @@ import Form from 'react-bootstrap/Form';
 import { MyContext } from "../../MyContext";
 import { useContext } from 'react';
 import Barra from "./NavBar";
+import "../../botonLindo.css";
 
 const AgendaVirtual = () => {
   const [turno, setTurno] = useState([]);
@@ -46,7 +47,7 @@ const AgendaVirtual = () => {
 
 
   const traerTurnos = () => {
-    axios.get(`http://localhost:5000/turno/${id}`) // Poner id paciente en el link
+    axios.get(`http://localhost:5000/turno/${id}`)
       .then((response) => {
         setTurno(response.data);
       })
@@ -84,33 +85,62 @@ const AgendaVirtual = () => {
       .then(function (response) {
         traerTurnos();
       });
-
     handleCloseCancelModal();
   };
 
   return (
     <div className="conteiner" style={{ backgroundImage: `url(${background})` }} >
-      <Container>
+      <Container className="marginTopp">
       <Barra/>
       <br></br>
       <br></br>
       <br></br>
-
-      
-        
-        
         <Table striped bordered hover variant="light">
           <thead>
             <tr>
+              <center>
               <th>Paciente</th>
-              <th>Sede</th>
-              <th>Fecha</th>
-              <th>Medico</th>
-              <th>Asistio</th>
-              <th>Estado</th>
-              <th>Estudio</th>
-              <th>Especialidad</th>
-              <th>Hora</th>
+              </center>
+              <th>
+                <center>
+                  Sede
+                </center>
+              </th>
+              <th>
+              <center>
+              Fecha
+                </center>
+              </th>
+              <th>
+              <center>
+              Medico
+                </center>
+              </th>
+              <th>
+              <center>
+              Asistio
+                </center>
+              </th>
+              <th>
+              <center>
+              Estado
+                </center>
+              </th>
+              <th>
+              <center>
+              Estudio
+                </center>
+              </th>
+              <th>
+              <center>
+              Especialidad
+                </center>
+              </th>
+              <th>
+              <center>
+              Hora
+                </center>
+              </th>
               <th></th>
               <th></th>
             </tr>
@@ -161,10 +191,9 @@ const AgendaVirtual = () => {
 
 
         </Table>
-        <Button
-          type="form" className="botonAG" onClick={onForm}>
-          Sacar Turno
-        </Button>
+        <button type="form" className="botonSacarTurno" onClick={onForm}>
+                    Sacar Turno
+                  </button>
       </Container>
 
 

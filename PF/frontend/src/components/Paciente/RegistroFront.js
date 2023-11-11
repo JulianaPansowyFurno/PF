@@ -87,7 +87,6 @@ const Registro = () => {
                     </label>
                     </div>
 
-                    <br></br>
                     <div className="omrs-input-group">
                     <label className="omrs-input-filled" id='marginFecha'>
                       <input className="u-full-width" type="date" name="FechaNacimiento" required></input>
