@@ -10,13 +10,13 @@ export default class TurnosService {
         const pool = await sql.connect(config);
         const response = await pool.request()
         .input('FKPaciente',sql.Int, id)
-        .query(`SELECT Turno.IdTurno, Sede.Sede, Turno.Fecha, Paciente.NombreApellido, Medico.NombreApellidoM , Turno.Cancelado, Turno.Asistio, Estudio.Estudio, Servicio.Servicio, Turno.Hora 
+        .query(`SELECT Turno.IdTurno, Sede.Sede, Turno.Fecha, Paciente.NombreApellido, Medico.NombreApellidoM , Turno.Cancelado, Turno.Asistio, Estudio.Estudio, Especialidad.Especialidad, Turno.Hora 
         FROM Turno 
         inner join Paciente on Paciente.IdPaciente = Turno.FkPaciente 
         inner join Sede on Sede.IdSede = Turno.FkSede
         inner join Medico on Medico.IdMedico = Turno.FkMedico
         inner join Estudio on Estudio.IdEstudio = Turno.FkEstudio
-        inner join Servicio on Servicio.IdServicio = Turno.FkServicio
+        inner join Especialidad on Especialidad.IdEspecialidad= Turno.FkEspecialidad
         WHERE Turno.FkPaciente = @FkPaciente`);
     
         console.log(response.recordset)
@@ -37,9 +37,9 @@ export default class TurnosService {
                 .input('Cancelado',sql.Bit, turno.Cancelado)
                 .input('Asistio',sql.Bit, turno.Asistio)
                 .input('FkEstudio',sql.Int, turno.FkEstudio)
-                .input('FkServicio',sql.Int, turno.FkServicio)
-                .query(`INSERT INTO Turno (FkSede, Fecha, Hora, FkPaciente, FkMedico, Cancelado, Asistio, FkEstudio, FkServicio) VALUES (@FkSede, @Fecha, @Hora, @FkPaciente, @FkMedico, @Cancelado, @Asistio, @FkEstudio, @FkServicio)`);
-            console.log(response)
+                .input('FkEspecialidad',sql.Int, turno.Especialidad)
+                .query(`INSERT INTO Turno (FkSede, Fecha, Hora, FkPaciente, FkMedico, Cancelado, Asistio, FkEstudio, FkEspecialidad) VALUES (@FkSede, @Fecha, @Hora, @FkPaciente, @FkMedico, @Cancelado, @Asistio, @FkEstudio, @FkEspecialidad)`);
+           
             /*{
                 "FkSede": 2,
                 "FechaYHora": "2022/06/10",
@@ -48,7 +48,7 @@ export default class TurnosService {
                 "Estado": true,
                 "Asistio": true,
                 "FkEstudio": 3,
-                "FkServicio": 2
+                "FkEspecialidad": 2
             }*/
         return response.recordset;
     }

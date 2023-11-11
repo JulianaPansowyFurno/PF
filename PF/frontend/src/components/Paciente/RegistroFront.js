@@ -8,6 +8,7 @@ import "../../botonLindo.css";
 
 const Registro = () => {
   const navigate = useNavigate();
+  
 
   const tomarValores = (e) => {
     e.preventDefault();
@@ -27,7 +28,7 @@ const Registro = () => {
     axios.post('http://localhost:5000/usuario', usuario)
     .then(function (response) {
       console.log(response);
-      navigate("/agenda");
+      navigate("/");
 
     })
   }; 

@@ -10,6 +10,7 @@ import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 import { MyContext } from "../../MyContext";
 import { useContext } from 'react';
+import Barra from "./NavBar";
 
 const AgendaVirtual = () => {
   const [turno, setTurno] = useState([]);
@@ -18,6 +19,18 @@ const AgendaVirtual = () => {
   const [showCancelModal, setShowCancelModal] = useState(false);
   const [showPosponerModal, setShowPosponerModal] = useState(false);
   const [turnoId, setTurnoId] = useState();
+  const [expand, updateExpanded] = useState(false);
+  const [navColour, updateNavbar] = useState(false);
+
+  function scrollHandler() {
+    if (window.scrollY >= 20) {
+      updateNavbar(true);
+    } else {
+      updateNavbar(false);
+    }
+  }
+
+  window.addEventListener("scroll", scrollHandler);
 
   const handleCloseCancelModal = () => setShowCancelModal(false);
   const handleClosePosponerModal = () => setShowPosponerModal(false);
@@ -78,7 +91,15 @@ const AgendaVirtual = () => {
   return (
     <div className="conteiner" style={{ backgroundImage: `url(${background})` }} >
       <Container>
-        <Table striped="columns">
+      <Barra/>
+      <br></br>
+      <br></br>
+      <br></br>
+
+      
+        
+        
+        <Table striped bordered hover variant="light">
           <thead>
             <tr>
               <th>Paciente</th>
@@ -88,7 +109,7 @@ const AgendaVirtual = () => {
               <th>Asistio</th>
               <th>Estado</th>
               <th>Estudio</th>
-              <th>Servicio</th>
+              <th>Especialidad</th>
               <th>Hora</th>
               <th></th>
               <th></th>
@@ -117,7 +138,7 @@ const AgendaVirtual = () => {
                   <td>{tur.Asistio ? "Si" : "No"}</td>
                   <td>{tur.Cancelado ? "Cancelado" : "No cancelado"}</td>
                   <td>{tur.Estudio}</td>
-                  <td>{tur.Servicio}</td>
+                  <td>{tur.Especialidad}</td>
                   <td>
                     {("0" + new Date(tur.Hora).getHours()).substr(-2) + ":" + ("0" + new Date(tur.Hora).getMinutes()).substr(-2)}
                   </td>

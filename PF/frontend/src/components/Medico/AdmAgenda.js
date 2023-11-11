@@ -26,6 +26,7 @@ const AgendaVirtual = () => {
   const [medicos, setmedicos] = useState([]);
   const [unMedico, setunMedico] = useState([]);
   const [Fecha, setFecha] = useState("");
+  const [especialidades, setEspecialidades] = useState([]);
 
 
 
@@ -66,7 +67,7 @@ const AgendaVirtual = () => {
   };
 
   const traerTurnos = () => {
-    axios.get(`http://localhost:5000/medico`) // Poner id paciente en el link
+    axios.get(`http://localhost:5000/medico`)
       .then((response) => {
         setTurno(response.data);
       })
@@ -75,15 +76,26 @@ const AgendaVirtual = () => {
 
   useEffect(() => {
     //VALIDAR QUE LA FECHA SEA DIFERETE A NULL Y RECIEN AHI LLAMAR LA FUNCION
-    filtroFecha();
-    traerTurnos();
-    traerPacientes();
-    traerMedicos();
+    if( Fecha )
+    {
+      filtroFecha();
+    }else{
+      traerTurnos();
+      traerPacientes();
+      traerMedicos();
+      traerEspecialidades();
+    }
+    
   }, []);
 
   useEffect(() => {
-    filtroFecha();
-    traerTurnos();
+    if( Fecha )
+    {
+      filtroFecha();
+    }else{
+      traerTurnos();
+    }
+    
   }, [Fecha]);
 
   const AgregarMedico = () => {
@@ -138,6 +150,24 @@ const AgendaVirtual = () => {
     .catch((error) => alert("aca hay algo raro"));
   }
 
+  const filtroEspecialidad = (idesp) => {
+    axios.get(`http://localhost:5000/filtro/esp/${idesp}`)
+    .then((response) => {
+      console.log(response.data)
+      setTurno(response.data);
+    })
+    .catch((error) => alert("aca hay algo raro"));
+  }
+
+  const traerEspecialidades = () => {
+    axios
+      .get("http://localhost:5000/especialidad")
+      .then((response) => {
+        setEspecialidades(response.data);
+      })
+      .catch((error) => alert("aca hay algo raro"));
+  }
+
 
   return (
     <div className="conteiner" style={{ backgroundImage: `url(${background})` }} >
@@ -162,6 +192,18 @@ const AgendaVirtual = () => {
               return(                
                 <option value={e.IdMedico}>
                   {e.NombreApellidoM}
+                </option>
+            );
+            
+        })}
+        </Form.Select>
+
+        <Form.Select className='marginLeft' onChange={(e) => filtroEspecialidad(e.target.value)}>
+          <option>Seleccionar la especialidad...</option>
+            {especialidades.map((e) => {
+              return(                
+                <option value={e.IdEspecialidad}>
+                  {e.Especialidad}
                 </option>
             );
             
@@ -195,7 +237,7 @@ const AgendaVirtual = () => {
               <th>Asistio</th>
               <th>Estado</th>
               <th>Estudio</th>
-              <th>Servicio</th>
+              <th>Especialidad</th>
               <th>Hora</th>
               <th></th>
               <th></th>
@@ -225,7 +267,7 @@ const AgendaVirtual = () => {
                   <td>{tur.Asistio ? "Si" : "No"}</td>
                   <td>{tur.Cancelado ? "Cancelado" : "No cancelado"}</td>
                   <td>{tur.Estudio}</td>
-                  <td>{tur.Servicio}</td>
+                  <td>{tur.Especialidad}</td>
                   <td>
                     {("0" + new Date(tur.Hora).getHours()).substr(-2) + ":" + ("0" + new Date(tur.Hora).getMinutes()).substr(-2)}
                   </td>

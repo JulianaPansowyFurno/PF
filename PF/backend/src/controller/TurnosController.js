@@ -29,7 +29,7 @@ router.put('', async (req, res) => {
 
 router.post('/sacarturno', async (req, res) => {
   
-  console.log(`This is a get operation getTurnos`);
+  console.log(`This is a get operation sacar`);
   const turno = await turnosService.sacarTurno(req.body);
 
   return res.status(200).json(turno);

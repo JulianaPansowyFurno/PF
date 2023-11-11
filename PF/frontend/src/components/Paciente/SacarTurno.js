@@ -1,6 +1,7 @@
 import '../..//App.css';
 import React from 'react';
 import '../../botonLindo.css';
+import '../../index.css';
 import background from "../Imagenes/fondoLogin.png";
 import logoPNG from "../Imagenes/logoPNG.png";
 import axios from 'axios';
@@ -11,10 +12,9 @@ import { MyContext } from "../../MyContext";
 import { useContext } from 'react';
 import swal from 'sweetalert';
 import 'mdb-react-ui-kit/dist/css/mdb.min.css';
-import "@fortawesome/fontawesome-free/css/all.min.css"
-;
+import "@fortawesome/fontawesome-free/css/all.min.css";
 import { MDBDropdown, MDBDropdownMenu, MDBDropdownToggle, MDBDropdownItem, MDBBtn } from 'mdb-react-ui-kit';
-
+import Barra from "./NavBar";
 
 
 const SacarTurno = () => {
@@ -70,13 +70,14 @@ const SacarTurno = () => {
       Asistio: false,
       FkPaciente: id,
       FkMedico: 2,
-      FkServicio: 1,
+      Especialidad: idEsp,
       Hora: formElement.Hora.value,
       Fecha: formElement.Fecha.value
     }
     axios.post("http://localhost:5000/turno/sacarturno", turno)
       .then(function (response) {
         swal("Bien!", "Se ha creado tu turno", "success");
+        navigate("/agenda");
       });
   };
   
@@ -93,6 +94,7 @@ const SacarTurno = () => {
   return(
     <div className="fondo" style={{ backgroundImage:`url(${background})` }}>
         <div className='conteiner' >
+            <Barra></Barra>
         <div id='formSize' >
             <div id='Form2' >
               <div className='fondoBlanco'id='bordesRedondos'>

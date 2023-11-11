@@ -25,5 +25,11 @@ router.get('', async (req, res) => {
   return res.status(200).json(especialidades);
 });
 
+router.get('/esp/:FkEspecialidad', async (req, res) => {
+  console.log(`This is a get operation GetFiltroFechac`);
+  const especialidades = await filtroserv.GetFiltroEspecialidad(req.params.FkEspecialidad);
+  return res.status(200).json(especialidades);
+});
+
 
 export default router;

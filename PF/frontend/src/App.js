@@ -3,6 +3,7 @@ import LoginFront from "./components/Paciente/LoginFront.js";
 import RegistroFront from "./components/Paciente/RegistroFront.js";
 import AgendaVirtual from "./components/Paciente/AgendaVirtual.js";
 import SacarTurno from "./components/Paciente/SacarTurno.js";
+import NavBar from './components/Paciente/NavBar.js';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import ReactDOM from 'react-dom'
 import {useState} from 'react';
@@ -15,11 +16,14 @@ export default function App() {
   return(
     <MyContext.Provider value={{id,setId}}>
     <Router>
+      
       <Routes>
+        
         <Route exact path="/" element={<LoginFront />}/>
          <Route path="/registro" element={<RegistroFront />} /> 
         <Route path="/agenda" element={<AgendaVirtual />}/>
         <Route path="/sacarTurno" element={<SacarTurno />}/>
+        
         <Route path="/administradoresAgenda" element={<AdmAgenda />}/>
         <Route path="/agregarMedico" element={<AgregarMedico />}/>
       </Routes>

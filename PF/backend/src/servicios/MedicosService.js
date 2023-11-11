@@ -18,13 +18,13 @@ export default class MedicosService {
         const pool = await sql.connect(config);
         const response = await pool.request()
         .query(`SELECT Turno.IdTurno, Sede.Sede, Turno.Fecha, Paciente.NombreApellido, Medico.NombreApellidoM 
-        , Turno.Cancelado, Turno.Asistio, Estudio.Estudio, Servicio.Servicio, Turno.Hora 
+        , Turno.Cancelado, Turno.Asistio, Estudio.Estudio, Especialidad.Especialidad, Turno.Hora 
         FROM Turno 
         inner join Paciente on Paciente.IdPaciente = Turno.FkPaciente 
         inner join Sede on Sede.IdSede = Turno.FkSede
         inner join Medico on Medico.IdMedico = Turno.FkMedico
         inner join Estudio on Estudio.IdEstudio = Turno.FkEstudio
-        inner join Servicio on Servicio.IdServicio = Turno.FkServicio
+        inner join Especialidad on Especialidad.IdEspecialidad= Turno.FkEspecialidad
         Order by Turno.Hora`);
     
         console.log(response.recordset)
