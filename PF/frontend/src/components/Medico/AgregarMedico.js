@@ -22,6 +22,7 @@ const AgregarMedico = () => {
   const [showCancelModal, setShowCancelModal] = useState(false);
   const [showPosponerModal, setShowPosponerModal] = useState(false);
   const [turnoId, setTurnoId] = useState();
+  const [genero, SetGenero] = useState("");
 
 
   const handleCloseCancelModal = () => setShowCancelModal(false);
@@ -45,23 +46,22 @@ const AgregarMedico = () => {
 
 
   const traerEspecialidades = () => {
-    // axios
-    //   .get("http://localhost:5000/especialidad")
-    //   .then((response) => {
-    //     setEspecialidades(response.data);
-    //   })
-    //   .catch((error) => alert("aca hay algo raro"));
-    //DESCOMENTAR
+    axios
+      .get("http://localhost:5000/especialidad")
+      .then((response) => {
+        setEspecialidades(response.data);
+      })
+      .catch((error) => alert("aca hay algo raro"));
   }
   const insertardiasLaboralesss = () => {
     console.log(selectedDays)
-    // axios.post('http://localhost:5000/medico/insertardias', selectedDays)
-    // .then(function (response) {
-    //   setidDiasLaborales(response.data[0].id)
+    axios.post('http://localhost:5000/medico/insertardias', selectedDays)
+    .then(function (response) {
+      setidDiasLaborales(response.data[0].id)
       
-    // })
-    // .catch((error) => alert("mal el insert"));
-    //DESCOMENTAR
+    })
+    .catch((error) => alert("mal el insert"));
+    
   }
 
   useEffect(() => {
@@ -72,22 +72,23 @@ const AgregarMedico = () => {
     e.preventDefault();
     const formElement = e.target; // Reference to the form element
     const formulario = new FormData(formElement); 
+    console.log(genero)
     const medico={
       esp: espElegida,
       mail: formulario.get('Mail'),
       telefono: formulario.get('Telefono'),
       nombre: formulario.get('NombreApellidoM'),
-      DiasLaborales: idDiasLaborales
+      DiasLaborales: idDiasLaborales,
+      Genero: genero
     }
-    // axios.post('http://localhost:5000/medico', medico)
-    // .then(function (response) {
-    //   console.log(idDiasLaborales);
-    //   console.log("hola")
-    //   console.log("medico bien")
-    //   swal("Bien!", "Se elimino el plato del menu correctamente", "success");
-    //   navigate("/administradoresAgenda");
-    // })
-    //DESCOMENTAR
+    axios.post('http://localhost:5000/medico', medico)
+    .then(function (response) {
+      console.log(idDiasLaborales);
+      console.log("hola")
+      console.log("medico bien")
+      swal("Bien!", "Se elimino el plato del menu correctamente", "success");
+      navigate("/administradoresAgenda");
+    })
   }; 
   
   const onVolver = (e) => {
@@ -148,12 +149,22 @@ const AgregarMedico = () => {
                           <span className="omrs-input-label">Nombre/s y Apellido/s</span>
                       </label>
 			              </div>
+                  
 
-
+                 
+              <Form.Select  id="formSelect" onChange={(e) => SetGenero(e.target.value)}>
+                <option>Seleccioná el genero  del medico...</option>              
+                <option value={"F"}> Femenino</option>
+                <option value={"M"}> Msculino</option>
+              </Form.Select> 
+                    
                   <div id='izq'>
+                  <center>
                     <h4 className='letraDias2'>Seleccione sus dias laborales:</h4>
+                    </center>
+                    <center>
                     <label className='marginDiasLabel'>
-                      
+                    
                       <input
                         type="checkbox"
                         checked={selectedDays.lunes}
@@ -161,9 +172,9 @@ const AgregarMedico = () => {
                       />
                     </label>
                     <span className="letraDias">Lunes</span>
-                    
+                    </center>
 
-                    <br></br>
+                    <center>
                     <label className='marginDiasLabel'>
                       
                       <input
@@ -174,8 +185,8 @@ const AgregarMedico = () => {
                       
                     </label>
                     <span className="letraDias">Martes</span>
-
-                    <br></br>
+                    </center>
+                    <center>
                     <label className='marginDiasLabel'>
                       
                       <input
@@ -186,8 +197,8 @@ const AgregarMedico = () => {
                       
                     </label>
                     <span className="letraDias">Miercoles</span>
-
-                    <br></br>
+                    </center>
+                    <center>
                     <label className='marginDiasLabel'>
                       <input
                         type="checkbox"
@@ -197,8 +208,8 @@ const AgregarMedico = () => {
                       
                     </label>
                     <span className="letraDias">Jueves</span>
-
-                    <br></br>
+                    </center>
+                    <center>
                     <label className='marginDiasLabel'>
                       <input
                         type="checkbox"
@@ -209,7 +220,8 @@ const AgregarMedico = () => {
                     </label>
                     <span className="letraDias">Viernes</span>
 
-                    <br></br>
+                    </center>
+                    <center>
                     <label className='marginDiasLabel'>
                       <input
                         type="checkbox"
@@ -219,9 +231,9 @@ const AgregarMedico = () => {
                       
                     </label>
                     <span className="letraDias">Sabado</span>
-
+                    </center>
                     </div>
-
+                    
                     </div>
                     <br></br>                    
                   <button type="submit" className="botonLog" > Sacar </button> 

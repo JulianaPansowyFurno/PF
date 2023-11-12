@@ -8,6 +8,8 @@ label{
   color: rgb(0, 0, 0);
 }
 
+
+
 body {
   margin: 0;
   padding: 0;
@@ -106,7 +108,13 @@ input[type="date"]
   align-content: left;
 }
 
-#Boton2 {
+#formSelect{
+  width: 400px;
+}
+
+
+
+#BotonReg {
   background-color: #4341b3; 
   border: none;
   color: rgb(255, 255, 255);
@@ -119,13 +127,16 @@ input[type="date"]
   border-radius: 10px;
   margin-top: 10px ;
   margin-left: 1px;
-  width: 80%;
+  width: 50%;
   font-family: sans-serif;
   color: rgb(149, 149, 149);
 }
+#BotonReg:hover {
+  background-color: rgb(81, 148, 187);
+}
 
-#Boton2:hover {
-  background-color: rgb(81, 92, 187);
+.fecha{
+width: 100px;
 }
 
 h1,
@@ -201,6 +212,10 @@ label {
   align-items: center;
 }
 
+#navFoto{
+  width: 20%;
+  height: 10%;
+}
 
 
 

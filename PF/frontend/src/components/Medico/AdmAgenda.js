@@ -81,7 +81,6 @@ const AgendaVirtual = () => {
   };
 
   useEffect(() => {
-    //VALIDAR QUE LA FECHA SEA DIFERETE A NULL Y RECIEN AHI LLAMAR LA FUNCION
     if( Fecha )
     {
       filtroFecha();
@@ -100,12 +99,21 @@ const AgendaVirtual = () => {
       filtroFecha();
     }else{
       traerTurnos();
-    }
-    
+    }    
   }, [Fecha]);
+
+  
+  useEffect(() => {
+    
+      traerTurnos();
+    
+  }, []);
 
   const AgregarMedico = () => {
     navigate("/agregarMedico")
+  };
+  const Volver = () => {
+    navigate("/")
   };
 
   const traerPacientes = () => {
@@ -187,7 +195,6 @@ const AgendaVirtual = () => {
 
   return (
     <div className="conteiner" style={{ backgroundImage: `url(${background})` }} >
-    <div className='fondoBlancoAdm'id='bordesRedondosAdm'>
 
 
       <Container>
@@ -198,33 +205,38 @@ const AgendaVirtual = () => {
           <b>Filtros</b>
         </Form.Label>
         </center>
-      <Form.Select onChange={(e) => filtroNombre(e.target.value)}>
-          <option>Seleccionar nombre del paciente...</option>
-          
-            {pacientes.map((e) => {
-              
-              return(                
-                <option value={e.IdPaciente}>
-                  {e.NombreApellido}
-                </option>
-            );
-            
-        })}
-        </Form.Select>
 
-        <Form.Select onChange={(e) => filtroMedicos(e.target.value)}>
-          <option>Seleccionar nombre del medico...</option>
-            {medicos.map((e) => {
-              return(                
-                <option value={e.IdMedico}>
-                  {e.NombreApellidoM}
-                </option>
-            );
-            
-        })}
-        </Form.Select>
 
-        <Form.Select onChange={(e) => filtroEspecialidad(e.target.value)}>
+        
+          <thead>
+            <tr>
+                  <th> <Form.Select id="formSelect" onChange={(e) => filtroNombre(e.target.value)}>
+                  <option>Seleccionar nombre del paciente...</option>
+                  
+                    {pacientes.map((e) => {
+                      
+                      return(                
+                        <option value={e.IdPaciente}>
+                          {e.NombreApellido}
+                        </option>
+                    );
+                    
+                })}
+                </Form.Select>
+                      </th>
+                    <th> <Form.Select  id="formSelect" onChange={(e) => filtroMedicos(e.target.value)}>
+                <option>Seleccionar nombre del medico...</option>
+                  {medicos.map((e) => {
+                    return(                
+                      <option value={e.IdMedico}>
+                        {e.NombreApellidoM}
+                      </option>
+                  );
+                  
+              })}
+              </Form.Select>
+                  </th>
+              <th><Form.Select  id="formSelect" onChange={(e) => filtroEspecialidad(e.target.value)}>
           <option>Seleccionar la especialidad...</option>
             {especialidades.map((e) => {
               return(                
@@ -235,19 +247,42 @@ const AgendaVirtual = () => {
             
         })}
         </Form.Select>
-         <Form.Group>
-          <br></br>
-        <Form.Label className="letraFechaAdm">
-          Fecha:
-        </Form.Label>
-        <Form.Control
-          type="date"
-          controlId="date"
-          name="date"
-          onChange={(e) => setFecha(e.target.value)}
-          placeholder="Enter date"  
-        />
-      </Form.Group>
+        </th>
+              
+           
+            </tr>
+          
+          </thead>
+          <thead>
+          <tr>
+          <th> </th> 
+           
+              <th> 
+                <Form.Group>
+                <br></br>
+              <Form.Control
+                id="formSelect"
+                type="date"
+                controlId="date"
+                name="date"
+                onChange={(e) => setFecha(e.target.value)}
+                placeholder="Ingrese la fecha por la cual filtrar"  
+              />
+            </Form.Group>
+            
+        </th>
+        <th> </th> 
+             
+           
+            </tr>
+          </thead>
+
+        
+     
+
+       
+        
+        
       <br></br>
       <br></br>
 
@@ -280,7 +315,7 @@ const AgendaVirtual = () => {
                 <tr>
                   <td key={tur.IdTurno}>{tur.NombreApellido}</td>
                   <td>{tur.Sede}</td>
-                  <td>
+                  <td id="fecha">
                     {(() => {
                       const fecha = new Date(tur.Fecha);
                       return (
@@ -301,34 +336,38 @@ const AgendaVirtual = () => {
                     {("0" + new Date(tur.Hora).getHours()).substr(-2) + ":" + ("0" + new Date(tur.Hora).getMinutes()).substr(-2)}
                   </td>
                   <td>
-                    <Button className="BTNAgenda" variant="primary" onClick={() => handleShowCancelModal(tur.IdTurno)}>
-                      Cancelar
-                    </Button>
+                    <button className="BTNAgenda" onClick={() => handleShowCancelModal(tur.IdTurno)}>
+                    Cancelar
+                  </button>
                   </td>
                   <td>
-                    <Button className="BTNAgenda" variant="primary" onClick={() => handleShowPosponerModal(tur.IdTurno)}>
+                    <button className="BTNAgenda"  onClick={() => handleShowPosponerModal(tur.IdTurno)}>
                       Posponer
-                    </Button>
+                    </button>
                   </td>
                 </tr>
               );
             })}
           </tbody>
         </Table>
-
+        <center>
         <button className="botonSacarTurno"  onClick={AgregarMedico}> Agregar Medico </button> 
+        <br></br>
+        <br></br>
+        <button className="botonSacarTurno"  onClick={Volver}> Volver</button>
+        </center> 
       </Container>
       <Modal show={showCancelModal} onHide={handleCloseCancelModal}>
         <Modal.Header closeButton>
           <Modal.Title>Cancelar turno </Modal.Title>
         </Modal.Header>
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleCloseCancelModal}>
+          <button  className="BTNAgenda" variant="secondary" onClick={handleCloseCancelModal}>
             Close
-          </Button>
-          <Button variant="primary" onClick={() => onclickCancelar(turnoId)}>
+          </button>
+          <button  className="BTNAgenda" variant="primary" onClick={() => onclickCancelar(turnoId)}>
             Save Changes
-          </Button>
+          </button>
         </Modal.Footer>
         
       </Modal>
@@ -349,18 +388,17 @@ const AgendaVirtual = () => {
 
 
             <Modal.Footer>
-              <Button variant="secondary" onClick={handleClosePosponerModal}>
+              <button  className="BTNAgenda" variant="secondary" onClick={handleClosePosponerModal}>
                 Close
-              </Button>
-              <Button variant="primary" type="submit" onClick={handleClosePosponerModal}>
+              </button>
+              <button  className="BTNAgenda" variant="primary" type="submit" onClick={handleClosePosponerModal}>
                 Guardar
-              </Button>
+              </button>
 
             </Modal.Footer>
           </Form>
         </Modal.Body>
       </Modal>
-    </div>
     </div>
 
   );

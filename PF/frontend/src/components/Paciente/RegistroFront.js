@@ -38,6 +38,10 @@ const Registro = () => {
     navigate("/");
   }
 
+  const Agenda = () => {
+    navigate("/agenda");
+  }
+
   return(
     <div className='bodyEstatico'>
 
@@ -108,13 +112,12 @@ const Registro = () => {
                     </label>
 			              </div>
                     <br></br>
-                    <button type="submit" className="botonreg"> Registrarse </button>
+                    <button type="submit" className="botonreg" onClick={Agenda}> Registrarse </button>
                   <div className='espacioEntreBotones'>
                   </div>
                   <button type="registro" className="botonVolver" onClick={onVolver}> Volver </button>
-                    {/* BOTONES PARA LA PROXIMA PAGINA*/}
+                    
                   <div>
-                    <h7><a href='pag para cambiar contrasena'><u>Olvide mi contraseña</u></a>   </h7> 
                   </div>
                   
                   </center>

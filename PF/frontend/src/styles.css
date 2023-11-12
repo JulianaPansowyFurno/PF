@@ -96,7 +96,7 @@ html {
   
   .navbar-toggler span {
     display: block !important;
-    background-color: #be50f4 !important;
+    background-color: #5060f4 !important;
     height: 4px !important;
     width: 27px !important;
     margin-top: 5px !important;
@@ -160,6 +160,7 @@ html {
   
   .navbar-nav .nav-link {
     color: black !important;
+    
   }
   
   .nav-link {
@@ -191,7 +192,7 @@ html {
     height: 5px;
     width: 0;
     border-radius: 16px;
-    background: #c95bf5;
+    background: #5b60f5;
     bottom: 1px;
     left: 0;
     z-index: -1;

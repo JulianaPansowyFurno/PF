@@ -11,6 +11,16 @@ router.get('/getAll', async (req, res) => {
   return res.status(200).json(especialidades);
 });
 
+router.get('/EspecialidadYGenero', async (req, res) => {
+  console.log(`This is a get operation get genero`);
+  const Genero = req.query.Genero;
+  const Especialidad = req.query.Especialidad;
+  const especialidades = await medController.getMedico(Genero, Especialidad);
+
+  return res.status(200).json(especialidades);
+});
+
+
 router.get('', async (req, res) => {
   console.log(`This is a get operation GET mediCOOOOOOOOOOOOOOOOOOOOS`);
   const sedes = await medController.GetTurnosMedico();

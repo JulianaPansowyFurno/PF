@@ -13,6 +13,19 @@ export default class MedicosService {
         return response.recordset;
     }
 
+    getMedico = async (Genero, Especialidad) => {
+        const pool = await sql.connect(config);
+        const response = await pool.request()
+        .input('Genero',sql.NChar, Genero)
+        .input('FkEspecialidad',sql.Int, Especialidad)
+        .query(`SELECT *
+            FROM Medico 
+            Where Medico.Genero = @Genero AND Medico.FkEspecialidad = @FkEspecialidad`);
+        console.log(response.recordset)
+        return response.recordset;
+    }
+
+
     GetTurnosMedico  = async () => {
         console.log('This is a function on the service getTurnos medivossss');
         const pool = await sql.connect(config);
@@ -50,7 +63,8 @@ export default class MedicosService {
                 .input('Mail',sql.NChar, medico.mail)
                 .input('Telefono',sql.Int, medico.telefono)
                 .input('FkDiasLaborales',sql.Int, medico.DiasLaborales)
-                .query(`INSERT INTO Medico (NombreApellidoM, FkEspecialidad, Mail, Telefono, FkDiasLaborales) VALUES (@NombreApellidoM, @FkEspecialidad, @Mail, @Telefono, @FkDiasLaborales)`);
+                .input('Genero',sql.NChar, medico.Genero)
+                .query(`INSERT INTO Medico (NombreApellidoM, FkEspecialidad, Mail, Telefono, FkDiasLaborales, Genero) VALUES (@NombreApellidoM, @FkEspecialidad, @Mail, @Telefono, @FkDiasLaborales, @Genero)`);
             return response.recordset;
         
         } else { 

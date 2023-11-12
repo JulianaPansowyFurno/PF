@@ -13,10 +13,9 @@ import {BiPlusMedical} from "react-icons/bi";
 import "../../styles.css";
 import Login from "./LoginFront";
 import SacarTurno from "./SacarTurno";
-import { Link  } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { CgFileDocument } from "react-icons/cg";
-import logoPNG from "../Imagenes/logoPNG.png";
-import "../../botonLindo.css";
+
 
 function NavBar() {
   const [expand, updateExpanded] = useState(false);
@@ -41,7 +40,6 @@ function NavBar() {
     >
       <Container>
          <Navbar.Brand href="/" className="d-flex">
-         <img className='navbarLogo' src = {logoPNG} width='22%' ></img>
         </Navbar.Brand>
         <Navbar.Toggle
           aria-controls="responsive-navbar-nav"
@@ -53,12 +51,11 @@ function NavBar() {
           <span></span>
           <span></span>
         </Navbar.Toggle>
-        <Navbar.Collapse  id="responsive-navbar-nav">
+        <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="ms-auto" defaultActiveKey="#home">
-            <Nav.Item >
+            <Nav.Item>
               <Nav.Link as={Link} to="/" onClick={() => updateExpanded(false)}>
-                 <AiOutlineHome className='navbarHome' style={{ marginBottom: "-20px" }}  /> 
-                 <div className="navbarHomeText" >Home</div> 
+                <AiOutlineHome style={{ marginBottom: "2px" }} /> Home
               </Nav.Link>
             </Nav.Item>
 
@@ -68,9 +65,7 @@ function NavBar() {
                 to="/registro"
                 onClick={() => updateExpanded(false)}
               >
-                <AiOutlineUser className='navbarRegistro' style={{ marginBottom: "2px" }} />
-                <div className="navbarRegistroText" >Registro</div> 
- 
+                <AiOutlineUser style={{ marginBottom: "2px" }} /> Registro
               </Nav.Link>
             </Nav.Item>
 
@@ -80,9 +75,7 @@ function NavBar() {
                 to="/agenda"
                 onClick={() => updateExpanded(false)}
               >
-                <AiOutlineCalendar className='navbarAgenda' style={{ marginBottom: "2px" }} /> 
-                <div className="navbarAgendaText" >Agenda</div> 
-
+                <AiOutlineCalendar style={{ marginBottom: "2px" }} /> Agenda
               </Nav.Link>
             </Nav.Item>
 
@@ -93,13 +86,11 @@ function NavBar() {
                 to="/sacarTurno"
                 onClick={() => updateExpanded(false)}
               >
-                <BiPlusMedical className='navbarTurno' style={{ marginBottom: "2px" }} /> 
-                <div className="navbarTurnoText" >SacarTurno</div> 
-
+                <BiPlusMedical style={{ marginBottom: "2px" }} /> SacarTurno
               </Nav.Link>
             </Nav.Item>
 
-            
+
           </Nav>
         </Navbar.Collapse>
       </Container>

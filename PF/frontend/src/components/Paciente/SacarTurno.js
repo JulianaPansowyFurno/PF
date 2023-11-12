@@ -27,7 +27,9 @@ const SacarTurno = () => {
   const [idEsp, setidEsp] = useState(0);
   const navigate = useNavigate();
   const { id, setId } = useContext(MyContext);
-
+  const [genero, SetGenero] = useState("");
+  const [medicos, setMEdicos] = useState([]);
+  const [idMedico, setidMedico] = useState(0);
 
 
   const getEstudios = (id) => {
@@ -37,6 +39,18 @@ const SacarTurno = () => {
       .then((response) => {
         setEstudios(response.data);
         console.log(response);
+      })
+      .catch((error) => alert("mallllll"));
+  };
+
+  const getMedicos = (mascOFem) => {
+    SetGenero(mascOFem)
+    console.log(mascOFem)
+    console.log(idEsp)
+    axios.get(`http://localhost:5000/medico/EspecialidadYGenero?Genero=${mascOFem}&Especialidad=${idEsp}`)
+      .then((response) => {
+        setMEdicos(response.data);
+        console.log(response.response);
       })
       .catch((error) => alert("mallllll"));
   };
@@ -63,13 +77,14 @@ const SacarTurno = () => {
     e.preventDefault();
     const formElement = e.target; 
     //const formulario = new FormData(formElement);
+    console.log(formElement.Hora.value)
     const turno = {
       FkEstudio: estud,
       FkSede: idSede,
       Cancelado: false,
       Asistio: false,
       FkPaciente: id,
-      FkMedico: 2,
+      FkMedico: idMedico,
       Especialidad: idEsp,
       Hora: formElement.Hora.value,
       Fecha: formElement.Fecha.value
@@ -89,6 +104,7 @@ const SacarTurno = () => {
   useEffect(() => {
     traerEspecialidades()
     traerSede()
+    getMedicos();
     
   }, []);
   return(
@@ -108,24 +124,7 @@ const SacarTurno = () => {
                     </center>
 
     
-    {/* <MDBDropdown size='lg' dropright group>
-        <MDBBtn size='lg' className='marginLeft' onChange={(e) => getEstudios(e.target.value)}> Seleccionar especialidad...</MDBBtn>
-        <MDBDropdownToggle />
-        <MDBDropdownMenu size='lg'>
-        {especialidades.map((e) => {
-                            return(
-                              <MDBDropdownItem value={e.IdEspecialidad}>{e.Especialidad}</MDBDropdownItem>
-                              
-                            );
-                          })}
-          <MDBDropdownItem link>Action</MDBDropdownItem>
-          <MDBDropdownItem link>Another action</MDBDropdownItem>
-          <MDBDropdownItem link>Something else here</MDBDropdownItem>
-          <MDBDropdownItem divider />
-          <MDBDropdownItem link>Separated link</MDBDropdownItem>
-        </MDBDropdownMenu>
-      </MDBDropdown> */}
-                    <Form.Select className='marginLeft' onChange={(e) => getEstudios(e.target.value)}>
+                    <Form.Select className='marginLeft' onChange={(e) => getEstudios(e.target.value)} required>
                       <option>Seleccionar especialidad...</option>
                         {especialidades.map((e) => {
                             return(
@@ -138,7 +137,7 @@ const SacarTurno = () => {
                     </Form.Select>
                     <br></br>
                       
-                    <Form.Select className='marginLeft' onChange={(e) => setEstud(e.target.value)}>
+                    <Form.Select className='marginLeft' onChange={(e) => setEstud(e.target.value)} required>
                       <option>Seleccione el estudio...</option>
                         {estudios.map((e) => {
                             return(
@@ -151,7 +150,7 @@ const SacarTurno = () => {
                     </Form.Select>
                     
                     <br></br>
-                    <Form.Select className='marginLeft' onChange={(e) => setIdSede(e.target.value)}>
+                    <Form.Select  className='marginLeft' onChange={(e) => setIdSede(e.target.value)} required>
                     <option>Seleccione la sede...</option>
                       {sede.map((e) => {
                             return(
@@ -163,13 +162,35 @@ const SacarTurno = () => {
                           })}
                     </Form.Select>
                     <br></br>
+{/* genero y medico */}
+<Form.Select  className='marginLeft'  onChange={(e) => getMedicos(e.target.value)} required>
+                <option>Seleccioná el genero  del medico...</option>              
+                <option value={"F"}> Femenino</option>
+                <option value={"M"}> Msculino</option>
+              </Form.Select> 
+                    <br></br>
+                      
+                    <Form.Select className='marginLeft' onChange={(e) => setidMedico(e.target.value)} required>
+                      <option>Seleccione el medico...</option>
+                        {medicos.map((e) => {
+                            return(
+                              <option value={e.IdMedico}>
+                                {e.NombreApellidoM}
+                              </option>
+                            );
+                          
+                          })}
+                    </Form.Select>
+                 
+
+                    <br></br>
                     <Form.Text className='letraUnPocoMasGrande' id='marginLeftt'>
                       Elige la fecha en la que quieres sacar el turnoo:
                     </Form.Text>
                     <center>
 
                     <Form.Group className="mb-3" controlId="formBasicEmail" id='marginLeftt'>
-                      <Form.Control type="date" controlId="Fecha" name="Fecha" placeholder="Enter date" />
+                      <Form.Control type="date" controlId="Fecha" name="Fecha" placeholder="Enter date"  required/>
                     </Form.Group>
 
                     </center>
@@ -178,9 +199,8 @@ const SacarTurno = () => {
                     Elige la hora en la que quieres sacar el turno:
                     </Form.Text>
                     <center>
-
                     <Form.Group className="mb-3" controlId="formBasicEmail" id='marginLeftt'>
-                      <Form.Control controlId="Hora" type="time" name="Hora"/>
+                      <Form.Control controlId="Hora" type="time" name="Hora" required/>
                     </Form.Group>
                     </center>
 

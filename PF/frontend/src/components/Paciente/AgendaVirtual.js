@@ -173,14 +173,14 @@ const AgendaVirtual = () => {
                     {("0" + new Date(tur.Hora).getHours()).substr(-2) + ":" + ("0" + new Date(tur.Hora).getMinutes()).substr(-2)}
                   </td>
                   <td>
-                    <Button className="BTNAgenda" variant="primary" onClick={() => handleShowCancelModal(tur.IdTurno)}>
+                    <button className="BTNAgenda" variant="primary" onClick={() => handleShowCancelModal(tur.IdTurno)}>
                       Cancelar
-                    </Button>
+                    </button>
                   </td>
                   <td>
-                    <Button className="BTNAgenda" variant="primary" onClick={() => handleShowPosponerModal(tur.IdTurno)}>
+                    <button className="BTNAgenda" variant="primary" onClick={() => handleShowPosponerModal(tur.IdTurno)}>
                       Posponer
-                    </Button>
+                    </button>
                   </td>
                 </tr>
               );
@@ -201,16 +201,13 @@ const AgendaVirtual = () => {
         <Modal.Header closeButton>
           <Modal.Title>Cancelar turno </Modal.Title>
         </Modal.Header>
-        <Modal.Body><br></br>
-          ¿pola me llamo pobi?
-          </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleCloseCancelModal}>
+          <button className="BTNAgenda" onClick={handleCloseCancelModal}>
             Close
-          </Button>
-          <Button variant="primary" onClick={() => onclickCancelar(turnoId)}>
+          </button>
+          <button className="BTNAgenda" onClick={() => onclickCancelar(turnoId)}>
             Save Changes
-          </Button>
+          </button>
         </Modal.Footer>
         
       </Modal>
@@ -231,13 +228,13 @@ const AgendaVirtual = () => {
 
 
             <Modal.Footer>
-              <Button variant="secondary" onClick={handleClosePosponerModal}>
+              <button  className="BTNAgenda" onClick={handleClosePosponerModal}>
                 Close
-              </Button>
-              <Button variant="primary" type="submit" onClick={handleClosePosponerModal}>
+              </button>
+              <button  className="BTNAgenda" type="submit" onClick={handleClosePosponerModal}>
 
                 Guardar
-              </Button>
+              </button>
 
             </Modal.Footer>
           </Form>
