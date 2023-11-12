@@ -52,31 +52,31 @@ const AgendaVirtual = () => {
       IdTurno: IdTurno,
       Fecha: formulario.get('Fecha')
     }
-    // axios.put("http://localhost:5000/turno", fecha)
-    //   .then(function (response) {
-    //     traerTurnos();
-    //   });
-    //DESCOMENTAR
+    axios.put("http://localhost:5000/turno", fecha)
+      .then(function (response) {
+        traerTurnos();
+      });
+    
   };
 
   const onclickCancelar = (IdTurno) => {
-    // axios.put(`http://localhost:5000/cancelar/${IdTurno}`)
-    //   .then(function (response) {
-    //     traerTurnos();
-    //   });
-        //DESCOMENTAR
+    axios.put(`http://localhost:5000/cancelar/${IdTurno}`)
+      .then(function (response) {
+        traerTurnos();
+      });
+        
 
 
     handleCloseCancelModal();
   };
 
   const traerTurnos = () => {
-    // axios.get(`http://localhost:5000/medico`)
-    //   .then((response) => {
-    //     setTurno(response.data);
-    //   })
-    //   .catch((error) => alert("mallllll"));
-        //DESCOMENTAR
+    axios.get(`http://localhost:5000/medico`)
+      .then((response) => {
+        setTurno(response.data);
+      })
+      .catch((error) => alert("mallllll"));
+        
 
   };
 
@@ -109,82 +109,78 @@ const AgendaVirtual = () => {
   };
 
   const traerPacientes = () => {
-    // axios
-    //   .get("http://localhost:5000/paciente")
-    //   .then((response) => {
-    //     setpacientes(response.data);
-    //   })
-    //   .catch((error) => alert("aca hay algo raro"));
-        //DESCOMENTAR
+    axios
+      .get("http://localhost:5000/paciente")
+      .then((response) => {
+        setpacientes(response.data);
+      })
+      .catch((error) => alert("aca hay algo raro"));
+        
 
   }
 
   const filtroNombre = (IdPaciente) => {
     console.log(IdPaciente)
-    // axios.get(`http://localhost:5000/filtro/${IdPaciente}`)
-    //   .then((response) => {
-    //     setTurno(response.data);
-    //   })
-    //   .catch((error) => alert("aca hay algo raro"));
-        //DESCOMENTAR
+    axios.get(`http://localhost:5000/filtro/${IdPaciente}`)
+      .then((response) => {
+        setTurno(response.data);
+      })
+      .catch((error) => alert("aca hay algo raro"));
+      
 
   }
 
   const traerMedicos = () => {
-    // axios
-    //   .get("http://localhost:5000/medico/getAll")
-    //   .then((response) => {
-    //     setmedicos(response.data);
-    //   })
-    //   .catch((error) => alert("aca hay algo raro"));
-        //DESCOMENTAR
+    axios
+      .get("http://localhost:5000/medico/getAll")
+      .then((response) => {
+        setmedicos(response.data);
+      })
+      .catch((error) => alert("aca hay algo raro"));
+        
 
   }
 
   const filtroMedicos = (IdMedico) => {
     console.log(IdMedico)
-    // axios.get(`http://localhost:5000/filtro/nombreMed/${IdMedico}`)
-    //   .then((response) => {
-    //     console.log(response)
-    //     setTurno(response.data);
-    //   })
-    //   .catch((error) => alert("aca hay algo raro"));
-        //DESCOMENTAR
+    axios.get(`http://localhost:5000/filtro/nombreMed/${IdMedico}`)
+      .then((response) => {
+        console.log(response)
+        setTurno(response.data);
+      })
+      .catch((error) => alert("aca hay algo raro"));
 
   }
 
   
   const filtroFecha = () => {
     console.log(Fecha)
-    // axios.get(`http://localhost:5000/filtro?Fecha=${Fecha}`)
-    // .then((response) => {
-    //   console.log(response.data)
-    //   setTurno(response.data);
-    // })
-    // .catch((error) => alert("aca hay algo raro"));
-        //DESCOMENTAR
+    axios.get(`http://localhost:5000/filtro?Fecha=${Fecha}`)
+    .then((response) => {
+      console.log(response.data)
+      setTurno(response.data);
+    })
+    .catch((error) => alert("aca hay algo raro"));
 
   }
 
   const filtroEspecialidad = (idesp) => {
-    // axios.get(`http://localhost:5000/filtro/esp/${idesp}`)
-    // .then((response) => {
-    //   console.log(response.data)
-    //   setTurno(response.data);
-    // })
-    // .catch((error) => alert("aca hay algo raro"));
-        //DESCOMENTAR
+    axios.get(`http://localhost:5000/filtro/esp/${idesp}`)
+    .then((response) => {
+      console.log(response.data)
+      setTurno(response.data);
+    })
+    .catch((error) => alert("aca hay algo raro"));
 
   }
 
   const traerEspecialidades = () => {
-    // axios
-    //   .get("http://localhost:5000/especialidad")
-    //   .then((response) => {
-    //     setEspecialidades(response.data);
-    //   })
-    //   .catch((error) => alert("aca hay algo raro"));
-        //DESCOMENTAR
+    axios
+      .get("http://localhost:5000/especialidad")
+      .then((response) => {
+        setEspecialidades(response.data);
+      })
+      .catch((error) => alert("aca hay algo raro"));
 
   }
 
@@ -202,7 +198,7 @@ const AgendaVirtual = () => {
           <b>Filtros</b>
         </Form.Label>
         </center>
-      <Form.Select className='marginLeft' onChange={(e) => filtroNombre(e.target.value)}>
+      <Form.Select onChange={(e) => filtroNombre(e.target.value)}>
           <option>Seleccionar nombre del paciente...</option>
           
             {pacientes.map((e) => {
@@ -216,7 +212,7 @@ const AgendaVirtual = () => {
         })}
         </Form.Select>
 
-        <Form.Select className='marginLeft' onChange={(e) => filtroMedicos(e.target.value)}>
+        <Form.Select onChange={(e) => filtroMedicos(e.target.value)}>
           <option>Seleccionar nombre del medico...</option>
             {medicos.map((e) => {
               return(                
@@ -228,7 +224,7 @@ const AgendaVirtual = () => {
         })}
         </Form.Select>
 
-        <Form.Select className='marginLeft' onChange={(e) => filtroEspecialidad(e.target.value)}>
+        <Form.Select onChange={(e) => filtroEspecialidad(e.target.value)}>
           <option>Seleccionar la especialidad...</option>
             {especialidades.map((e) => {
               return(                

@@ -9,6 +9,8 @@ import { useState, useEffect } from "react";
 import { MyContext } from "../../MyContext";
 import { useContext } from 'react';
 import swal from 'sweetalert';
+import { MDBDropdown, MDBDropdownMenu, MDBDropdownToggle, MDBDropdownItem } from 'mdb-react-ui-kit';
+
 
 const AgregarMedico = () => {
   const [estudios, setEstudios] = useState([]);
@@ -43,21 +45,23 @@ const AgregarMedico = () => {
 
 
   const traerEspecialidades = () => {
-    axios
-      .get("http://localhost:5000/especialidad")
-      .then((response) => {
-        setEspecialidades(response.data);
-      })
-      .catch((error) => alert("aca hay algo raro"));
+    // axios
+    //   .get("http://localhost:5000/especialidad")
+    //   .then((response) => {
+    //     setEspecialidades(response.data);
+    //   })
+    //   .catch((error) => alert("aca hay algo raro"));
+    //DESCOMENTAR
   }
   const insertardiasLaboralesss = () => {
     console.log(selectedDays)
-    axios.post('http://localhost:5000/medico/insertardias', selectedDays)
-    .then(function (response) {
-      setidDiasLaborales(response.data[0].id)
+    // axios.post('http://localhost:5000/medico/insertardias', selectedDays)
+    // .then(function (response) {
+    //   setidDiasLaborales(response.data[0].id)
       
-    })
-    .catch((error) => alert("mal el insert"));
+    // })
+    // .catch((error) => alert("mal el insert"));
+    //DESCOMENTAR
   }
 
   useEffect(() => {
@@ -75,14 +79,15 @@ const AgregarMedico = () => {
       nombre: formulario.get('NombreApellidoM'),
       DiasLaborales: idDiasLaborales
     }
-    axios.post('http://localhost:5000/medico', medico)
-    .then(function (response) {
-      console.log(idDiasLaborales);
-      console.log("hola")
-      console.log("medico bien")
-      swal("Bien!", "Se elimino el plato del menu correctamente", "success");
-      navigate("/administradoresAgenda");
-    })
+    // axios.post('http://localhost:5000/medico', medico)
+    // .then(function (response) {
+    //   console.log(idDiasLaborales);
+    //   console.log("hola")
+    //   console.log("medico bien")
+    //   swal("Bien!", "Se elimino el plato del menu correctamente", "success");
+    //   navigate("/administradoresAgenda");
+    // })
+    //DESCOMENTAR
   }; 
   
   const onVolver = (e) => {
@@ -107,7 +112,9 @@ const AgregarMedico = () => {
                     <br></br>
                     <center>
                     <div className='form'>
+                    <div className='cambioWidth'>
                     <Form.Select onChange={(e) => setEspElegida(e.target.value)}>
+
                       <option>Seleccionar especialidad...</option>
                         {especialidades.map((e) => {
                             return(
@@ -117,7 +124,7 @@ const AgregarMedico = () => {
                             );
                           })}
                     </Form.Select>
-                    
+                    </div>
                     <br></br>
 
 
@@ -143,66 +150,78 @@ const AgregarMedico = () => {
 			              </div>
 
 
-                  
-                    <h2>Select your workdays:</h2>
-                    <label>
+                  <div id='izq'>
+                    <h4 className='letraDias2'>Seleccione sus dias laborales:</h4>
+                    <label className='marginDiasLabel'>
                       
                       <input
-                      className="izq"
                         type="checkbox"
                         checked={selectedDays.lunes}
                         onChange={() => handleDayChange('lunes')}
                       />
-                      Lunes
                     </label>
+                    <span className="letraDias">Lunes</span>
+                    
+
                     <br></br>
-                    <label>
+                    <label className='marginDiasLabel'>
                       
                       <input
                         type="checkbox"
                         checked={selectedDays.martes}
                         onChange={() => handleDayChange('martes')}
                       />
-                      Martes
+                      
                     </label>
+                    <span className="letraDias">Martes</span>
+
                     <br></br>
-                    <label>
+                    <label className='marginDiasLabel'>
                       
                       <input
                         type="checkbox"
                         checked={selectedDays.miercoles}
                         onChange={() => handleDayChange('miercoles')}
                       />
-                      Miercoles
+                      
                     </label>
+                    <span className="letraDias">Miercoles</span>
+
                     <br></br>
-                    <label>
+                    <label className='marginDiasLabel'>
                       <input
                         type="checkbox"
                         checked={selectedDays.jueves}
                         onChange={() => handleDayChange('jueves')}
                       />
-                      Jueves
+                      
                     </label>
+                    <span className="letraDias">Jueves</span>
+
                     <br></br>
-                    <label>
+                    <label className='marginDiasLabel'>
                       <input
                         type="checkbox"
                         checked={selectedDays.viernes}
                         onChange={() => handleDayChange('viernes')}
                       />
-                      Viernes
+                      
                     </label>
+                    <span className="letraDias">Viernes</span>
+
                     <br></br>
-                    <label>
+                    <label className='marginDiasLabel'>
                       <input
                         type="checkbox"
                         checked={selectedDays.sabado}
                         onChange={() => handleDayChange('sabado')}
                       />
-                      Sabado
+                      
                     </label>
-                    
+                    <span className="letraDias">Sabado</span>
+
+                    </div>
+
                     </div>
                     <br></br>                    
                   <button type="submit" className="botonLog" > Sacar </button> 

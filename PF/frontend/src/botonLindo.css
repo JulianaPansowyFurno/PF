@@ -6,11 +6,14 @@
 	/* ADM AGENDA */
 
 .fondoBlancoAdm{
-	margin-left: 13%;
+	/* margin-left: 13%; */
 	background-color: #fff;
 	background: rgba(255, 255, 255, 0.767);
-	width: 1620%;
+	width: 70%;
 	padding-bottom: 3rem;
+  display: flex;
+  align-items: center;
+  margin-left: 15%;
   }
   
   .fondoBlancoEspacioAdm{
@@ -20,7 +23,11 @@
   #bordesRedondosAdm{
 	border: 2px solid rgba(255, 255, 255, 0.767);
 	border-radius: 10px;
-	width: 1550px
+	width: 70%;
+	display: flex;
+  align-items: center;
+  margin-left: 15%;
+
   }
   .letraFechaAdm{
 	font-size: 17px;
@@ -71,7 +78,24 @@
 
 	/* AGREGAR MEDICO */
 
+.cambioWidth{
+	width: 60%
+}
+.marginDiasLabel{
+	margin-left: 7%;
+	margin-right: 2%;
+}
 
+.letraDias{
+	font-size: 17px;
+	line-height: 147.6%;
+	color: var(--omrs-color-ink-medium-contrast);
+}
+.letraDias2{
+	font-size: 25px;
+	line-height: 147.6%;
+	color: var(--omrs-color-ink-medium-contrast);
+}
 
 /* SACR TURNO */
 
