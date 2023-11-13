@@ -216,13 +216,10 @@ const AgendaVirtual = () => {
         <Modal.Header closeButton>
           <Modal.Title>Posponer Turno</Modal.Title>
         </Modal.Header>
-        <Modal.Body><br></br>
+        <Modal.Body>
           <Form onSubmit={(e) => onPosponer(e, turnoId)}>
-            <Form.Text className="text-muted">
-              Elige la fecha  a la que la quieres cambiar:
-            </Form.Text>
             <Form.Group className="mb-3" controlId="formBasicEmail">
-              <Form.Label>Change de date</Form.Label>
+              <Form.Label>Elige la fecha  a la que la quieres cambiar:</Form.Label>
               <Form.Control type="date" name="Fecha" placeholder="Enter date" />
             </Form.Group>
 

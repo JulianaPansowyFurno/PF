@@ -12,8 +12,8 @@ import { useContext } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
-import isMatch from 'date-fns/isMatch'
-
+import isMatch from 'date-fns/isMatch';
+import BarraMedico from "./NavBarMedico";
 
 const AgendaVirtual = () => {
   const [turno, setTurno] = useState([]);
@@ -198,18 +198,30 @@ const AgendaVirtual = () => {
 
 
       <Container>
+      <BarraMedico></BarraMedico>
       <br></br>
-
-        <center>
+      <br></br>
+      <br></br>
+        <thead>
+          <tr>
+          <th> </th> 
+           
+              <th> 
+              <center>
       <Form.Label className="letraFiltroAdm">
           <b>Filtros</b>
         </Form.Label>
         </center>
-
-
+        </th>
+        <th> </th> 
+             
+           
+            </tr>
+          </thead>
         
           <thead>
             <tr>
+              
                   <th> <Form.Select id="formSelect" onChange={(e) => filtroNombre(e.target.value)}>
                   <option>Seleccionar nombre del paciente...</option>
                   
@@ -350,12 +362,7 @@ const AgendaVirtual = () => {
             })}
           </tbody>
         </Table>
-        <center>
-        <button className="botonSacarTurno"  onClick={AgregarMedico}> Agregar Medico </button> 
-        <br></br>
-        <br></br>
-        <button className="botonSacarTurno"  onClick={Volver}> Volver</button>
-        </center> 
+        
       </Container>
       <Modal show={showCancelModal} onHide={handleCloseCancelModal}>
         <Modal.Header closeButton>
@@ -376,13 +383,10 @@ const AgendaVirtual = () => {
         <Modal.Header closeButton>
           <Modal.Title>Posponer Turno</Modal.Title>
         </Modal.Header>
-        <Modal.Body><br></br>
+        <Modal.Body>
           <Form onSubmit={(e) => onPosponer(e, turnoId)}>
-            <Form.Text className="text-muted">
-              Elige la fecha  a la que la quieres cambiar:
-            </Form.Text>
             <Form.Group className="mb-3" controlId="formBasicEmail">
-              <Form.Label>Change de date</Form.Label>
+              <Form.Label> Elige la fecha  a la que la quieres cambiar:</Form.Label>
               <Form.Control type="date" name="Fecha" placeholder="Enter date" />
             </Form.Group>
 

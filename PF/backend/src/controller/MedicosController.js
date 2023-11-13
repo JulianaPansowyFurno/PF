@@ -4,6 +4,13 @@ import MedicosService from '../servicios/MedicosService.js';
 const router = Router();
 const medController = new MedicosService();
 
+router.get('/DiasDisponibles/:id', async (req, res) => {
+  console.log(`This is a get operation getEspecialidades`);
+  const especialidades = await medController.GetDiasDisponibles(req.params.id);
+
+  return res.status(200).json(especialidades);
+});
+
 router.get('/getAll', async (req, res) => {
   console.log(`This is a get operation getEspecialidades`);
   const especialidades = await medController.GetAllMedicos();

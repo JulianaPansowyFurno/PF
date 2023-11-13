@@ -33,13 +33,10 @@ const Registro = () => {
     })
   }; 
 
-  const onVolver = (e) => {
-    e.preventDefault();
-    navigate("/");
-  }
 
-  const Agenda = () => {
-    navigate("/agenda");
+
+  const Volver = () => {
+    navigate("/");
   }
 
   return(
@@ -112,10 +109,10 @@ const Registro = () => {
                     </label>
 			              </div>
                     <br></br>
-                    <button type="submit" className="botonreg" onClick={Agenda}> Registrarse </button>
+                    <button type="submit" className="botonreg"> Registrarse </button>
                   <div className='espacioEntreBotones'>
                   </div>
-                  <button type="registro" className="botonVolver" onClick={onVolver}> Volver </button>
+                  <button type="registro" className="botonVolver" onClick={Volver}> Volver </button>
                     
                   <div>
                   </div>

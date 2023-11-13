@@ -23,6 +23,25 @@ export default class TurnosService {
         return response.recordset;
     }
 
+    getTurnosById = async (id) => {
+        console.log('This is a function on the service getTurnos');
+        console.log(id)
+        const pool = await sql.connect(config);
+        const response = await pool.request()
+        .input('FKPaciente',sql.Int, id)
+        .query(`SELECT Turno.IdTurno, Sede.Sede, Turno.Fecha, Paciente.NombreApellido, Medico.NombreApellidoM , Turno.Cancelado, Turno.Asistio, Estudio.Estudio, Especialidad.Especialidad, Turno.Hora 
+        FROM Turno 
+        inner join Paciente on Paciente.IdPaciente = Turno.FkPaciente 
+        inner join Sede on Sede.IdSede = Turno.FkSede
+        inner join Medico on Medico.IdMedico = Turno.FkMedico
+        inner join Estudio on Estudio.IdEstudio = Turno.FkEstudio
+        inner join Especialidad on Especialidad.IdEspecialidad= Turno.FkEspecialidad
+        WHERE Turno.FkPaciente = @FkPaciente`);
+    
+        console.log(response.recordset)
+        return response.recordset;
+    }
+
     
 
     sacarTurno = async (turno) => {
@@ -89,5 +108,7 @@ export default class TurnosService {
 
         return response.recordset;
     }
+
+    
     
 }

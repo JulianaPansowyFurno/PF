@@ -10,7 +10,7 @@ import { MyContext } from "../../MyContext";
 import { useContext } from 'react';
 import swal from 'sweetalert';
 import { MDBDropdown, MDBDropdownMenu, MDBDropdownToggle, MDBDropdownItem } from 'mdb-react-ui-kit';
-
+import BarraMedico from "./NavBarMedico";
 
 const AgregarMedico = () => {
   const [estudios, setEstudios] = useState([]);
@@ -105,8 +105,9 @@ const AgregarMedico = () => {
   return(
     <div className="fondo" style={{ backgroundImage:`url(${background})` }}>
         <div className='conteiner' >
+          <BarraMedico></BarraMedico>
         <div id='formSize'>
-            <div id='Form2' >
+            <div id='Form3' >
               <div className='fondoBlanco'id='bordesRedondos'>
               <form onSubmit={Valores}>
                     <br></br>
@@ -236,12 +237,12 @@ const AgregarMedico = () => {
                     
                     </div>
                     <br></br>                    
-                  <button type="submit" className="botonLog" > Sacar </button> 
+                  <button type="submit" className="botonLog" > Agregar </button> 
                   </center>
                   </form>
                   <br></br>
                   <center>
-                  <button className="botonLog"  onClick={onVolver}> Volver a mi agenda </button>
+                  <button className="botonLog"  onClick={onVolver}> Volver a la agenda </button>
                   </center>
             </div>
           </div>

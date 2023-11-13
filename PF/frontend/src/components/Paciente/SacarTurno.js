@@ -28,8 +28,10 @@ const SacarTurno = () => {
   const navigate = useNavigate();
   const { id, setId } = useContext(MyContext);
   const [genero, SetGenero] = useState("");
+  const [Fecha, SetFecha] = useState("");
   const [medicos, setMEdicos] = useState([]);
   const [idMedico, setidMedico] = useState(0);
+  const [dias, setDias] = useState([]);
 
 
   const getEstudios = (id) => {
@@ -73,27 +75,74 @@ const SacarTurno = () => {
       .catch((error) => alert("aca hay algo raro"));
   };
 
+  const TraerDiasLaborales = () => {
+    axios
+      .get(`http://localhost:5000/medico/DiasDisponibles/${idMedico}`)
+      .then((response) => {
+        setDias(response.data);
+      })
+      .catch((error) => alert("aca hay algo raro"));
+  };
+
+
   const Valores = (e) => {
     e.preventDefault();
     const formElement = e.target; 
     //const formulario = new FormData(formElement);
-    console.log(formElement.Hora.value)
-    const turno = {
-      FkEstudio: estud,
-      FkSede: idSede,
-      Cancelado: false,
-      Asistio: false,
-      FkPaciente: id,
-      FkMedico: idMedico,
-      Especialidad: idEsp,
-      Hora: formElement.Hora.value,
-      Fecha: formElement.Fecha.value
+
+    let diaElegido = "";
+    switch (new Date(formElement.Fecha.value + " ").getDay()) {
+      case 0: 
+        diaElegido = "Domingo";
+        break;
+      case 1: 
+        diaElegido = "Lunes";
+        break;
+      case 2: 
+        diaElegido = "Martes";
+        break;
+      case 3: 
+        diaElegido = "Miercoles";
+        break;
+      case 4: 
+        diaElegido = "Jueves";
+        break;
+      case 5: 
+        diaElegido = "Viernes";
+        break;
+      case 6: 
+        diaElegido = "Sabado";
+        break;
+      default:
+        diaElegido = "";
     }
-    axios.post("http://localhost:5000/turno/sacarturno", turno)
-      .then(function (response) {
-        swal("Bien!", "Se ha creado tu turno", "success");
-        navigate("/agenda");
-      });
+
+    if (!trabajaEldia(diaElegido)) {
+      alert("El medico no trabaja ese dia!!!");
+    } else {
+      const turno = {
+        FkEstudio: estud,
+        FkSede: idSede,
+        Cancelado: false,
+        Asistio: false,
+        FkPaciente: id,
+        FkMedico: idMedico,
+        Especialidad: idEsp,
+        Hora: formElement.Hora.value,
+        Fecha: formElement.Fecha.value
+      }
+      axios.post("http://localhost:5000/turno/sacarturno", turno)
+        .then(function (response) {
+          swal("Bien!", "Se ha creado tu turno", "success");
+          navigate("/agenda");
+        });
+    }
+  };
+
+  const DiaDisponibles = (fecha) => {
+    const dia = new Date(fecha).getDay()
+    
+   
   };
   
   const onVolver = (e) => {
@@ -107,6 +156,19 @@ const SacarTurno = () => {
     getMedicos();
     
   }, []);
+
+  useEffect(() => {
+    TraerDiasLaborales();
+  }, [idMedico]);
+
+  const trabajaEldia = (dia) => {
+    if (dias?.length) {
+      return !!dias[0][dia];
+    }
+    
+    return false;
+  }
+
   return(
     <div className="fondo" style={{ backgroundImage:`url(${background})` }}>
         <div className='conteiner' >
@@ -190,9 +252,17 @@ const SacarTurno = () => {
                     <center>
 
                     <Form.Group className="mb-3" controlId="formBasicEmail" id='marginLeftt'>
-                      <Form.Control type="date" controlId="Fecha" name="Fecha" placeholder="Enter date"  required/>
+                      <Form.Control type="date" controlId="Fecha" onChange={((e) => DiaDisponibles(e.target.value))} name="Fecha" placeholder="Enter date"  required/>
                     </Form.Group>
-
+                      <div>
+                        El medico trabaja los dias
+                        <div>Lunes: {trabajaEldia("Lunes") ? "Si" : "No"}</div>
+                        <div>Martes: {trabajaEldia("Martes") ? "Si" : "No"}</div>
+                        <div>Miercoles: {trabajaEldia("Miercoles") ? "Si" : "No"}</div>
+                        <div>Jueves: {trabajaEldia("Jueves") ? "Si" : "No"}</div>
+                        <div>Viernes: {trabajaEldia("Viernes") ? "Si" : "No"}</div>
+                        <div>Sabado: {trabajaEldia("Sabado") ? "Si" : "No"}</div>
+                        </div>
                     </center>
                     <br></br>
                     <Form.Text className='letraUnPocoMasGrande' id='marginLeftt'>
