@@ -185,7 +185,7 @@ const SacarTurno = () => {
 
                     <br></br>
                     <Form.Text className='letraUnPocoMasGrande' id='marginLeftt'>
-                      Elige la fecha en la que quieres sacar el turnoo:
+                      Elige la fecha en la que quieres sacar el turno:
                     </Form.Text>
                     <center>
 
